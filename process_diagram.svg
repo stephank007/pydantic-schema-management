@@ -1,0 +1,229 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1370" width="1000" height="1370" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+<defs>
+  <filter id="sh" x="-15%" y="-15%" width="130%" height="145%">
+    <feDropShadow dx="0" dy="4" stdDeviation="9" flood-color="#000000" flood-opacity="0.65"/>
+  </filter>
+  <marker id="arr" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+    <path d="M 0,0.5 L 9,4 L 0,7.5 Z" fill="#4b5563"/>
+  </marker>
+  <marker id="arr2" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+    <path d="M 0,0.5 L 9,4 L 0,7.5 Z" fill="#374151"/>
+  </marker>
+  <pattern id="dots" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
+    <circle cx="11" cy="11" r="0.85" fill="#1c2433"/>
+  </pattern>
+  <radialGradient id="g1" cx="35%" cy="35%" r="70%">
+    <stop offset="0%" stop-color="#60a5fa"/>
+    <stop offset="100%" stop-color="#1d4ed8"/>
+  </radialGradient>
+  <radialGradient id="g2" cx="35%" cy="35%" r="70%">
+    <stop offset="0%" stop-color="#818cf8"/>
+    <stop offset="100%" stop-color="#4338ca"/>
+  </radialGradient>
+  <radialGradient id="g3" cx="35%" cy="35%" r="70%">
+    <stop offset="0%" stop-color="#c084fc"/>
+    <stop offset="100%" stop-color="#7e22ce"/>
+  </radialGradient>
+  <radialGradient id="g4" cx="35%" cy="35%" r="70%">
+    <stop offset="0%" stop-color="#34d399"/>
+    <stop offset="100%" stop-color="#047857"/>
+  </radialGradient>
+  <radialGradient id="g5" cx="35%" cy="35%" r="70%">
+    <stop offset="0%" stop-color="#fcd34d"/>
+    <stop offset="100%" stop-color="#b45309"/>
+  </radialGradient>
+  <radialGradient id="g6" cx="35%" cy="35%" r="70%">
+    <stop offset="0%" stop-color="#f87171"/>
+    <stop offset="100%" stop-color="#b91c1c"/>
+  </radialGradient>
+  <radialGradient id="g7" cx="35%" cy="35%" r="70%">
+    <stop offset="0%" stop-color="#22d3ee"/>
+    <stop offset="100%" stop-color="#0e7490"/>
+  </radialGradient>
+  <radialGradient id="g8" cx="35%" cy="35%" r="70%">
+    <stop offset="0%" stop-color="#f472b6"/>
+    <stop offset="100%" stop-color="#be185d"/>
+  </radialGradient>
+</defs>
+
+<!-- ══════════════════════════════════════════════════════ BACKGROUND -->
+<rect width="1000" height="1370" fill="#0d1117"/>
+<rect width="1000" height="1370" fill="url(#dots)"/>
+<ellipse cx="500" cy="-30" rx="420" ry="220" fill="#1d4ed8" opacity="0.055"/>
+
+<!-- ══════════════════════════════════════════════════════ TITLE -->
+<text x="500" y="40" text-anchor="middle" fill="#f0f6fc" font-size="20" font-weight="700" letter-spacing="-0.4">WMS Schema Governance Pipeline</text>
+<text x="500" y="60" text-anchor="middle" fill="#6e7681" font-size="12">bootstrap · pydantic · validate · firewall-ready delivery</text>
+<line x1="80" y1="75" x2="920" y2="75" stroke="#21262d" stroke-width="1"/>
+<text x="370" y="89" text-anchor="middle" fill="#30363d" font-size="9" font-family="'SF Mono',Consolas,monospace" letter-spacing="1.8">PIPELINE STEP</text>
+<text x="828" y="89" text-anchor="middle" fill="#30363d" font-size="9" font-family="'SF Mono',Consolas,monospace" letter-spacing="1.8">ARTIFACT</text>
+
+<!-- ══════════════════════════════════════════════════════ PHASE BACKGROUNDS -->
+
+<!-- INPUT: step 1 (y=110..210) -->
+<rect x="48" y="97" width="904" height="122" rx="12" fill="#0d1f38" stroke="#1e3a8a" stroke-width="0.8" opacity="0.85"/>
+<text x="62" y="112" fill="#3b82f6" font-size="8.5" font-weight="700" letter-spacing="2" font-family="'SF Mono',Consolas,monospace">INPUT</text>
+
+<!-- ENGINEERING: steps 2-3 (y=305..535) -->
+<rect x="48" y="290" width="904" height="255" rx="12" fill="#130e2e" stroke="#4c1d95" stroke-width="0.8" opacity="0.85"/>
+<text x="62" y="305" fill="#8b5cf6" font-size="8.5" font-weight="700" letter-spacing="2" font-family="'SF Mono',Consolas,monospace">ENGINEERING</text>
+
+<!-- TESTING: steps 4-6 (y=610..970) -->
+<rect x="48" y="596" width="904" height="384" rx="12" fill="#1c1000" stroke="#92400e" stroke-width="0.8" opacity="0.85"/>
+<text x="62" y="611" fill="#f59e0b" font-size="8.5" font-weight="700" letter-spacing="2" font-family="'SF Mono',Consolas,monospace">TESTING</text>
+
+<!-- SIGN-OFF: step 7 (y=1045..1145) -->
+<rect x="48" y="1032" width="904" height="122" rx="12" fill="#001820" stroke="#155e75" stroke-width="0.8" opacity="0.85"/>
+<text x="62" y="1047" fill="#06b6d4" font-size="8.5" font-weight="700" letter-spacing="2" font-family="'SF Mono',Consolas,monospace">SIGN-OFF</text>
+
+<!-- DELIVERY: step 8 (y=1215..1315) -->
+<rect x="48" y="1202" width="904" height="122" rx="12" fill="#1a0015" stroke="#9d174d" stroke-width="0.8" opacity="0.85"/>
+<text x="62" y="1217" fill="#ec4899" font-size="8.5" font-weight="700" letter-spacing="2" font-family="'SF Mono',Consolas,monospace">DELIVERY</text>
+
+<!-- ══════════════════════════════════════════════════════ CONNECTOR ARROWS -->
+<!-- 1→2 cross-phase dashed: y=212 → 302 -->
+<line x1="370" y1="213" x2="370" y2="299" stroke="#2d3748" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arr2)"/>
+<!-- 2→3 same-phase solid: y=407 → 432 -->
+<line x1="370" y1="408" x2="370" y2="431" stroke="#4b5563" stroke-width="2" marker-end="url(#arr)"/>
+<!-- 3→4 cross-phase dashed: y=537 → 607 -->
+<line x1="370" y1="538" x2="370" y2="606" stroke="#2d3748" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arr2)"/>
+<!-- 4→5 same-phase solid: y=712 → 737 -->
+<line x1="370" y1="713" x2="370" y2="736" stroke="#4b5563" stroke-width="2" marker-end="url(#arr)"/>
+<!-- 5→6 same-phase solid: y=842 → 867 -->
+<line x1="370" y1="843" x2="370" y2="866" stroke="#4b5563" stroke-width="2" marker-end="url(#arr)"/>
+<!-- 6→7 cross-phase dashed: y=972 → 1039 -->
+<line x1="370" y1="973" x2="370" y2="1039" stroke="#2d3748" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arr2)"/>
+<!-- 7→8 cross-phase dashed: y=1147 → 1210 -->
+<line x1="370" y1="1148" x2="370" y2="1209" stroke="#2d3748" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arr2)"/>
+
+<!-- ══════════════════════════════════════════════════════ STEP 1 — Receive Existing Schema -->
+<rect x="100" y="110" width="540" height="100" rx="12" fill="#161b22" stroke="#21262d" stroke-width="1" filter="url(#sh)"/>
+<rect x="100" y="122" width="5" height="76" rx="2.5" fill="#3b82f6"/>
+<circle cx="137" cy="160" r="20" fill="url(#g1)"/>
+<text x="137" y="160" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="14" font-weight="700">1</text>
+<text x="167" y="146" fill="#e6edf3" font-size="14" font-weight="600">Receive Existing Schema</text>
+<text x="167" y="163" fill="#8b949e" font-size="12">Original signed schemas from the firewall team — never edit</text>
+<rect x="166" y="171" width="198" height="20" rx="4" fill="#0a0d14"/>
+<text x="173" y="184" fill="#3b82f6" font-size="10.5" font-family="'SF Mono',Consolas,monospace">bootstrap/*.schema.json</text>
+<line x1="641" y1="160" x2="693" y2="160" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+<rect x="694" y="132" width="266" height="56" rx="9" fill="#0a1428" stroke="#3b82f6" stroke-width="0.8"/>
+<text x="827" y="153" text-anchor="middle" fill="#93c5fd" font-size="11.5" font-weight="600">Source of Truth</text>
+<text x="827" y="170" text-anchor="middle" fill="#60a5fa" font-size="10.5" font-family="'SF Mono',Consolas,monospace">bootstrap/  ·  read-only</text>
+
+<!-- ══════════════════════════════════════════════════════ STEP 2 — Preprocess & Reverse Engineer -->
+<rect x="100" y="305" width="540" height="100" rx="12" fill="#161b22" stroke="#21262d" stroke-width="1" filter="url(#sh)"/>
+<rect x="100" y="317" width="5" height="76" rx="2.5" fill="#6366f1"/>
+<circle cx="137" cy="355" r="20" fill="url(#g2)"/>
+<text x="137" y="355" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="14" font-weight="700">2</text>
+<text x="167" y="341" fill="#e6edf3" font-size="14" font-weight="600">Preprocess &amp; Reverse Engineer</text>
+<text x="167" y="358" fill="#8b949e" font-size="12">Resolve $refs · flatten allOf · run datamodel-codegen</text>
+<rect x="166" y="366" width="225" height="20" rx="4" fill="#0a0d14"/>
+<text x="173" y="379" fill="#6366f1" font-size="10.5" font-family="'SF Mono',Consolas,monospace">python 01_reverse_engineer.py</text>
+<line x1="641" y1="355" x2="693" y2="355" stroke="#6366f1" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+<rect x="694" y="327" width="266" height="56" rx="9" fill="#100e2e" stroke="#6366f1" stroke-width="0.8"/>
+<text x="827" y="348" text-anchor="middle" fill="#a5b4fc" font-size="11.5" font-weight="600">Generated Files</text>
+<text x="827" y="365" text-anchor="middle" fill="#818cf8" font-size="10.5" font-family="'SF Mono',Consolas,monospace">schemas/  +  models/</text>
+
+<!-- ══════════════════════════════════════════════════════ STEP 3 — Enrich Pydantic Models (ADDED) -->
+<rect x="100" y="435" width="540" height="100" rx="12" fill="#1a1228" stroke="#7c3aed" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="100" y="435" width="540" height="100" rx="12" fill="none" stroke="#8b5cf6" stroke-width="2.5" opacity="0.2"/>
+<rect x="100" y="447" width="5" height="76" rx="2.5" fill="#8b5cf6"/>
+<circle cx="137" cy="485" r="20" fill="url(#g3)"/>
+<text x="137" y="485" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="14" font-weight="700">3</text>
+<text x="167" y="471" fill="#e6edf3" font-size="14" font-weight="600">Enrich Pydantic Models</text>
+<text x="167" y="488" fill="#8b949e" font-size="12">Add Field() constraints · validators · metadata  (dev team)</text>
+<rect x="166" y="496" width="180" height="20" rx="4" fill="#0a0d14"/>
+<text x="173" y="509" fill="#8b5cf6" font-size="10.5" font-family="'SF Mono',Consolas,monospace">models/*.py  (manual)</text>
+<!-- ADDED badge -->
+<rect x="572" y="440" width="58" height="18" rx="9" fill="#6d28d9" opacity="0.9"/>
+<text x="601" y="452" text-anchor="middle" dominant-baseline="middle" fill="#ddd6fe" font-size="8.5" font-weight="700" letter-spacing="0.5">ADDED ✦</text>
+<line x1="641" y1="485" x2="693" y2="485" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+<rect x="694" y="457" width="266" height="56" rx="9" fill="#130e2e" stroke="#8b5cf6" stroke-width="0.8"/>
+<text x="827" y="478" text-anchor="middle" fill="#c4b5fd" font-size="11.5" font-weight="600">Enriched Source</text>
+<text x="827" y="495" text-anchor="middle" fill="#a78bfa" font-size="10.5" font-family="'SF Mono',Consolas,monospace">models/*.py  (annotated)</text>
+
+<!-- ══════════════════════════════════════════════════════ STEP 4 — Reproduce Schemas -->
+<rect x="100" y="610" width="540" height="100" rx="12" fill="#161b22" stroke="#21262d" stroke-width="1" filter="url(#sh)"/>
+<rect x="100" y="622" width="5" height="76" rx="2.5" fill="#10b981"/>
+<circle cx="137" cy="660" r="20" fill="url(#g4)"/>
+<text x="137" y="660" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="14" font-weight="700">4</text>
+<text x="167" y="646" fill="#e6edf3" font-size="14" font-weight="600">Reproduce Schemas</text>
+<text x="167" y="663" fill="#8b949e" font-size="12">Generate JSON schemas from enriched Pydantic models</text>
+<rect x="166" y="671" width="218" height="20" rx="4" fill="#0a0d14"/>
+<text x="173" y="684" fill="#10b981" font-size="10.5" font-family="'SF Mono',Consolas,monospace">python 02_reproduce_schema.py</text>
+<line x1="641" y1="660" x2="693" y2="660" stroke="#10b981" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+<rect x="694" y="632" width="266" height="56" rx="9" fill="#001a0e" stroke="#10b981" stroke-width="0.8"/>
+<text x="827" y="653" text-anchor="middle" fill="#6ee7b7" font-size="11.5" font-weight="600">Reproduced Schemas</text>
+<text x="827" y="670" text-anchor="middle" fill="#34d399" font-size="10.5" font-family="'SF Mono',Consolas,monospace">reproduced/*.schema.json</text>
+
+<!-- ══════════════════════════════════════════════════════ STEP 5 — Generate Test Payloads -->
+<rect x="100" y="740" width="540" height="100" rx="12" fill="#161b22" stroke="#21262d" stroke-width="1" filter="url(#sh)"/>
+<rect x="100" y="752" width="5" height="76" rx="2.5" fill="#f59e0b"/>
+<circle cx="137" cy="790" r="20" fill="url(#g5)"/>
+<text x="137" y="790" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="14" font-weight="700">5</text>
+<text x="167" y="776" fill="#e6edf3" font-size="14" font-weight="600">Generate Test Payloads</text>
+<text x="167" y="793" fill="#8b949e" font-size="12">Craft valid + invalid message examples for complete coverage</text>
+<rect x="166" y="801" width="259" height="20" rx="4" fill="#0a0d14"/>
+<text x="173" y="814" fill="#f59e0b" font-size="10.5" font-family="'SF Mono',Consolas,monospace">GOOD_MESSAGE  ·  BAD_MESSAGE</text>
+<line x1="641" y1="790" x2="693" y2="790" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+<rect x="694" y="762" width="266" height="56" rx="9" fill="#1a1000" stroke="#f59e0b" stroke-width="0.8"/>
+<text x="827" y="783" text-anchor="middle" fill="#fde68a" font-size="11.5" font-weight="600">Test Corpus</text>
+<text x="827" y="800" text-anchor="middle" fill="#fcd34d" font-size="10.5" font-family="'SF Mono',Consolas,monospace">valid  ·  invalid payloads</text>
+
+<!-- ══════════════════════════════════════════════════════ STEP 6 — Validate Messages -->
+<rect x="100" y="870" width="540" height="100" rx="12" fill="#161b22" stroke="#21262d" stroke-width="1" filter="url(#sh)"/>
+<rect x="100" y="882" width="5" height="76" rx="2.5" fill="#ef4444"/>
+<circle cx="137" cy="920" r="20" fill="url(#g6)"/>
+<text x="137" y="920" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="14" font-weight="700">6</text>
+<text x="167" y="906" fill="#e6edf3" font-size="14" font-weight="600">Validate Messages</text>
+<text x="167" y="923" fill="#8b949e" font-size="12">Test against bootstrap · Pydantic model · reproduced schema</text>
+<rect x="166" y="931" width="203" height="20" rx="4" fill="#0a0d14"/>
+<text x="173" y="944" fill="#ef4444" font-size="10.5" font-family="'SF Mono',Consolas,monospace">python validate_messages.py</text>
+<line x1="641" y1="920" x2="693" y2="920" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+<rect x="694" y="892" width="266" height="56" rx="9" fill="#1a0a0a" stroke="#ef4444" stroke-width="0.8"/>
+<text x="827" y="913" text-anchor="middle" fill="#fca5a5" font-size="11.5" font-weight="600">Validation Report</text>
+<text x="827" y="930" text-anchor="middle" fill="#f87171" font-size="10.5" font-family="'SF Mono',Consolas,monospace">✓/✗  across 3 layers</text>
+
+<!-- ══════════════════════════════════════════════════════ STEP 7 — Compare & Classify Diffs (ADDED) -->
+<rect x="100" y="1045" width="540" height="100" rx="12" fill="#0e1f2a" stroke="#0891b2" stroke-width="1.5" filter="url(#sh)"/>
+<rect x="100" y="1045" width="540" height="100" rx="12" fill="none" stroke="#22d3ee" stroke-width="2.5" opacity="0.2"/>
+<rect x="100" y="1057" width="5" height="76" rx="2.5" fill="#06b6d4"/>
+<circle cx="137" cy="1095" r="20" fill="url(#g7)"/>
+<text x="137" y="1095" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="14" font-weight="700">7</text>
+<text x="167" y="1081" fill="#e6edf3" font-size="14" font-weight="600">Compare &amp; Classify Diffs</text>
+<text x="167" y="1098" fill="#8b949e" font-size="12">Classify EXPECTED · REVIEW · MISSING delta categories</text>
+<rect x="166" y="1106" width="213" height="20" rx="4" fill="#0a0d14"/>
+<text x="173" y="1119" fill="#06b6d4" font-size="10.5" font-family="'SF Mono',Consolas,monospace">python 03_compare_schemas.py</text>
+<!-- ADDED badge -->
+<rect x="572" y="1050" width="58" height="18" rx="9" fill="#0e7490" opacity="0.9"/>
+<text x="601" y="1062" text-anchor="middle" dominant-baseline="middle" fill="#a5f3fc" font-size="8.5" font-weight="700" letter-spacing="0.5">ADDED ✦</text>
+<line x1="641" y1="1095" x2="693" y2="1095" stroke="#06b6d4" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+<rect x="694" y="1067" width="266" height="56" rx="9" fill="#001820" stroke="#06b6d4" stroke-width="0.8"/>
+<text x="827" y="1088" text-anchor="middle" fill="#67e8f9" font-size="11.5" font-weight="600">Sign-off Report</text>
+<text x="827" y="1105" text-anchor="middle" fill="#22d3ee" font-size="10.5" font-family="'SF Mono',Consolas,monospace">COMPARISON_REPORT.txt</text>
+
+<!-- ══════════════════════════════════════════════════════ STEP 8 — Firewall Team Delivery -->
+<rect x="100" y="1215" width="540" height="100" rx="12" fill="#161b22" stroke="#21262d" stroke-width="1" filter="url(#sh)"/>
+<rect x="100" y="1227" width="5" height="76" rx="2.5" fill="#db2777"/>
+<circle cx="137" cy="1265" r="20" fill="url(#g8)"/>
+<text x="137" y="1265" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="14" font-weight="700">8</text>
+<text x="167" y="1251" fill="#e6edf3" font-size="14" font-weight="600">Firewall Team Delivery</text>
+<text x="167" y="1268" fill="#8b949e" font-size="12">Submit reproduced schemas + comparison report for re-signing</text>
+<rect x="166" y="1276" width="272" height="20" rx="4" fill="#0a0d14"/>
+<text x="173" y="1289" fill="#db2777" font-size="10.5" font-family="'SF Mono',Consolas,monospace">reproduced/  ·  COMPARISON_REPORT.txt</text>
+<line x1="641" y1="1265" x2="693" y2="1265" stroke="#db2777" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+<rect x="694" y="1237" width="266" height="56" rx="9" fill="#1a0015" stroke="#db2777" stroke-width="0.8"/>
+<text x="827" y="1258" text-anchor="middle" fill="#fbcfe8" font-size="11.5" font-weight="600">Awaiting Signature</text>
+<text x="827" y="1275" text-anchor="middle" fill="#f472b6" font-size="10.5" font-family="'SF Mono',Consolas,monospace">firewall team re-signs</text>
+
+<!-- ══════════════════════════════════════════════════════ LEGEND -->
+<line x1="80" y1="1338" x2="920" y2="1338" stroke="#21262d" stroke-width="1"/>
+<line x1="95" y1="1352" x2="125" y2="1352" stroke="#4b5563" stroke-width="2"/>
+<text x="131" y="1356" fill="#6e7681" font-size="10.5">within phase</text>
+<line x1="210" y1="1352" x2="240" y2="1352" stroke="#374151" stroke-width="2" stroke-dasharray="4,3"/>
+<text x="246" y="1356" fill="#6e7681" font-size="10.5">phase transition</text>
+<rect x="368" y="1344" width="42" height="16" rx="8" fill="#4c1d95" opacity="0.85"/>
+<text x="389" y="1355" text-anchor="middle" dominant-baseline="middle" fill="#ddd6fe" font-size="8.5" font-weight="700">ADDED ✦</text>
+<text x="416" y="1356" fill="#6e7681" font-size="10.5">steps added to your original spec (3 &amp; 7)</text>
+
+</svg>

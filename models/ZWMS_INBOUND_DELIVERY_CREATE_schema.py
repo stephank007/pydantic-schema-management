@@ -139,15 +139,17 @@ class InboundDocItem(BaseModel):
     RECEIVING_STORAGE_LOCATION: business_types_schema.StorageLocation
 
     # --- Optional ---
-    BATCH          : Annotated[str, Field(max_length=10)] | None = None
-    STOCK_TYPE     : Annotated[str, Field(max_length=2)]  | None = None
-    DELIVERY_DATE  : SapDate | None                              = None
-    LINE_TEXT      : Annotated[str, Field(max_length=40)] | None = None
-    DELETION_INDIC : Annotated[str, Field(max_length=1)]  | None = None
-    INSPECTION_TYPE: Annotated[str, Field(max_length=2)]  | None = None
-    MILSTRIP       : Annotated[str, Field(max_length=20)] | None = None
-    LOT            : Annotated[str, Field(max_length=10)] | None = None
+    BATCH             : Annotated[str, Field(max_length=10)] | None = None
+    STOCK_TYPE        : Annotated[str, Field(max_length=2)]  | None = None
+    DELIVERY_DATE     : SapDate                              | None = None
+    LINE_TEXT         : Annotated[str, Field(max_length=40)] | None = None
+    DELETION_INDIC    : Annotated[str, Field(max_length= 1)] | None = None
+    INSPECTION_TYPE   : Annotated[str, Field(max_length= 2)] | None = None
+    MILSTRIP          : Annotated[str, Field(max_length=20)] | None = None
+    LOT               : Annotated[str, Field(max_length=10)] | None = None
+    
     QUALITY_INSPECTION: business_types_schema.QualityInspection | None = None
+    
     HANDLING_UNITS: Annotated[
         list[business_types_schema.HandlingUnit],
         Field(max_length=100, min_length=1),
@@ -180,34 +182,34 @@ class Body(BaseModel):
     DOC_ITEM         : Annotated[list[InboundDocItem], Field(max_length=999, min_length=1)]
 
     # --- Optional ---
-    SHIP_CON                  : business_types_schema.SHIPCON | None = None
-    PARTNER_TYPE              : business_types_schema.PARTNERTYPE | None = None
-    OPER_CODE                 : business_types_schema.OPERCODE | None = None
-    HEADER_TEXT               : business_types_schema.HEADERTEXT | None = None
-    RELS_ORD                  : business_types_schema.RELSORD | None = None
-    BOL_1                     : Annotated[business_types_schema.BOL, Field(alias='BOL')] | None = None
-    CONTAIN_ID                : business_types_schema.CONTAINID | None = None
-    CONTAIN_SEAL_NUM          : business_types_schema.CONTAINSEALNUM | None = None
-    CONTAIN_TYP               : business_types_schema.CONTAINTYP | None = None
-    AIR_OR_SEA_IND            : business_types_schema.AIRORSEAIND | None = None
-    REQU_COORD                : business_types_schema.REQUCOORD | None = None
-    REF_DELIV                 : business_types_schema.REFDELIV | None = None
-    DELIV_NOTE                : business_types_schema.DELIVNOTE | None = None
+    SHIP_CON                  : business_types_schema.SHIPCON                              | None = None
+    PARTNER_TYPE              : business_types_schema.PARTNERTYPE                          | None = None
+    OPER_CODE                 : business_types_schema.OPERCODE                             | None = None
+    HEADER_TEXT               : business_types_schema.HEADERTEXT                           | None = None
+    RELS_ORD                  : business_types_schema.RELSORD                              | None = None
+    BOL_1                     : Annotated[business_types_schema.BOL, Field(alias='BOL')]   | None = None
+    CONTAIN_ID                : business_types_schema.CONTAINID                            | None = None
+    CONTAIN_SEAL_NUM          : business_types_schema.CONTAINSEALNUM                       | None = None
+    CONTAIN_TYP               : business_types_schema.CONTAINTYP                           | None = None
+    AIR_OR_SEA_IND            : business_types_schema.AIRORSEAIND                          | None = None
+    REQU_COORD                : business_types_schema.REQUCOORD                            | None = None
+    REF_DELIV                 : business_types_schema.REFDELIV                             | None = None
+    DELIV_NOTE                : business_types_schema.DELIVNOTE                            | None = None
     SPED_1                    : Annotated[business_types_schema.SPED, Field(alias='SPED')] | None = None
-    ARMY_MANAGED              : business_types_schema.ARMYMANAGED | None = None
-    PICK_POINT                : business_types_schema.PICKPOINT | None = None
-    REC_DOC_LINE              : business_types_schema.RECDOCLINE | None = None
-    DELETION_INDIC            : business_types_schema.DELETIONINDIC | None = None
-    MOD_ORDER                 : business_types_schema.MODORDER | None = None
-    MATERIAL                  : business_types_schema.MaterialNumber | None = None
-    SERIAL_PROF               : business_types_schema.SERIALPROF | None = None
-    QUANTITY                  : business_types_schema.SapQuantity | None = None
-    STOCK_TYPE                : business_types_schema.STOCKTYPE | None = None
-    RECEIVING_STORAGE_LOCATION: business_types_schema.RECEIVINGSTORAGELOCATION | None = None
-    LINE_TEXT                 : business_types_schema.LINETEXT | None = None
-    ORDER_TOLERANCE           : business_types_schema.ORDERTOLERANCE | None = None
-    CROSS_DOC_ORDER           : business_types_schema.CROSSDOCORDER | None = None
-    CROSS_DOC_ORDER_LINE      : business_types_schema.CROSSDOCORDERLINE | None = None
+    ARMY_MANAGED              : business_types_schema.ARMYMANAGED                          | None = None
+    PICK_POINT                : business_types_schema.PICKPOINT                            | None = None
+    REC_DOC_LINE              : business_types_schema.RECDOCLINE                           | None = None
+    DELETION_INDIC            : business_types_schema.DELETIONINDIC                        | None = None
+    MOD_ORDER                 : business_types_schema.MODORDER                             | None = None
+    MATERIAL                  : business_types_schema.MaterialNumber                       | None = None
+    SERIAL_PROF               : business_types_schema.SERIALPROF                           | None = None
+    QUANTITY                  : business_types_schema.SapQuantity                          | None = None
+    STOCK_TYPE                : business_types_schema.STOCKTYPE                            | None = None
+    RECEIVING_STORAGE_LOCATION: business_types_schema.RECEIVINGSTORAGELOCATION             | None = None
+    LINE_TEXT                 : business_types_schema.LINETEXT                             | None = None
+    ORDER_TOLERANCE           : business_types_schema.ORDERTOLERANCE                       | None = None
+    CROSS_DOC_ORDER           : business_types_schema.CROSSDOCORDER                        | None = None
+    CROSS_DOC_ORDER_LINE      : business_types_schema.CROSSDOCORDERLINE                    | None = None
     BATCH_1                   : Annotated[business_types_schema.BATCH, Field(alias='BATCH')] | None = None
     KIT_SIZE                  : business_types_schema.KITSIZE | None = None
     INSPECTION_TYPE           : business_types_schema.INSPECTIONTYPE | None = None
