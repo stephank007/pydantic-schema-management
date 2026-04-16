@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/wms/envelope.schema.json",
+  "title": "WmsEnvelope",
+  "description": "Layer 1 — stable WMS message envelope. Owned by the security/infrastructure team. Validates the Header block only. DOC_HEADER is intentionally opaque: format never changes with business requirements; business content never belongs here.",
+
+  "$defs": {
+
+    "InterfaceName": {
+      "$anchor": "InterfaceName",
+      "type": "string",
+      "pattern": "^Z[A-Z0-9_]{3,40}$",
+      "minLength": 4,
+      "maxLength": 41,
+      "description": "SAP WMS interface routing key. Always begins with 'Z' (custom namespace), uppercase alphanumeric + underscore. Strictly pattern-checked — unknown interfaces are hard-rejected. Analogous to message_type in the generic firewall.",
+      "examples": ["ZWMS_WMS_PULL_PUSH_UNIT", "ZWMS_WMS_RETURN_UNIT"]
+    },
+
+    "MessageId": {
+      "$anchor": "MessageId",
+      "type": "string",
+      "pattern": "^[0-9]{16}$",
+      "minLength": 16,
+      "maxLength": 16,
+      "description": "Unique 16-digit zero-padded message identifier assigned by the sending system.",
+      "examples": ["0000002243643973", "0000000000000001"]
+    },
+
+    "PlantCode": {
+      "$anchor": "PlantCode",
+      "type": "string",
+      "pattern": "^[0-9]{4}$",
+      "minLength": 4,
+      "maxLength": 4,
+      "description": "SAP 4-digit numeric plant code. Infrastructure primitive — owned by the infra/master-data team. Declared once here; $ref'd by any payload field that carries a plant code (SUPPLYING_PLANT, RECEIVING_PLANT, TRANSIT_DOCKING_PLANT).",
+      "examples": ["6300", "0010", "1000"]
+    },
+
+    "ConsigneeCode": {
+      "$anchor": "ConsigneeCode",
+      "type": "string",
+      "pattern": "^[A-Z0-9]{2,10}$",
+      "minLength": 2,
+      "maxLength": 10,
+      "description": "Recipient/consignee short code. Uppercase alphanumeric, 2–10 chars. Infrastructure-level recipient identity — not a business-domain customer identifier.",
+      "examples": ["ATAL", "MAIN", "WH01"]
+    },
+
+    "SapDate": {
+      "$anchor": "SapDate",
+      "type": "string",
+      "pattern": "^[0-9]{8}$",
+      "minLength": 8,
+      "maxLength": 8,
+      "description": "SAP compact date format YYYYMMDD. Used for all date fields across envelope and payload. Declared once here; $ref'd by payload date fields (DELIVERY_DATE etc.).",
+      "examples": ["20240915", "20241010"]
+    },
+
+    "SapTime": {
+      "$anchor": "SapTime",
+      "type": "string",
+      "pattern": "^[0-9]{6}$",
+      "minLength": 6,
+      "maxLength": 6,
+      "description": "SAP compact time format HHMMSS (24-hour). Used in envelope timestamp; payload systems may $ref for time fields.",
+      "examples": ["160656", "083000", "235959"]
+    },
+
+    "OpaqueDocHeader": {
+      "$anchor": "OpaqueDocHeader",
+      "type": "object",
+      "description": "Business document payload. INTENTIONALLY OPAQUE to the firewall. Structure varies by WMS_ORD_TP order type. The recipient/WMS system is the sole owner of DOC_HEADER validation (Layer 2).",
+      "unevaluatedProperties": true
+    }
+
+  },
+
+  "properties": {
+    "Header": {
+      "type": "object",
+      "description": "Message envelope. All 6 fields are infrastructure invariants validated by the firewall.",
+      "properties": {
+        "INTERFACE_NAME": { "$ref": "#/$defs/InterfaceName"    },
+        "ID":             { "$ref": "#/$defs/MessageId"        },
+        "PLANT":          { "$ref": "#/$defs/PlantCode"        },
+        "DATE":           { "$ref": "#/$defs/SapDate"          },
+        "TIME":           { "$ref": "#/$defs/SapTime"          },
+        "CONSIGNEE":      { "$ref": "#/$defs/ConsigneeCode"    }
+      },
+      "required": ["INTERFACE_NAME", "ID", "PLANT", "DATE", "TIME", "CONSIGNEE"],
+      "unevaluatedProperties": false
+    },
+    "DOC_HEADER": { "$ref": "#/$defs/OpaqueDocHeader" }
+  },
+
+  "required": ["Header", "DOC_HEADER"],
+  "unevaluatedProperties": false,
+
+  "$comment": "unevaluatedProperties:false at the root blocks any injected top-level field. unevaluatedProperties:false inside Header blocks injected header fields. PlantCode and SapDate are declared here because they are infrastructure primitives used in the envelope itself — L2 payload schemas $ref them rather than re-declaring the patterns."
+}

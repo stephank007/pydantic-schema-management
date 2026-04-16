@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "ConsigneeCode": {
+      "maxLength": 10,
+      "minLength": 2,
+      "pattern": "^[A-Z0-9]{2,10}$",
+      "title": "ConsigneeCode",
+      "type": "string"
+    },
+    "Header": {
+      "additionalProperties": false,
+      "description": "Message envelope. All 6 fields are infrastructure invariants validated by the firewall.",
+      "properties": {
+        "INTERFACE_NAME": {
+          "$ref": "#/$defs/InterfaceName"
+        },
+        "ID": {
+          "$ref": "#/$defs/MessageId"
+        },
+        "PLANT": {
+          "$ref": "#/$defs/PlantCode"
+        },
+        "DATE": {
+          "$ref": "#/$defs/SapDate"
+        },
+        "TIME": {
+          "$ref": "#/$defs/SapTime"
+        },
+        "CONSIGNEE": {
+          "$ref": "#/$defs/ConsigneeCode"
+        }
+      },
+      "required": [
+        "INTERFACE_NAME",
+        "ID",
+        "PLANT",
+        "DATE",
+        "TIME",
+        "CONSIGNEE"
+      ],
+      "title": "Header",
+      "type": "object"
+    },
+    "InterfaceName": {
+      "maxLength": 41,
+      "minLength": 4,
+      "pattern": "^Z[A-Z0-9_]{3,40}$",
+      "title": "InterfaceName",
+      "type": "string"
+    },
+    "MessageId": {
+      "maxLength": 16,
+      "minLength": 16,
+      "pattern": "^[0-9]{16}$",
+      "title": "MessageId",
+      "type": "string"
+    },
+    "OpaqueDocHeader": {
+      "additionalProperties": true,
+      "description": "Business document payload. INTENTIONALLY OPAQUE to the firewall. Structure varies by WMS_ORD_TP order type. The recipient/WMS system is the sole owner of DOC_HEADER validation (Layer 2).",
+      "properties": {},
+      "title": "OpaqueDocHeader",
+      "type": "object"
+    },
+    "PlantCode": {
+      "maxLength": 4,
+      "minLength": 4,
+      "pattern": "^[0-9]{4}$",
+      "title": "PlantCode",
+      "type": "string"
+    },
+    "SapDate": {
+      "maxLength": 8,
+      "minLength": 8,
+      "pattern": "^[0-9]{8}$",
+      "title": "SapDate",
+      "type": "string"
+    },
+    "SapTime": {
+      "maxLength": 6,
+      "minLength": 6,
+      "pattern": "^[0-9]{6}$",
+      "title": "SapTime",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Layer 1 — stable WMS message envelope. Owned by the security/infrastructure team. Validates the Header block only. DOC_HEADER is intentionally opaque: format never changes with business requirements; business content never belongs here.",
+  "properties": {
+    "Header": {
+      "$ref": "#/$defs/Header"
+    },
+    "DOC_HEADER": {
+      "$ref": "#/$defs/OpaqueDocHeader"
+    }
+  },
+  "required": [
+    "Header",
+    "DOC_HEADER"
+  ],
+  "title": "WmsEnvelope",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

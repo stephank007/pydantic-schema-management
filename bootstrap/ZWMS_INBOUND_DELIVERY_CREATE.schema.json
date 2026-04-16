@@ -1,0 +1,345 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/wms/interfaces/ZWMS_INBOUND_DELIVERY_CREATE",
+  "title": "WmsInterface — ZWMS_INBOUND_DELIVERY_CREATE",
+  "description": "Payload schema for sheet '5,6,7,8,24.1' – קבלה למלאי (אספקה נכנסת) רכש מקומי (Outbound)",
+  "$defs": {
+    "Body": {
+      "type": "object",
+      "description": "Payload schema for sheet '5,6,7,8,24.1' – קבלה למלאי (אספקה נכנסת) רכש מקומי (Outbound)",
+      "properties": {
+        "REC_DOC": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/REC_DOC"
+        },
+        "WMS_ORD_TP": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/WMS_ORD_TP"
+        },
+        "SHIP_CON": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/SHIP_CON"
+        },
+        "SUP_PRTNR": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/SUP_PRTNR"
+        },
+        "PARTNER_TYPE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/PARTNER_TYPE"
+        },
+        "OPER_CODE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/OPER_CODE"
+        },
+        "HEADER_TEXT": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/HEADER_TEXT"
+        },
+        "RELS_ORD": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/RELS_ORD"
+        },
+        "BOL": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/BOL"
+        },
+        "CONTAIN_ID": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/CONTAIN_ID"
+        },
+        "CONTAIN_SEAL_NUM": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/CONTAIN_SEAL_NUM"
+        },
+        "CONTAIN_TYP": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/CONTAIN_TYP"
+        },
+        "AIR_OR_SEA_IND": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/AIR_OR_SEA_IND"
+        },
+        "REQU_COORD": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/REQU_COORD"
+        },
+        "REF_DELIV": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/REF_DELIV"
+        },
+        "RECEIVING_PLANT": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/RECEIVING_PLANT"
+        },
+        "DELIV_NOTE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/DELIV_NOTE"
+        },
+        "SPED": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/SPED"
+        },
+        "ARMY_MANAGED": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ARMY_MANAGED"
+        },
+        "PICK_POINT": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/PICK_POINT"
+        },
+        "DELIVERY_DATE": {
+          "$ref": "https://example.org/wms/envelope.schema.json#/$defs/SapDate"
+        },
+        "REC_DOC_LINE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/REC_DOC_LINE"
+        },
+        "DELETION_INDIC": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/DELETION_INDIC"
+        },
+        "MOD_ORDER": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/MOD_ORDER"
+        },
+        "MATERIAL": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/MaterialNumber"
+        },
+        "SERIAL_PROF": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/SERIAL_PROF"
+        },
+        "QUANTITY": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/SapQuantity"
+        },
+        "STOCK_TYPE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/STOCK_TYPE"
+        },
+        "RECEIVING_STORAGE_LOCATION": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/RECEIVING_STORAGE_LOCATION"
+        },
+        "LINE_TEXT": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/LINE_TEXT"
+        },
+        "ORDER_TOLERANCE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ORDER_TOLERANCE"
+        },
+        "CROSS_DOC_ORDER": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/CROSS_DOC_ORDER"
+        },
+        "CROSS_DOC_ORDER_LINE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/CROSS_DOC_ORDER_LINE"
+        },
+        "BATCH": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/BATCH"
+        },
+        "KIT_SIZE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/KIT_SIZE"
+        },
+        "INSPECTION_TYPE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/INSPECTION_TYPE"
+        },
+        "SAP_INTER_ORDER": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/SAP_INTER_ORDER"
+        },
+        "SAP_INTER_ORDER_LINE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/SAP_INTER_ORDER_LINE"
+        },
+        "MILSTRIP": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/MILSTRIP"
+        },
+        "MLSTRP_SPLIT": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/MLSTRP_SPLIT"
+        },
+        "LOT": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/LOT"
+        },
+        "RESERVATION_ORDER": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/RESERVATION_ORDER"
+        },
+        "RECEIPT": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/RECEIPT"
+        },
+        "RECEIPT_LINE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/RECEIPT_LINE"
+        },
+        "CONTACT_PERSON_NAME": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/CONTACT_PERSON_NAME"
+        },
+        "CONTACT_PERSON_PHONE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/CONTACT_PERSON_PHONE"
+        },
+        "COORDINATES_WIDTH": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/COORDINATES_WIDTH"
+        },
+        "COORDINATES_LENGTH": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/COORDINATES_LENGTH"
+        },
+        "SERIAL": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/SERIAL"
+        },
+        "ASN_MAINTENANCE_DATE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_MAINTENANCE_DATE"
+        },
+        "ASN_LAST_CNT_DATE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_LAST_CNT_DATE"
+        },
+        "ASN_INSPECTION_DATE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_INSPECTION_DATE"
+        },
+        "ASN_LOADID": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_LOADID"
+        },
+        "ASN_EXPIRATION_DATE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_EXPIRATION_DATE"
+        },
+        "ASN_HU": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_HU"
+        },
+        "ASN_SKU_WMS": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_SKU_WMS"
+        },
+        "ASN_COL_DATE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_COL_DATE"
+        },
+        "ASN_CHARGE_DATE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_CHARGE_DATE"
+        },
+        "ASN_EXTRA_ACTIVITY_DATE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_EXTRA_ACTIVITY_DATE"
+        },
+        "ASN_ALLOW_PICK": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_ALLOW_PICK"
+        },
+        "ASN_VERSION": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_VERSION"
+        },
+        "ASN_VERSION_DATE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_VERSION_DATE"
+        },
+        "ASN_LOAD_UM": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_LOAD_UM"
+        },
+        "ASN_UM_UNITS": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_UM_UNITS"
+        },
+        "ASN_WMS_STAT": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_WMS_STAT"
+        },
+        "ASN_BLOCK": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_BLOCK"
+        },
+        "ASN_HU_TYPE": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_HU_TYPE"
+        },
+        "ASN_KIT_ORDER": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_KIT_ORDER"
+        },
+        "ASN_SUB_KIT": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/ASN_SUB_KIT"
+        },
+        "DOC_ITEM": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InboundDocItem"
+          },
+          "minItems": 1,
+          "maxItems": 999
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "REC_DOC",
+        "WMS_ORD_TP",
+        "SUP_PRTNR",
+        "RECEIVING_PLANT",
+        "DELIVERY_DATE",
+        "DOC_ITEM"
+      ]
+    },
+    "InboundDocItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "MATERIAL",
+        "QUANTITY",
+        "RECEIVING_STORAGE_LOCATION"
+      ],
+      "properties": {
+        "MATERIAL": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/MaterialNumber"
+        },
+        "BATCH": {
+          "type": "string",
+          "maxLength": 10
+        },
+        "QUANTITY": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/SapQuantity"
+        },
+        "STOCK_TYPE": {
+          "type": "string",
+          "maxLength": 2
+        },
+        "RECEIVING_STORAGE_LOCATION": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/StorageLocation"
+        },
+        "DELIVERY_DATE": {
+          "$ref": "https://example.org/wms/envelope.schema.json#/$defs/SapDate"
+        },
+        "LINE_TEXT": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "DELETION_INDIC": {
+          "type": "string",
+          "maxLength": 1
+        },
+        "INSPECTION_TYPE": {
+          "type": "string",
+          "maxLength": 2
+        },
+        "MILSTRIP": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "LOT": {
+          "type": "string",
+          "maxLength": 10
+        },
+        "HANDLING_UNITS": {
+          "type": "array",
+          "items": {
+            "$ref": "https://example.org/wms/business-types.schema.json#/$defs/HandlingUnit"
+          },
+          "minItems": 1,
+          "maxItems": 100
+        },
+        "SERIAL_NUMBERS": {
+          "type": "array",
+          "items": {
+            "$ref": "https://example.org/wms/business-types.schema.json#/$defs/SerialNumber"
+          },
+          "uniqueItems": true,
+          "maxItems": 999
+        },
+        "BATCH_SPLITS": {
+          "type": "array",
+          "items": {
+            "$ref": "https://example.org/wms/business-types.schema.json#/$defs/BatchSplit"
+          },
+          "minItems": 2,
+          "maxItems": 50
+        },
+        "QUALITY_INSPECTION": {
+          "$ref": "https://example.org/wms/business-types.schema.json#/$defs/QualityInspection"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://example.org/wms/envelope.schema.json",
+      "$comment": "Inherit L1 envelope invariants (Header structure, field patterns)."
+    },
+    {
+      "$comment": "Lock this schema to INTERFACE_NAME=ZWMS_INBOUND_DELIVERY_CREATE. Any other value is rejected.",
+      "properties": {
+        "Header": {
+          "properties": {
+            "INTERFACE_NAME": {
+              "const": "ZWMS_INBOUND_DELIVERY_CREATE"
+            }
+          },
+          "required": [
+            "INTERFACE_NAME"
+          ]
+        }
+      }
+    },
+    {
+      "$comment": "Validate DOC_HEADER body against the strict per-interface schema.",
+      "properties": {
+        "DOC_HEADER": {
+          "$ref": "#/$defs/Body"
+        }
+      }
+    }
+  ]
+}

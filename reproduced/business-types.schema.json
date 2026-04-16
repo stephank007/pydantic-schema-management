@@ -1,0 +1,3056 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "business_types_schema",
+  "description": "Combined schema — 368 models from business_types_schema.",
+  "$defs": {
+    "ACCOMPANYINGITEM": {
+      "type": "string"
+    },
+    "ADDRESS": {
+      "maxLength": 35,
+      "type": "string"
+    },
+    "AIRORSEAIND": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "APPOITMENTID": {
+      "type": "string"
+    },
+    "ARMYMANAGED": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "ASNALLOWPICK": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "ASNBLOCK": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "ASNCHARGEDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "ASNCOLDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "ASNEXPIRATIONDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "ASNEXTRAACTIVITYDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "ASNHU": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "ASNHUTYPE": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "ASNINSPECTIONDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "ASNKITORDER": {
+      "maxLength": 7,
+      "type": "string"
+    },
+    "ASNLASTCNTDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "ASNLOADID": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "ASNLOADUM": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "ASNMAINTENANCEDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "ASNSKUWMS": {
+      "maxLength": 100,
+      "type": "string"
+    },
+    "ASNSUBKIT": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "ASNSUBSERIES": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "ASNUMUNITS": {
+      "maxLength": 17,
+      "type": "string"
+    },
+    "ASNVERSION": {
+      "maxLength": 50,
+      "type": "string"
+    },
+    "ASNVERSIONDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "ASNWMSSTAT": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "ATTRACTIVEITEM": {
+      "type": "string"
+    },
+    "AdjustmentReason": {
+      "description": "Reason code for an inventory adjustment line (WMS_ORD_TP=301). Required on every adjustment item.",
+      "enum": [
+        "SHRINKAGE",
+        "DAMAGE",
+        "COUNT_CORRECTION",
+        "THEFT",
+        "EXPIRY",
+        "SYSTEM_ERROR"
+      ],
+      "type": "string"
+    },
+    "AppointmentID": {
+      "type": "string"
+    },
+    "BASEITEM": {
+      "type": "string"
+    },
+    "BATCH": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "BATCHINDICATOR": {
+      "type": "string"
+    },
+    "BATCHSTATUS": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "BLOCKEDVENDOR": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "BOL": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "BREAKABLE": {
+      "type": "string"
+    },
+    "BREIT": {
+      "type": "string"
+    },
+    "BRGEW": {
+      "type": "string"
+    },
+    "Batch": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "BatchSplit": {
+      "$defs": {
+        "SHELFLIFEEXPDATE": {
+          "maxLength": 0,
+          "title": "SHELFLIFEEXPDATE",
+          "type": "string"
+        },
+        "SapDate": {
+          "maxLength": 8,
+          "minLength": 8,
+          "pattern": "^[0-9]{8}$",
+          "title": "SapDate",
+          "type": "string"
+        },
+        "SapQuantity": {
+          "maxLength": 20,
+          "minLength": 5,
+          "pattern": "^[0-9]+\\.[0-9]{3}$",
+          "title": "SapQuantity",
+          "type": "string"
+        },
+        "StorageLocation": {
+          "maxLength": 4,
+          "minLength": 4,
+          "pattern": "^[A-Z0-9]{4}$",
+          "title": "StorageLocation",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "A portion of a line item fulfilled from one specific batch. Used when a single delivery line is split across multiple batches (e.g. partial FIFO fulfilment).",
+      "properties": {
+        "BATCH": {
+          "maxLength": 10,
+          "minLength": 1,
+          "title": "Batch",
+          "type": "string"
+        },
+        "QUANTITY": {
+          "$ref": "#/$defs/SapQuantity"
+        },
+        "STOCK_TYPE": {
+          "anyOf": [
+            {
+              "maxLength": 2,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stock Type"
+        },
+        "STORAGE_LOCATION": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StorageLocation"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "SHELF_LIFE_EXP_DATE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SHELFLIFEEXPDATE"
+            },
+            {
+              "$ref": "#/$defs/SapDate"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shelf Life Exp Date"
+        }
+      },
+      "required": [
+        "BATCH",
+        "QUANTITY"
+      ],
+      "type": "object"
+    },
+    "CALIBRATIONDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "CANCELEDVENDOR": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "CAS": {
+      "type": "string"
+    },
+    "CASEPREPARATIONTYPE": {
+      "type": "string"
+    },
+    "CHANGEDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "CHARGEDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "CHEMCOMP": {
+      "type": "string"
+    },
+    "CHEMSEQUENCE": {
+      "type": "string"
+    },
+    "CITY": {
+      "maxLength": 35,
+      "type": "string"
+    },
+    "CONCENTRATION": {
+      "type": "number"
+    },
+    "CONFIRMSKUONPICK": {
+      "type": "string"
+    },
+    "CONTACTPERSONNAME": {
+      "maxLength": 35,
+      "type": "string"
+    },
+    "CONTACTPERSONPHONE": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "CONTAINID": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "CONTAINSEALNUM": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "CONTAINTYP": {
+      "maxLength": 2,
+      "type": "string"
+    },
+    "COORDINATESLENGTH": {
+      "maxLength": 18,
+      "type": "string"
+    },
+    "COORDINATESWIDTH": {
+      "maxLength": 18,
+      "type": "string"
+    },
+    "COUNTRY": {
+      "maxLength": 3,
+      "type": "string"
+    },
+    "COUNTTOLERANCE": {
+      "type": "string"
+    },
+    "CPFIRSTNAME": {
+      "maxLength": 35,
+      "type": "string"
+    },
+    "CPLASTNAME": {
+      "maxLength": 35,
+      "type": "string"
+    },
+    "CPTELEPHONE": {
+      "maxLength": 16,
+      "type": "string"
+    },
+    "CREATEDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "CREATETIME": {
+      "maxLength": 6,
+      "type": "string"
+    },
+    "CROSSDOCK": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "CROSSDOCORDER": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "CROSSDOCORDERLINE": {
+      "maxLength": 6,
+      "type": "string"
+    },
+    "CUSTOMER": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "CUSTOMERACCOUNTGROUP": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "CUSTOMERID": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "CUSTOMERNAME": {
+      "maxLength": 35,
+      "type": "string"
+    },
+    "CUSTOMERTYPE": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "CYCLE": {
+      "type": "string"
+    },
+    "CYCLEACTIVITYDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "CYCLEACTIVITYTYPE": {
+      "maxLength": 2,
+      "type": "string"
+    },
+    "CYCLECOUNTINT": {
+      "type": "string"
+    },
+    "ConsigneeCode": {
+      "maxLength": 10,
+      "minLength": 2,
+      "pattern": "^[A-Z0-9]{2,10}$",
+      "type": "string"
+    },
+    "CoordinateDecimal": {
+      "maxLength": 22,
+      "minLength": 14,
+      "pattern": "^-?[0-9]+\\.[0-9]{12}$",
+      "type": "string"
+    },
+    "CustomerNumber": {
+      "maxLength": 10,
+      "minLength": 10,
+      "pattern": "^[0-9]{10}$",
+      "type": "string"
+    },
+    "DATE1": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "DATE2": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "DATE3": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "DATE5": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "DATE6": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "DEFAULTRECUOM": {
+      "type": "string"
+    },
+    "DEFAULTUOM": {
+      "type": "string"
+    },
+    "DELETIONINDIC": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "DELETIONINDICATOR": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "DELIVERYPRIORITY": {
+      "maxLength": 2,
+      "type": "string"
+    },
+    "DELIVNOTE": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "DESCRIPTIONEN": {
+      "type": "string"
+    },
+    "DESCRIPTIONHE": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "DESCRIPTIONSHORT": {
+      "type": "string"
+    },
+    "DISTRIBUTIONDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "DISTRIBUTIONROUTE": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "DOCUMENTCATEGORY": {
+      "maxLength": 2,
+      "type": "string"
+    },
+    "DOCUMENTITEM": {
+      "maxLength": 5,
+      "type": "string"
+    },
+    "DOCUMENTNUM": {
+      "type": "string"
+    },
+    "DOCUMENTTYPESAP": {
+      "maxLength": 2,
+      "type": "string"
+    },
+    "DimensionUnit": {
+      "description": "Unit of measure for linear dimensions used in HU DIMENSIONS objects.",
+      "enum": [
+        "MM",
+        "CM",
+        "M",
+        "IN"
+      ],
+      "type": "string"
+    },
+    "DocItem": {
+      "$defs": {
+        "BatchSplit": {
+          "additionalProperties": false,
+          "description": "A portion of a line item fulfilled from one specific batch. Used when a single delivery line is split across multiple batches (e.g. partial FIFO fulfilment).",
+          "properties": {
+            "BATCH": {
+              "maxLength": 10,
+              "minLength": 1,
+              "title": "Batch",
+              "type": "string"
+            },
+            "QUANTITY": {
+              "$ref": "#/$defs/SapQuantity"
+            },
+            "STOCK_TYPE": {
+              "anyOf": [
+                {
+                  "maxLength": 2,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Stock Type"
+            },
+            "STORAGE_LOCATION": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/StorageLocation"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "SHELF_LIFE_EXP_DATE": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/SHELFLIFEEXPDATE"
+                },
+                {
+                  "$ref": "#/$defs/SapDate"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Shelf Life Exp Date"
+            }
+          },
+          "required": [
+            "BATCH",
+            "QUANTITY"
+          ],
+          "title": "BatchSplit",
+          "type": "object"
+        },
+        "CoordinateDecimal": {
+          "maxLength": 22,
+          "minLength": 14,
+          "pattern": "^-?[0-9]+\\.[0-9]{12}$",
+          "title": "CoordinateDecimal",
+          "type": "string"
+        },
+        "CustomerNumber": {
+          "maxLength": 10,
+          "minLength": 10,
+          "pattern": "^[0-9]{10}$",
+          "title": "CustomerNumber",
+          "type": "string"
+        },
+        "DimensionUnit": {
+          "description": "Unit of measure for linear dimensions used in HU DIMENSIONS objects.",
+          "enum": [
+            "MM",
+            "CM",
+            "M",
+            "IN"
+          ],
+          "title": "DimensionUnit",
+          "type": "string"
+        },
+        "HandlingUnit": {
+          "additionalProperties": false,
+          "description": "A physical handling unit (pallet, box, container) assigned to a document item. Demonstrates three levels of nesting: HandlingUnit → DIMENSIONS (nested object) + ITEMS (array of HuItem dicts).",
+          "properties": {
+            "HU_NUMBER": {
+              "pattern": "^[0-9]{18,20}$",
+              "title": "Hu Number",
+              "type": "string"
+            },
+            "HU_TYPE": {
+              "$ref": "#/$defs/HuType"
+            },
+            "GROSS_WEIGHT": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/WeightDecimal"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "TARE_WEIGHT": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/WeightDecimal"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "WEIGHT_UNIT": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/WeightUnit"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "DIMENSIONS": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/HuDimensions"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "ITEMS": {
+              "items": {
+                "$ref": "#/$defs/HuItem"
+              },
+              "maxItems": 200,
+              "minItems": 1,
+              "title": "Items",
+              "type": "array"
+            }
+          },
+          "required": [
+            "HU_NUMBER",
+            "HU_TYPE",
+            "ITEMS"
+          ],
+          "title": "HandlingUnit",
+          "type": "object"
+        },
+        "HuDimensions": {
+          "additionalProperties": false,
+          "description": "Physical outer dimensions of a handling unit. All values in the unit specified by UNIT field.",
+          "properties": {
+            "LENGTH": {
+              "$ref": "#/$defs/LinearDimension"
+            },
+            "WIDTH": {
+              "$ref": "#/$defs/LinearDimension"
+            },
+            "HEIGHT": {
+              "$ref": "#/$defs/LinearDimension"
+            },
+            "UNIT": {
+              "$ref": "#/$defs/DimensionUnit"
+            }
+          },
+          "required": [
+            "LENGTH",
+            "WIDTH",
+            "HEIGHT",
+            "UNIT"
+          ],
+          "title": "HuDimensions",
+          "type": "object"
+        },
+        "HuItem": {
+          "additionalProperties": false,
+          "description": "A single material line packed inside a handling unit. Represents the physical packing detail — what material, which batch, how many, and optionally the serial number.",
+          "properties": {
+            "MATERIAL": {
+              "$ref": "#/$defs/MaterialNumber"
+            },
+            "BATCH": {
+              "anyOf": [
+                {
+                  "maxLength": 10,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Batch"
+            },
+            "QUANTITY": {
+              "$ref": "#/$defs/SapQuantity"
+            },
+            "SERIAL_NUMBER": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/SERIALNUMBER"
+                },
+                {
+                  "$ref": "#/$defs/SerialNumber"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Serial Number"
+            }
+          },
+          "required": [
+            "MATERIAL",
+            "QUANTITY"
+          ],
+          "title": "HuItem",
+          "type": "object"
+        },
+        "HuType": {
+          "description": "Handling unit type. PAL=euro pallet, BOX=carton box, BAG=bulk bag, CTN=ISO container, PLT=flat pallet, TRL=trailer load.",
+          "enum": [
+            "PAL",
+            "BOX",
+            "BAG",
+            "CTN",
+            "PLT",
+            "TRL"
+          ],
+          "title": "HuType",
+          "type": "string"
+        },
+        "InspectionCharResult": {
+          "description": "Result of evaluating a single quality inspection characteristic. NA=not applicable for this material, PENDING=awaiting lab result.",
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA",
+            "PENDING"
+          ],
+          "title": "InspectionCharResult",
+          "type": "string"
+        },
+        "InspectionCharacteristic": {
+          "additionalProperties": false,
+          "description": "A single quality characteristic evaluated during goods receipt inspection. Attribute checks (visual, label) use RESULT only; quantitative checks (weight, temperature) also carry NUMERIC_VALUE and LOWER/UPPER limits.",
+          "properties": {
+            "CHAR_NAME": {
+              "maxLength": 30,
+              "title": "Char Name",
+              "type": "string"
+            },
+            "RESULT": {
+              "$ref": "#/$defs/InspectionCharResult"
+            },
+            "NUMERIC_VALUE": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/NUMERICVALUE"
+                },
+                {
+                  "$ref": "#/$defs/NUMERICVALUE1"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Numeric Value"
+            },
+            "UNIT": {
+              "anyOf": [
+                {
+                  "maxLength": 10,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Unit"
+            },
+            "LOWER_LIMIT": {
+              "anyOf": [
+                {
+                  "maxLength": 20,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Lower Limit"
+            },
+            "UPPER_LIMIT": {
+              "anyOf": [
+                {
+                  "maxLength": 20,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Upper Limit"
+            }
+          },
+          "required": [
+            "CHAR_NAME",
+            "RESULT"
+          ],
+          "title": "InspectionCharacteristic",
+          "type": "object"
+        },
+        "LinearDimension": {
+          "maxLength": 10,
+          "minLength": 4,
+          "pattern": "^[0-9]+\\.[0-9]{2}$",
+          "title": "LinearDimension",
+          "type": "string"
+        },
+        "MaterialNumber": {
+          "maxLength": 40,
+          "minLength": 1,
+          "pattern": "^[0-9A-Z\\-]{1,40}$",
+          "title": "MaterialNumber",
+          "type": "string"
+        },
+        "NUMERICVALUE": {
+          "maxLength": 0,
+          "title": "NUMERICVALUE",
+          "type": "string"
+        },
+        "NUMERICVALUE1": {
+          "pattern": "^-?[0-9]+\\.[0-9]{1,6}$",
+          "title": "NUMERICVALUE1",
+          "type": "string"
+        },
+        "PlantCode": {
+          "maxLength": 4,
+          "minLength": 4,
+          "pattern": "^[0-9]{4}$",
+          "title": "PlantCode",
+          "type": "string"
+        },
+        "QualityDecision": {
+          "description": "Quality usage decision code attached to an inspection lot. A=Accept (unrestricted stock), R=Reject (returns to vendor or scrap), P=Partial accept (split stock), N=Not yet decided (inspection still open).",
+          "enum": [
+            "A",
+            "R",
+            "P",
+            "N"
+          ],
+          "title": "QualityDecision",
+          "type": "string"
+        },
+        "QualityInspection": {
+          "additionalProperties": false,
+          "description": "Quality inspection block attached to a document item. Present only for Q-inspection managed materials. Contains the inspection lot reference, usage decision, and an array of evaluated characteristics (each an InspectionCharacteristic dict).",
+          "properties": {
+            "INSPECTION_LOT": {
+              "pattern": "^[0-9]{12}$",
+              "title": "Inspection Lot",
+              "type": "string"
+            },
+            "USAGE_DECISION": {
+              "$ref": "#/$defs/QualityDecision"
+            },
+            "INSPECTOR_ID": {
+              "anyOf": [
+                {
+                  "maxLength": 12,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Inspector Id"
+            },
+            "INSPECTION_DATE": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/SapDate"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "CHARACTERISTICS": {
+              "items": {
+                "$ref": "#/$defs/InspectionCharacteristic"
+              },
+              "maxItems": 50,
+              "minItems": 1,
+              "title": "Characteristics",
+              "type": "array"
+            }
+          },
+          "required": [
+            "INSPECTION_LOT",
+            "USAGE_DECISION",
+            "CHARACTERISTICS"
+          ],
+          "title": "QualityInspection",
+          "type": "object"
+        },
+        "SERIALNUMBER": {
+          "maxLength": 0,
+          "title": "SERIALNUMBER",
+          "type": "string"
+        },
+        "SHELFLIFEEXPDATE": {
+          "maxLength": 0,
+          "title": "SHELFLIFEEXPDATE",
+          "type": "string"
+        },
+        "SapDate": {
+          "maxLength": 8,
+          "minLength": 8,
+          "pattern": "^[0-9]{8}$",
+          "title": "SapDate",
+          "type": "string"
+        },
+        "SapItemNumber": {
+          "maxLength": 5,
+          "minLength": 5,
+          "pattern": "^[0-9]{5}$",
+          "title": "SapItemNumber",
+          "type": "string"
+        },
+        "SapQuantity": {
+          "maxLength": 20,
+          "minLength": 5,
+          "pattern": "^[0-9]+\\.[0-9]{3}$",
+          "title": "SapQuantity",
+          "type": "string"
+        },
+        "SerialNumber": {
+          "maxLength": 30,
+          "minLength": 1,
+          "pattern": "^[A-Z0-9\\-]{1,30}$",
+          "title": "SerialNumber",
+          "type": "string"
+        },
+        "StorageLocation": {
+          "maxLength": 4,
+          "minLength": 4,
+          "pattern": "^[A-Z0-9]{4}$",
+          "title": "StorageLocation",
+          "type": "string"
+        },
+        "TRANSITDOCKINGPLANT": {
+          "maxLength": 0,
+          "title": "TRANSITDOCKINGPLANT",
+          "type": "string"
+        },
+        "TwoDigitCode": {
+          "maxLength": 2,
+          "minLength": 2,
+          "pattern": "^[0-9]{2}$",
+          "title": "TwoDigitCode",
+          "type": "string"
+        },
+        "WeightDecimal": {
+          "maxLength": 20,
+          "minLength": 5,
+          "pattern": "^[0-9]+\\.[0-9]{3}$",
+          "title": "WeightDecimal",
+          "type": "string"
+        },
+        "WeightUnit": {
+          "description": "Unit of measure for weight fields (GROSS_WEIGHT, TARE_WEIGHT).",
+          "enum": [
+            "KG",
+            "G",
+            "LB",
+            "T"
+          ],
+          "title": "WeightUnit",
+          "type": "string"
+        }
+      },
+      "description": "A single WMS document line item. Open schema (no additionalProperties:false) — SAP custom Z-fields and extension fields are common and must not be rejected by schema drift. Nested fields: BATCH_SPLITS (array of dicts), HANDLING_UNITS (array of dicts with nested DIMENSIONS + ITEMS), QUALITY_INSPECTION (object with CHARACTERISTICS array), SERIAL_NUMBERS (array of strings), CUSTOM_FIELDS (dict).",
+      "properties": {
+        "DELIVERY_DATE": {
+          "$ref": "#/$defs/SapDate"
+        },
+        "SUPPLYING_STORAGE_LOCATION": {
+          "$ref": "#/$defs/StorageLocation"
+        },
+        "CUSTOMER": {
+          "anyOf": [
+            {
+              "maxLength": 10,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Customer"
+        },
+        "CUSTOMER_TYPE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TwoDigitCode"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "RECEIVING_PLANT": {
+          "$ref": "#/$defs/PlantCode"
+        },
+        "RECEIVING_STORAGE_LOCATION": {
+          "$ref": "#/$defs/StorageLocation"
+        },
+        "DELIVERY_PRIORITY": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TwoDigitCode"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "SHIP_CON": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TwoDigitCode"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ORDERING_CUSTOMER": {
+          "$ref": "#/$defs/CustomerNumber"
+        },
+        "CONTACT_PERSON_NAME": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Contact Person Name"
+        },
+        "CONTACT_PERSON_PHONE": {
+          "anyOf": [
+            {
+              "maxLength": 30,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Contact Person Phone"
+        },
+        "TRANSIT_DOCKING_PLANT": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TRANSITDOCKINGPLANT"
+            },
+            {
+              "$ref": "#/$defs/PlantCode"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transit Docking Plant"
+        },
+        "COORDINATES_WIDTH": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CoordinateDecimal"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "COORDINATES_LENGTH": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CoordinateDecimal"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "DOCUMENT_ITEM_SAP": {
+          "$ref": "#/$defs/SapItemNumber"
+        },
+        "DELETION_INDIC": {
+          "anyOf": [
+            {
+              "maxLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Deletion Indic"
+        },
+        "CROSS_DOCK": {
+          "anyOf": [
+            {
+              "maxLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cross Dock"
+        },
+        "MATERIAL": {
+          "$ref": "#/$defs/MaterialNumber"
+        },
+        "BATCH": {
+          "anyOf": [
+            {
+              "maxLength": 10,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Batch"
+        },
+        "QUANTITY": {
+          "$ref": "#/$defs/SapQuantity"
+        },
+        "STOCK_TYPE": {
+          "anyOf": [
+            {
+              "maxLength": 2,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stock Type"
+        },
+        "RESERVE_NUM": {
+          "anyOf": [
+            {
+              "maxLength": 16,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reserve Num"
+        },
+        "VERSION": {
+          "anyOf": [
+            {
+              "maxLength": 20,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Version"
+        },
+        "FOOD_PACKING": {
+          "anyOf": [
+            {
+              "maxLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Food Packing"
+        },
+        "EMERGENCY_TIME_ISSUE": {
+          "anyOf": [
+            {
+              "maxLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Emergency Time Issue"
+        },
+        "MILITARY_ZACHYAN_MANAGMENT": {
+          "anyOf": [
+            {
+              "maxLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Military Zachyan Managment"
+        },
+        "MESIMA_ASHBARATIT": {
+          "anyOf": [
+            {
+              "maxLength": 20,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mesima Ashbaratit"
+        },
+        "MANPAR_NOTES": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Manpar Notes"
+        },
+        "SERIAL_TYPE": {
+          "anyOf": [
+            {
+              "maxLength": 4,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Serial Type"
+        },
+        "MOVMENT_TYPE": {
+          "anyOf": [
+            {
+              "maxLength": 3,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Movment Type"
+        },
+        "REASON_FOR_MOVMENT": {
+          "anyOf": [
+            {
+              "maxLength": 4,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason For Movment"
+        },
+        "WMS_STATUS": {
+          "anyOf": [
+            {
+              "maxLength": 4,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Wms Status"
+        },
+        "SERIAL_NUMBERS": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/SerialNumber"
+              },
+              "maxItems": 999,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Serial Numbers"
+        },
+        "BATCH_SPLITS": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/BatchSplit"
+              },
+              "maxItems": 50,
+              "minItems": 2,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Batch Splits"
+        },
+        "HANDLING_UNITS": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/HandlingUnit"
+              },
+              "maxItems": 100,
+              "minItems": 1,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Handling Units"
+        },
+        "QUALITY_INSPECTION": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/QualityInspection"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "CUSTOM_FIELDS": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Custom Fields"
+        }
+      },
+      "required": [
+        "DELIVERY_DATE",
+        "SUPPLYING_STORAGE_LOCATION",
+        "RECEIVING_PLANT",
+        "RECEIVING_STORAGE_LOCATION",
+        "ORDERING_CUSTOMER",
+        "DOCUMENT_ITEM_SAP",
+        "MATERIAL",
+        "QUANTITY"
+      ],
+      "type": "object"
+    },
+    "DocumentCategory": {
+      "maxLength": 2,
+      "minLength": 2,
+      "pattern": "^[0-9]{2}$",
+      "type": "string"
+    },
+    "EACHHANDLINGTYPE": {
+      "type": "string"
+    },
+    "EANUPC": {
+      "type": "string"
+    },
+    "EMAIL": {
+      "maxLength": 60,
+      "type": "string"
+    },
+    "EMERGENCYCODE": {
+      "type": "string"
+    },
+    "EMERGENCYCOORDINATESLENGTH": {
+      "maxLength": 18,
+      "type": "string"
+    },
+    "EMERGENCYCOORDINATESWIDTH": {
+      "maxLength": 18,
+      "type": "string"
+    },
+    "ENDDATE": {
+      "type": "string"
+    },
+    "EVALUATIONCODE": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "EXPIREDDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "EXPIRTAIONDATEINDICATOR": {
+      "type": "string"
+    },
+    "EXTRAACTIVITYDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "FOODPACKING": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "FROMBATCH": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "FROMMATERIAL": {
+      "maxLength": 120,
+      "type": "string"
+    },
+    "FROMORDERQTY": {
+      "type": "string"
+    },
+    "FROMSERIALNUMBER": {
+      "maxLength": 18,
+      "type": "string"
+    },
+    "FROMTIME": {
+      "type": "string"
+    },
+    "FSTKTYPE": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "G29": {
+      "type": "string"
+    },
+    "GENERALSKU": {
+      "type": "string"
+    },
+    "GRABTYPE": {
+      "type": "string"
+    },
+    "Gate": {
+      "type": "string"
+    },
+    "HEADERTEXT": {
+      "maxLength": 255,
+      "type": "string"
+    },
+    "HOEHE": {
+      "type": "string"
+    },
+    "HUMIDITY": {
+      "type": "string"
+    },
+    "HUTYPE": {
+      "type": "string"
+    },
+    "HandlingUnit": {
+      "$defs": {
+        "DimensionUnit": {
+          "description": "Unit of measure for linear dimensions used in HU DIMENSIONS objects.",
+          "enum": [
+            "MM",
+            "CM",
+            "M",
+            "IN"
+          ],
+          "title": "DimensionUnit",
+          "type": "string"
+        },
+        "HuDimensions": {
+          "additionalProperties": false,
+          "description": "Physical outer dimensions of a handling unit. All values in the unit specified by UNIT field.",
+          "properties": {
+            "LENGTH": {
+              "$ref": "#/$defs/LinearDimension"
+            },
+            "WIDTH": {
+              "$ref": "#/$defs/LinearDimension"
+            },
+            "HEIGHT": {
+              "$ref": "#/$defs/LinearDimension"
+            },
+            "UNIT": {
+              "$ref": "#/$defs/DimensionUnit"
+            }
+          },
+          "required": [
+            "LENGTH",
+            "WIDTH",
+            "HEIGHT",
+            "UNIT"
+          ],
+          "title": "HuDimensions",
+          "type": "object"
+        },
+        "HuItem": {
+          "additionalProperties": false,
+          "description": "A single material line packed inside a handling unit. Represents the physical packing detail — what material, which batch, how many, and optionally the serial number.",
+          "properties": {
+            "MATERIAL": {
+              "$ref": "#/$defs/MaterialNumber"
+            },
+            "BATCH": {
+              "anyOf": [
+                {
+                  "maxLength": 10,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Batch"
+            },
+            "QUANTITY": {
+              "$ref": "#/$defs/SapQuantity"
+            },
+            "SERIAL_NUMBER": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/SERIALNUMBER"
+                },
+                {
+                  "$ref": "#/$defs/SerialNumber"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Serial Number"
+            }
+          },
+          "required": [
+            "MATERIAL",
+            "QUANTITY"
+          ],
+          "title": "HuItem",
+          "type": "object"
+        },
+        "HuType": {
+          "description": "Handling unit type. PAL=euro pallet, BOX=carton box, BAG=bulk bag, CTN=ISO container, PLT=flat pallet, TRL=trailer load.",
+          "enum": [
+            "PAL",
+            "BOX",
+            "BAG",
+            "CTN",
+            "PLT",
+            "TRL"
+          ],
+          "title": "HuType",
+          "type": "string"
+        },
+        "LinearDimension": {
+          "maxLength": 10,
+          "minLength": 4,
+          "pattern": "^[0-9]+\\.[0-9]{2}$",
+          "title": "LinearDimension",
+          "type": "string"
+        },
+        "MaterialNumber": {
+          "maxLength": 40,
+          "minLength": 1,
+          "pattern": "^[0-9A-Z\\-]{1,40}$",
+          "title": "MaterialNumber",
+          "type": "string"
+        },
+        "SERIALNUMBER": {
+          "maxLength": 0,
+          "title": "SERIALNUMBER",
+          "type": "string"
+        },
+        "SapQuantity": {
+          "maxLength": 20,
+          "minLength": 5,
+          "pattern": "^[0-9]+\\.[0-9]{3}$",
+          "title": "SapQuantity",
+          "type": "string"
+        },
+        "SerialNumber": {
+          "maxLength": 30,
+          "minLength": 1,
+          "pattern": "^[A-Z0-9\\-]{1,30}$",
+          "title": "SerialNumber",
+          "type": "string"
+        },
+        "WeightDecimal": {
+          "maxLength": 20,
+          "minLength": 5,
+          "pattern": "^[0-9]+\\.[0-9]{3}$",
+          "title": "WeightDecimal",
+          "type": "string"
+        },
+        "WeightUnit": {
+          "description": "Unit of measure for weight fields (GROSS_WEIGHT, TARE_WEIGHT).",
+          "enum": [
+            "KG",
+            "G",
+            "LB",
+            "T"
+          ],
+          "title": "WeightUnit",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "A physical handling unit (pallet, box, container) assigned to a document item. Demonstrates three levels of nesting: HandlingUnit → DIMENSIONS (nested object) + ITEMS (array of HuItem dicts).",
+      "properties": {
+        "HU_NUMBER": {
+          "pattern": "^[0-9]{18,20}$",
+          "title": "Hu Number",
+          "type": "string"
+        },
+        "HU_TYPE": {
+          "$ref": "#/$defs/HuType"
+        },
+        "GROSS_WEIGHT": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WeightDecimal"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "TARE_WEIGHT": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WeightDecimal"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "WEIGHT_UNIT": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WeightUnit"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "DIMENSIONS": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/HuDimensions"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ITEMS": {
+          "items": {
+            "$ref": "#/$defs/HuItem"
+          },
+          "maxItems": 200,
+          "minItems": 1,
+          "title": "Items",
+          "type": "array"
+        }
+      },
+      "required": [
+        "HU_NUMBER",
+        "HU_TYPE",
+        "ITEMS"
+      ],
+      "type": "object"
+    },
+    "HuDimensions": {
+      "$defs": {
+        "DimensionUnit": {
+          "description": "Unit of measure for linear dimensions used in HU DIMENSIONS objects.",
+          "enum": [
+            "MM",
+            "CM",
+            "M",
+            "IN"
+          ],
+          "title": "DimensionUnit",
+          "type": "string"
+        },
+        "LinearDimension": {
+          "maxLength": 10,
+          "minLength": 4,
+          "pattern": "^[0-9]+\\.[0-9]{2}$",
+          "title": "LinearDimension",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Physical outer dimensions of a handling unit. All values in the unit specified by UNIT field.",
+      "properties": {
+        "LENGTH": {
+          "$ref": "#/$defs/LinearDimension"
+        },
+        "WIDTH": {
+          "$ref": "#/$defs/LinearDimension"
+        },
+        "HEIGHT": {
+          "$ref": "#/$defs/LinearDimension"
+        },
+        "UNIT": {
+          "$ref": "#/$defs/DimensionUnit"
+        }
+      },
+      "required": [
+        "LENGTH",
+        "WIDTH",
+        "HEIGHT",
+        "UNIT"
+      ],
+      "type": "object"
+    },
+    "HuItem": {
+      "$defs": {
+        "MaterialNumber": {
+          "maxLength": 40,
+          "minLength": 1,
+          "pattern": "^[0-9A-Z\\-]{1,40}$",
+          "title": "MaterialNumber",
+          "type": "string"
+        },
+        "SERIALNUMBER": {
+          "maxLength": 0,
+          "title": "SERIALNUMBER",
+          "type": "string"
+        },
+        "SapQuantity": {
+          "maxLength": 20,
+          "minLength": 5,
+          "pattern": "^[0-9]+\\.[0-9]{3}$",
+          "title": "SapQuantity",
+          "type": "string"
+        },
+        "SerialNumber": {
+          "maxLength": 30,
+          "minLength": 1,
+          "pattern": "^[A-Z0-9\\-]{1,30}$",
+          "title": "SerialNumber",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "A single material line packed inside a handling unit. Represents the physical packing detail — what material, which batch, how many, and optionally the serial number.",
+      "properties": {
+        "MATERIAL": {
+          "$ref": "#/$defs/MaterialNumber"
+        },
+        "BATCH": {
+          "anyOf": [
+            {
+              "maxLength": 10,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Batch"
+        },
+        "QUANTITY": {
+          "$ref": "#/$defs/SapQuantity"
+        },
+        "SERIAL_NUMBER": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SERIALNUMBER"
+            },
+            {
+              "$ref": "#/$defs/SerialNumber"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Serial Number"
+        }
+      },
+      "required": [
+        "MATERIAL",
+        "QUANTITY"
+      ],
+      "type": "object"
+    },
+    "HuType": {
+      "description": "Handling unit type. PAL=euro pallet, BOX=carton box, BAG=bulk bag, CTN=ISO container, PLT=flat pallet, TRL=trailer load.",
+      "enum": [
+        "PAL",
+        "BOX",
+        "BAG",
+        "CTN",
+        "PLT",
+        "TRL"
+      ],
+      "type": "string"
+    },
+    "IMAGE": {
+      "type": "string"
+    },
+    "INCPECTIONNUM": {
+      "maxLength": 25,
+      "type": "string"
+    },
+    "INITIALSTATUS": {
+      "type": "string"
+    },
+    "INSPECTIONLOT": {
+      "maxLength": 12,
+      "type": "string"
+    },
+    "INSPECTIONTYPE": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "ISSUEPLANT": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "ISSUESTLOC": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "ISSUESTLOC1": {
+      "type": "string"
+    },
+    "ITEMCLASS": {
+      "type": "string"
+    },
+    "InspectionCharResult": {
+      "description": "Result of evaluating a single quality inspection characteristic. NA=not applicable for this material, PENDING=awaiting lab result.",
+      "enum": [
+        "PASS",
+        "FAIL",
+        "NA",
+        "PENDING"
+      ],
+      "type": "string"
+    },
+    "InspectionCharacteristic": {
+      "$defs": {
+        "InspectionCharResult": {
+          "description": "Result of evaluating a single quality inspection characteristic. NA=not applicable for this material, PENDING=awaiting lab result.",
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA",
+            "PENDING"
+          ],
+          "title": "InspectionCharResult",
+          "type": "string"
+        },
+        "NUMERICVALUE": {
+          "maxLength": 0,
+          "title": "NUMERICVALUE",
+          "type": "string"
+        },
+        "NUMERICVALUE1": {
+          "pattern": "^-?[0-9]+\\.[0-9]{1,6}$",
+          "title": "NUMERICVALUE1",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "A single quality characteristic evaluated during goods receipt inspection. Attribute checks (visual, label) use RESULT only; quantitative checks (weight, temperature) also carry NUMERIC_VALUE and LOWER/UPPER limits.",
+      "properties": {
+        "CHAR_NAME": {
+          "maxLength": 30,
+          "title": "Char Name",
+          "type": "string"
+        },
+        "RESULT": {
+          "$ref": "#/$defs/InspectionCharResult"
+        },
+        "NUMERIC_VALUE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NUMERICVALUE"
+            },
+            {
+              "$ref": "#/$defs/NUMERICVALUE1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Numeric Value"
+        },
+        "UNIT": {
+          "anyOf": [
+            {
+              "maxLength": 10,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "LOWER_LIMIT": {
+          "anyOf": [
+            {
+              "maxLength": 20,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Lower Limit"
+        },
+        "UPPER_LIMIT": {
+          "anyOf": [
+            {
+              "maxLength": 20,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Upper Limit"
+        }
+      },
+      "required": [
+        "CHAR_NAME",
+        "RESULT"
+      ],
+      "type": "object"
+    },
+    "InterfaceName": {
+      "maxLength": 41,
+      "minLength": 4,
+      "pattern": "^Z[A-Z0-9_]{3,40}$",
+      "type": "string"
+    },
+    "KITFACTOR": {
+      "type": "string"
+    },
+    "KITLOCATION": {
+      "type": "string"
+    },
+    "KITSIZE": {
+      "maxLength": 7,
+      "type": "string"
+    },
+    "KITTYPE": {
+      "type": "string"
+    },
+    "KOSHER": {
+      "maxLength": 2,
+      "type": "string"
+    },
+    "LABORGRABTYPE": {
+      "type": "string"
+    },
+    "LABORHANDLINGTYPE": {
+      "type": "string"
+    },
+    "LABORPACKAGETYPE": {
+      "type": "string"
+    },
+    "LABORPREPARATIONTYPE": {
+      "type": "string"
+    },
+    "LAENG": {
+      "type": "string"
+    },
+    "LANGUAGE": {
+      "maxLength": 2,
+      "type": "string"
+    },
+    "LEADITEM": {
+      "type": "string"
+    },
+    "LEADITEMSIZE": {
+      "type": "string"
+    },
+    "LINETEXT": {
+      "maxLength": 255,
+      "type": "string"
+    },
+    "LINGEROUTTIME": {
+      "type": "string"
+    },
+    "LOCATION": {
+      "type": "string"
+    },
+    "LOT": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "LOWLIMITCOUNT": {
+      "type": "string"
+    },
+    "LinearDimension": {
+      "maxLength": 10,
+      "minLength": 4,
+      "pattern": "^[0-9]+\\.[0-9]{2}$",
+      "type": "string"
+    },
+    "MAINGROUP": {
+      "type": "string"
+    },
+    "MAINTENANCEDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "MAINTENANCENOTE": {
+      "type": "string"
+    },
+    "MAINTENANCETYPE": {
+      "type": "string"
+    },
+    "MAINUN": {
+      "type": "string"
+    },
+    "MANAGEDPARTNUMBER": {
+      "type": "string"
+    },
+    "MANAGERNAME": {
+      "type": "string"
+    },
+    "MANAGERTEL": {
+      "type": "string"
+    },
+    "MANPARNOTES": {
+      "maxLength": 50,
+      "type": "string"
+    },
+    "MANUFACTURERNUMBER": {
+      "type": "string"
+    },
+    "MANUFACTURERPARTEXT": {
+      "type": "string"
+    },
+    "MANUFACTURERPARTNUM": {
+      "type": "string"
+    },
+    "MATCHGROUP": {
+      "type": "string"
+    },
+    "MATERIALSUBCATEGORY": {
+      "type": "string"
+    },
+    "MATERIALTYPE": {
+      "type": "string"
+    },
+    "MATERIALTYPE1": {
+      "type": "string"
+    },
+    "MATTERSTATE": {
+      "type": "string"
+    },
+    "MAXTEMPERATURE": {
+      "type": "string"
+    },
+    "MEABM": {
+      "type": "string"
+    },
+    "MESHEK": {
+      "type": "string"
+    },
+    "MESIMAASHBARATIT": {
+      "maxLength": 12,
+      "type": "string"
+    },
+    "MILSTRIP": {
+      "maxLength": 14,
+      "type": "string"
+    },
+    "MINSHELFLIFE": {
+      "type": "string"
+    },
+    "MINTEMPERATURE": {
+      "type": "string"
+    },
+    "MLSTRPSPLIT": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "MODORDER": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "MOVEMENTREASON": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "MOVEMENTTYPE": {
+      "maxLength": 3,
+      "type": "string"
+    },
+    "Material": {
+      "maxLength": 120,
+      "type": "string"
+    },
+    "MaterialNumber": {
+      "maxLength": 40,
+      "minLength": 1,
+      "pattern": "^[0-9A-Z\\-]{1,40}$",
+      "type": "string"
+    },
+    "MessageId": {
+      "maxLength": 16,
+      "minLength": 16,
+      "pattern": "^[0-9]{16}$",
+      "type": "string"
+    },
+    "MovementType": {
+      "type": "string"
+    },
+    "NEWITEM": {
+      "type": "string"
+    },
+    "NEXTINSPEC": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "NFPABLUE": {
+      "type": "string"
+    },
+    "NFPARED": {
+      "type": "string"
+    },
+    "NFPAWHITE": {
+      "type": "string"
+    },
+    "NFPAYELLOW": {
+      "type": "string"
+    },
+    "NIIN": {
+      "type": "string"
+    },
+    "NOTES": {
+      "type": "string"
+    },
+    "NSCGROUP": {
+      "type": "string"
+    },
+    "NTGEW": {
+      "type": "string"
+    },
+    "NUMERICVALUE": {
+      "maxLength": 0,
+      "type": "string"
+    },
+    "NUMERICVALUE1": {
+      "pattern": "^-?[0-9]+\\.[0-9]{1,6}$",
+      "type": "string"
+    },
+    "Notes": {
+      "type": "string"
+    },
+    "OPERCODE": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "OPORTUNITYREPLFLAG": {
+      "type": "string"
+    },
+    "ORDERID": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "ORDERINGCUSTOMER": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "ORDERINTOF": {
+      "type": "string"
+    },
+    "ORDERINTOT": {
+      "type": "string"
+    },
+    "ORDERNUMBER": {
+      "type": "string"
+    },
+    "ORDERQTY": {
+      "maxLength": 17,
+      "type": "string"
+    },
+    "ORDERREASON": {
+      "maxLength": 3,
+      "type": "string"
+    },
+    "ORDERTOLERANCE": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "OVERPICKPCT": {
+      "type": "string"
+    },
+    "OVERRECEIVEPCT": {
+      "type": "string"
+    },
+    "OpaqueDocHeader": {
+      "additionalProperties": true,
+      "description": "Business document payload. INTENTIONALLY OPAQUE to the firewall. Structure varies by WMS_ORD_TP order type. The recipient/WMS system is the sole owner of DOC_HEADER validation (Layer 2).",
+      "properties": {},
+      "type": "object"
+    },
+    "PACKAGETYPE": {
+      "type": "string"
+    },
+    "PACKNOTES": {
+      "type": "string"
+    },
+    "PACKQUAN": {
+      "type": "string"
+    },
+    "PACKTYPE": {
+      "type": "string"
+    },
+    "PARTNERTYPE": {
+      "maxLength": 2,
+      "type": "string"
+    },
+    "PASSKOSHER": {
+      "maxLength": 2,
+      "type": "string"
+    },
+    "PHARMACYINSPECTION": {
+      "type": "string"
+    },
+    "PICKPOINT": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "PICKSORTORDER": {
+      "type": "string"
+    },
+    "PRINTSKULBLREC": {
+      "type": "string"
+    },
+    "PRODDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "PRODUCTMANAGER": {
+      "type": "string"
+    },
+    "PURPOSEKIT": {
+      "maxLength": 2,
+      "type": "string"
+    },
+    "PUTAWAYNOTES": {
+      "type": "string"
+    },
+    "PlantCode": {
+      "maxLength": 4,
+      "minLength": 4,
+      "pattern": "^[0-9]{4}$",
+      "type": "string"
+    },
+    "QTY": {
+      "maxLength": 17,
+      "type": "string"
+    },
+    "QUANTITIY": {
+      "maxLength": 18,
+      "type": "string"
+    },
+    "QualityDecision": {
+      "description": "Quality usage decision code attached to an inspection lot. A=Accept (unrestricted stock), R=Reject (returns to vendor or scrap), P=Partial accept (split stock), N=Not yet decided (inspection still open).",
+      "enum": [
+        "A",
+        "R",
+        "P",
+        "N"
+      ],
+      "type": "string"
+    },
+    "QualityInspection": {
+      "$defs": {
+        "InspectionCharResult": {
+          "description": "Result of evaluating a single quality inspection characteristic. NA=not applicable for this material, PENDING=awaiting lab result.",
+          "enum": [
+            "PASS",
+            "FAIL",
+            "NA",
+            "PENDING"
+          ],
+          "title": "InspectionCharResult",
+          "type": "string"
+        },
+        "InspectionCharacteristic": {
+          "additionalProperties": false,
+          "description": "A single quality characteristic evaluated during goods receipt inspection. Attribute checks (visual, label) use RESULT only; quantitative checks (weight, temperature) also carry NUMERIC_VALUE and LOWER/UPPER limits.",
+          "properties": {
+            "CHAR_NAME": {
+              "maxLength": 30,
+              "title": "Char Name",
+              "type": "string"
+            },
+            "RESULT": {
+              "$ref": "#/$defs/InspectionCharResult"
+            },
+            "NUMERIC_VALUE": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/NUMERICVALUE"
+                },
+                {
+                  "$ref": "#/$defs/NUMERICVALUE1"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Numeric Value"
+            },
+            "UNIT": {
+              "anyOf": [
+                {
+                  "maxLength": 10,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Unit"
+            },
+            "LOWER_LIMIT": {
+              "anyOf": [
+                {
+                  "maxLength": 20,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Lower Limit"
+            },
+            "UPPER_LIMIT": {
+              "anyOf": [
+                {
+                  "maxLength": 20,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Upper Limit"
+            }
+          },
+          "required": [
+            "CHAR_NAME",
+            "RESULT"
+          ],
+          "title": "InspectionCharacteristic",
+          "type": "object"
+        },
+        "NUMERICVALUE": {
+          "maxLength": 0,
+          "title": "NUMERICVALUE",
+          "type": "string"
+        },
+        "NUMERICVALUE1": {
+          "pattern": "^-?[0-9]+\\.[0-9]{1,6}$",
+          "title": "NUMERICVALUE1",
+          "type": "string"
+        },
+        "QualityDecision": {
+          "description": "Quality usage decision code attached to an inspection lot. A=Accept (unrestricted stock), R=Reject (returns to vendor or scrap), P=Partial accept (split stock), N=Not yet decided (inspection still open).",
+          "enum": [
+            "A",
+            "R",
+            "P",
+            "N"
+          ],
+          "title": "QualityDecision",
+          "type": "string"
+        },
+        "SapDate": {
+          "maxLength": 8,
+          "minLength": 8,
+          "pattern": "^[0-9]{8}$",
+          "title": "SapDate",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Quality inspection block attached to a document item. Present only for Q-inspection managed materials. Contains the inspection lot reference, usage decision, and an array of evaluated characteristics (each an InspectionCharacteristic dict).",
+      "properties": {
+        "INSPECTION_LOT": {
+          "pattern": "^[0-9]{12}$",
+          "title": "Inspection Lot",
+          "type": "string"
+        },
+        "USAGE_DECISION": {
+          "$ref": "#/$defs/QualityDecision"
+        },
+        "INSPECTOR_ID": {
+          "anyOf": [
+            {
+              "maxLength": 12,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Inspector Id"
+        },
+        "INSPECTION_DATE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SapDate"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "CHARACTERISTICS": {
+          "items": {
+            "$ref": "#/$defs/InspectionCharacteristic"
+          },
+          "maxItems": 50,
+          "minItems": 1,
+          "title": "Characteristics",
+          "type": "array"
+        }
+      },
+      "required": [
+        "INSPECTION_LOT",
+        "USAGE_DECISION",
+        "CHARACTERISTICS"
+      ],
+      "type": "object"
+    },
+    "RECADDITIONALWORK": {
+      "type": "string"
+    },
+    "RECDOC": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "RECDOCLINE": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "RECEIPT": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "RECEIPTLINE": {
+      "maxLength": 7,
+      "type": "string"
+    },
+    "RECEIPTTYPE": {
+      "maxLength": 2,
+      "type": "string"
+    },
+    "RECEIVINGPLANT": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "RECEIVINGSTLOC": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "RECEIVINGSTORAGELOCATION": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "RECIVINGPLANT": {
+      "type": "string"
+    },
+    "RECIVINGSTLOC": {
+      "type": "string"
+    },
+    "REFDELIV": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "REFDOCNUM": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "RELSORD": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "REQINSPECTIONREC": {
+      "type": "string"
+    },
+    "REQSAMPLINGREC": {
+      "type": "string"
+    },
+    "REQUCOORD": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "RESERVATIONORDER": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "RESERVENUM": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "RESTRICTED": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "ReasonCode": {
+      "type": "string"
+    },
+    "SAMPLESIZE": {
+      "type": "string"
+    },
+    "SAPDOCUMENTTYPE": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "SAPINTERORDER": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "SAPINTERORDERLINE": {
+      "maxLength": 6,
+      "type": "string"
+    },
+    "SAPORDERTYPE": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "SCHEDULEDATE": {
+      "type": "string"
+    },
+    "SECONDARYGROUP": {
+      "type": "string"
+    },
+    "SERIAL": {
+      "maxLength": 18,
+      "type": "string"
+    },
+    "SERIALNUMBER": {
+      "maxLength": 0,
+      "type": "string"
+    },
+    "SERIALNUMBER1": {
+      "maxLength": 18,
+      "type": "string"
+    },
+    "SERIALPROF": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "SERIALPROFILE": {
+      "type": "string"
+    },
+    "SERIALTYPE": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "SHELFLIFEEXPDATE": {
+      "maxLength": 0,
+      "type": "string"
+    },
+    "SHELFLIFEWMS": {
+      "type": "string"
+    },
+    "SHIPCON": {
+      "maxLength": 2,
+      "type": "string"
+    },
+    "SHIPPABLE": {
+      "type": "string"
+    },
+    "SIVUGBITCHONI": {
+      "type": "string"
+    },
+    "SKU": {
+      "type": "string"
+    },
+    "SOLDTO": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "SPECIALTRACE": {
+      "type": "string"
+    },
+    "SPED": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "STATUS": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "STATUSON": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "STOCKCOUNT": {
+      "type": "string"
+    },
+    "STOCKINDICATOR": {
+      "type": "string"
+    },
+    "STOCKTYPE": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "STORAGECLASS": {
+      "type": "string"
+    },
+    "STORAGELOCATION": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "STORAGELOCATIONTYPE": {
+      "maxLength": 2,
+      "type": "string"
+    },
+    "STORAGELOCATIONTYPEDESC": {
+      "maxLength": 30,
+      "type": "string"
+    },
+    "STORAGEMETHOD": {
+      "type": "string"
+    },
+    "SUPPLYCENTER": {
+      "type": "string"
+    },
+    "SUPPLYINGPLANT": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "SUPPLYINGSTORAGELOCATION": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "SUPPLYSECTION": {
+      "type": "string"
+    },
+    "SUPPRTNR": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "SapAdjustmentQuantity": {
+      "maxLength": 21,
+      "minLength": 5,
+      "pattern": "^-?[0-9]+\\.[0-9]{3}$",
+      "type": "string"
+    },
+    "SapDate": {
+      "maxLength": 8,
+      "minLength": 8,
+      "pattern": "^[0-9]{8}$",
+      "type": "string"
+    },
+    "SapDocumentNumber": {
+      "maxLength": 10,
+      "minLength": 10,
+      "pattern": "^[0-9]{10}$",
+      "type": "string"
+    },
+    "SapDocumentType": {
+      "maxLength": 4,
+      "minLength": 2,
+      "pattern": "^[A-Z0-9]{2,4}$",
+      "type": "string"
+    },
+    "SapItemNumber": {
+      "maxLength": 5,
+      "minLength": 5,
+      "pattern": "^[0-9]{5}$",
+      "type": "string"
+    },
+    "SapQuantity": {
+      "maxLength": 20,
+      "minLength": 5,
+      "pattern": "^[0-9]+\\.[0-9]{3}$",
+      "type": "string"
+    },
+    "SapTime": {
+      "maxLength": 6,
+      "minLength": 6,
+      "pattern": "^[0-9]{6}$",
+      "type": "string"
+    },
+    "SerialNumber": {
+      "maxLength": 30,
+      "minLength": 1,
+      "pattern": "^[A-Z0-9\\-]{1,30}$",
+      "type": "string"
+    },
+    "Status": {
+      "type": "string"
+    },
+    "StorageLocation": {
+      "maxLength": 4,
+      "minLength": 4,
+      "pattern": "^[A-Z0-9]{4}$",
+      "type": "string"
+    },
+    "TAKINACHZAKA": {
+      "type": "string"
+    },
+    "TEKENEXPOSURE": {
+      "type": "string"
+    },
+    "TELEPHONE1": {
+      "maxLength": 16,
+      "type": "string"
+    },
+    "TELEPHONE2": {
+      "maxLength": 16,
+      "type": "string"
+    },
+    "TOBATCH": {
+      "type": "string"
+    },
+    "TOLERANCE": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "TOMATERIAL": {
+      "type": "string"
+    },
+    "TOORDERQTY": {
+      "type": "string"
+    },
+    "TORESERVATION": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "TOSERIALNUMBER": {
+      "type": "string"
+    },
+    "TOTALSHELFLIFE": {
+      "type": "string"
+    },
+    "TOTIME": {
+      "type": "string"
+    },
+    "TRANSITDOCKINGPLANT": {
+      "maxLength": 0,
+      "type": "string"
+    },
+    "TRANSITDOCKINGPLANT1": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "TRANSPORTIONZONE": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "TSTKTYPE": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "TimeOfMovement": {
+      "type": "string"
+    },
+    "TwoDigitCode": {
+      "maxLength": 2,
+      "minLength": 2,
+      "pattern": "^[0-9]{2}$",
+      "type": "string"
+    },
+    "UNENDESC": {
+      "type": "string"
+    },
+    "UNHEDESC": {
+      "type": "string"
+    },
+    "UNID": {
+      "type": "string"
+    },
+    "UNITOFMEASURE": {
+      "type": "string"
+    },
+    "UNITPERLOWESTUOM": {
+      "type": "string"
+    },
+    "UNSEQUENCE": {
+      "type": "string"
+    },
+    "UNUNITOFMEASURE": {
+      "type": "string"
+    },
+    "UOM": {
+      "type": "string"
+    },
+    "UsageDecisionBlock": {
+      "$defs": {
+        "QualityDecision": {
+          "description": "Quality usage decision code attached to an inspection lot. A=Accept (unrestricted stock), R=Reject (returns to vendor or scrap), P=Partial accept (split stock), N=Not yet decided (inspection still open).",
+          "enum": [
+            "A",
+            "R",
+            "P",
+            "N"
+          ],
+          "title": "QualityDecision",
+          "type": "string"
+        },
+        "SapDate": {
+          "maxLength": 8,
+          "minLength": 8,
+          "pattern": "^[0-9]{8}$",
+          "title": "SapDate",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Quality usage decision block. Encapsulates the final SAP usage decision for an inspection lot: decision code, inspector, date, and optional remarks. Promoted from per-interface inline definition to BT so all schemas share one canonical type.",
+      "properties": {
+        "DECISION": {
+          "$ref": "#/$defs/QualityDecision"
+        },
+        "INSPECTOR_ID": {
+          "maxLength": 12,
+          "title": "Inspector Id",
+          "type": "string"
+        },
+        "DECISION_DATE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SapDate"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "REMARKS": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Remarks"
+        }
+      },
+      "required": [
+        "DECISION",
+        "INSPECTOR_ID"
+      ],
+      "type": "object"
+    },
+    "VELOCITYGROUP": {
+      "type": "string"
+    },
+    "VENDORACCOUNTGROUP": {
+      "maxLength": 4,
+      "type": "string"
+    },
+    "VENDORALLBLOCK": {
+      "maxLength": 1,
+      "type": "string"
+    },
+    "VENDORBATCH": {
+      "maxLength": 15,
+      "type": "string"
+    },
+    "VENDOREXPDATE": {
+      "maxLength": 8,
+      "type": "string"
+    },
+    "VENDORFAX": {
+      "maxLength": 31,
+      "type": "string"
+    },
+    "VENDORID": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "VENDORNAME": {
+      "maxLength": 35,
+      "type": "string"
+    },
+    "VENDORTYPE": {
+      "maxLength": 2,
+      "type": "string"
+    },
+    "VERSION": {
+      "type": "string"
+    },
+    "VERSIONDESC": {
+      "type": "string"
+    },
+    "VOLUME": {
+      "type": "string"
+    },
+    "VehicleID": {
+      "type": "string"
+    },
+    "Version": {
+      "type": "string"
+    },
+    "WAREHOUSEID": {
+      "maxLength": 10,
+      "type": "string"
+    },
+    "WARNING": {
+      "type": "string"
+    },
+    "WEIGHTTOLERANCEPCT": {
+      "type": "string"
+    },
+    "WEIGHTTYPE": {
+      "type": "string"
+    },
+    "WMSCERTIFICATE": {
+      "type": "string"
+    },
+    "WMSCERTIFICATEITEM": {
+      "type": "string"
+    },
+    "WMSDOCTYPE": {
+      "maxLength": 20,
+      "type": "string"
+    },
+    "WMSMATERIALGROUP": {
+      "type": "string"
+    },
+    "WMSORDTP": {
+      "maxLength": 3,
+      "type": "string"
+    },
+    "WMSSTATUS": {
+      "maxLength": 3,
+      "type": "string"
+    },
+    "WMSWORKCENTER": {
+      "type": "string"
+    },
+    "WONOTES": {
+      "type": "string"
+    },
+    "WeightDecimal": {
+      "maxLength": 20,
+      "minLength": 5,
+      "pattern": "^[0-9]+\\.[0-9]{3}$",
+      "type": "string"
+    },
+    "WeightUnit": {
+      "description": "Unit of measure for weight fields (GROSS_WEIGHT, TARE_WEIGHT).",
+      "enum": [
+        "KG",
+        "G",
+        "LB",
+        "T"
+      ],
+      "type": "string"
+    },
+    "WmsBusinessTypes": {},
+    "WmsOrderType": {
+      "description": "WMS order type code (WMS_ORD_TP). Determines which DOC_HEADER payload schema branch fires in Layer 2. 101=inbound transfer, 201=outbound transfer, 301=inventory adjustment, 401=vendor return, 501=cross-dock. Extend this enum when new order types are onboarded — requires only a business-types update, not a firewall change.",
+      "enum": [
+        "101",
+        "201",
+        "301",
+        "401",
+        "501"
+      ],
+      "type": "string"
+    },
+    "ZZWMSRECEIVINGDOCITEM": {
+      "maxLength": 7,
+      "type": "string"
+    },
+    "ZZWMSRECEIVINGDOCUMENT": {
+      "maxLength": 25,
+      "type": "string"
+    }
+  }
+}

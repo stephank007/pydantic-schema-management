@@ -1,0 +1,416 @@
+{
+  "title": "WmsInterface — ZWMS_INBOUND_DELIVERY_CREATE",
+  "description": "Payload schema for sheet '5,6,7,8,24.1' – קבלה למלאי (אספקה נכנסת) רכש מקומי (Outbound)",
+  "$defs": {
+    "Body": {
+      "type": "object",
+      "description": "Payload schema for sheet '5,6,7,8,24.1' – קבלה למלאי (אספקה נכנסת) רכש מקומי (Outbound)",
+      "properties": {
+        "REC_DOC": {
+          "$ref": "./business-types.schema.json#/$defs/REC_DOC"
+        },
+        "WMS_ORD_TP": {
+          "$ref": "./business-types.schema.json#/$defs/WMS_ORD_TP"
+        },
+        "SHIP_CON": {
+          "$ref": "./business-types.schema.json#/$defs/SHIP_CON"
+        },
+        "SUP_PRTNR": {
+          "$ref": "./business-types.schema.json#/$defs/SUP_PRTNR"
+        },
+        "PARTNER_TYPE": {
+          "$ref": "./business-types.schema.json#/$defs/PARTNER_TYPE"
+        },
+        "OPER_CODE": {
+          "$ref": "./business-types.schema.json#/$defs/OPER_CODE"
+        },
+        "HEADER_TEXT": {
+          "$ref": "./business-types.schema.json#/$defs/HEADER_TEXT"
+        },
+        "RELS_ORD": {
+          "$ref": "./business-types.schema.json#/$defs/RELS_ORD"
+        },
+        "BOL": {
+          "$ref": "./business-types.schema.json#/$defs/BOL"
+        },
+        "CONTAIN_ID": {
+          "$ref": "./business-types.schema.json#/$defs/CONTAIN_ID"
+        },
+        "CONTAIN_SEAL_NUM": {
+          "$ref": "./business-types.schema.json#/$defs/CONTAIN_SEAL_NUM"
+        },
+        "CONTAIN_TYP": {
+          "$ref": "./business-types.schema.json#/$defs/CONTAIN_TYP"
+        },
+        "AIR_OR_SEA_IND": {
+          "$ref": "./business-types.schema.json#/$defs/AIR_OR_SEA_IND"
+        },
+        "REQU_COORD": {
+          "$ref": "./business-types.schema.json#/$defs/REQU_COORD"
+        },
+        "REF_DELIV": {
+          "$ref": "./business-types.schema.json#/$defs/REF_DELIV"
+        },
+        "RECEIVING_PLANT": {
+          "$ref": "./business-types.schema.json#/$defs/RECEIVING_PLANT"
+        },
+        "DELIV_NOTE": {
+          "$ref": "./business-types.schema.json#/$defs/DELIV_NOTE"
+        },
+        "SPED": {
+          "$ref": "./business-types.schema.json#/$defs/SPED"
+        },
+        "ARMY_MANAGED": {
+          "$ref": "./business-types.schema.json#/$defs/ARMY_MANAGED"
+        },
+        "PICK_POINT": {
+          "$ref": "./business-types.schema.json#/$defs/PICK_POINT"
+        },
+        "DELIVERY_DATE": {
+          "$ref": "#/$defs/SapDate"
+        },
+        "REC_DOC_LINE": {
+          "$ref": "./business-types.schema.json#/$defs/REC_DOC_LINE"
+        },
+        "DELETION_INDIC": {
+          "$ref": "./business-types.schema.json#/$defs/DELETION_INDIC"
+        },
+        "MOD_ORDER": {
+          "$ref": "./business-types.schema.json#/$defs/MOD_ORDER"
+        },
+        "MATERIAL": {
+          "$ref": "./business-types.schema.json#/$defs/MaterialNumber"
+        },
+        "SERIAL_PROF": {
+          "$ref": "./business-types.schema.json#/$defs/SERIAL_PROF"
+        },
+        "QUANTITY": {
+          "$ref": "./business-types.schema.json#/$defs/SapQuantity"
+        },
+        "STOCK_TYPE": {
+          "$ref": "./business-types.schema.json#/$defs/STOCK_TYPE"
+        },
+        "RECEIVING_STORAGE_LOCATION": {
+          "$ref": "./business-types.schema.json#/$defs/RECEIVING_STORAGE_LOCATION"
+        },
+        "LINE_TEXT": {
+          "$ref": "./business-types.schema.json#/$defs/LINE_TEXT"
+        },
+        "ORDER_TOLERANCE": {
+          "$ref": "./business-types.schema.json#/$defs/ORDER_TOLERANCE"
+        },
+        "CROSS_DOC_ORDER": {
+          "$ref": "./business-types.schema.json#/$defs/CROSS_DOC_ORDER"
+        },
+        "CROSS_DOC_ORDER_LINE": {
+          "$ref": "./business-types.schema.json#/$defs/CROSS_DOC_ORDER_LINE"
+        },
+        "BATCH": {
+          "$ref": "./business-types.schema.json#/$defs/BATCH"
+        },
+        "KIT_SIZE": {
+          "$ref": "./business-types.schema.json#/$defs/KIT_SIZE"
+        },
+        "INSPECTION_TYPE": {
+          "$ref": "./business-types.schema.json#/$defs/INSPECTION_TYPE"
+        },
+        "SAP_INTER_ORDER": {
+          "$ref": "./business-types.schema.json#/$defs/SAP_INTER_ORDER"
+        },
+        "SAP_INTER_ORDER_LINE": {
+          "$ref": "./business-types.schema.json#/$defs/SAP_INTER_ORDER_LINE"
+        },
+        "MILSTRIP": {
+          "$ref": "./business-types.schema.json#/$defs/MILSTRIP"
+        },
+        "MLSTRP_SPLIT": {
+          "$ref": "./business-types.schema.json#/$defs/MLSTRP_SPLIT"
+        },
+        "LOT": {
+          "$ref": "./business-types.schema.json#/$defs/LOT"
+        },
+        "RESERVATION_ORDER": {
+          "$ref": "./business-types.schema.json#/$defs/RESERVATION_ORDER"
+        },
+        "RECEIPT": {
+          "$ref": "./business-types.schema.json#/$defs/RECEIPT"
+        },
+        "RECEIPT_LINE": {
+          "$ref": "./business-types.schema.json#/$defs/RECEIPT_LINE"
+        },
+        "CONTACT_PERSON_NAME": {
+          "$ref": "./business-types.schema.json#/$defs/CONTACT_PERSON_NAME"
+        },
+        "CONTACT_PERSON_PHONE": {
+          "$ref": "./business-types.schema.json#/$defs/CONTACT_PERSON_PHONE"
+        },
+        "COORDINATES_WIDTH": {
+          "$ref": "./business-types.schema.json#/$defs/COORDINATES_WIDTH"
+        },
+        "COORDINATES_LENGTH": {
+          "$ref": "./business-types.schema.json#/$defs/COORDINATES_LENGTH"
+        },
+        "SERIAL": {
+          "$ref": "./business-types.schema.json#/$defs/SERIAL"
+        },
+        "ASN_MAINTENANCE_DATE": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_MAINTENANCE_DATE"
+        },
+        "ASN_LAST_CNT_DATE": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_LAST_CNT_DATE"
+        },
+        "ASN_INSPECTION_DATE": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_INSPECTION_DATE"
+        },
+        "ASN_LOADID": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_LOADID"
+        },
+        "ASN_EXPIRATION_DATE": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_EXPIRATION_DATE"
+        },
+        "ASN_HU": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_HU"
+        },
+        "ASN_SKU_WMS": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_SKU_WMS"
+        },
+        "ASN_COL_DATE": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_COL_DATE"
+        },
+        "ASN_CHARGE_DATE": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_CHARGE_DATE"
+        },
+        "ASN_EXTRA_ACTIVITY_DATE": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_EXTRA_ACTIVITY_DATE"
+        },
+        "ASN_ALLOW_PICK": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_ALLOW_PICK"
+        },
+        "ASN_VERSION": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_VERSION"
+        },
+        "ASN_VERSION_DATE": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_VERSION_DATE"
+        },
+        "ASN_LOAD_UM": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_LOAD_UM"
+        },
+        "ASN_UM_UNITS": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_UM_UNITS"
+        },
+        "ASN_WMS_STAT": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_WMS_STAT"
+        },
+        "ASN_BLOCK": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_BLOCK"
+        },
+        "ASN_HU_TYPE": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_HU_TYPE"
+        },
+        "ASN_KIT_ORDER": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_KIT_ORDER"
+        },
+        "ASN_SUB_KIT": {
+          "$ref": "./business-types.schema.json#/$defs/ASN_SUB_KIT"
+        },
+        "DOC_ITEM": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InboundDocItem"
+          },
+          "minItems": 1,
+          "maxItems": 999
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "REC_DOC",
+        "WMS_ORD_TP",
+        "SUP_PRTNR",
+        "RECEIVING_PLANT",
+        "DELIVERY_DATE",
+        "DOC_ITEM"
+      ]
+    },
+    "InboundDocItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "MATERIAL",
+        "QUANTITY",
+        "RECEIVING_STORAGE_LOCATION"
+      ],
+      "properties": {
+        "MATERIAL": {
+          "$ref": "./business-types.schema.json#/$defs/MaterialNumber"
+        },
+        "BATCH": {
+          "type": "string",
+          "maxLength": 10
+        },
+        "QUANTITY": {
+          "$ref": "./business-types.schema.json#/$defs/SapQuantity"
+        },
+        "STOCK_TYPE": {
+          "type": "string",
+          "maxLength": 2
+        },
+        "RECEIVING_STORAGE_LOCATION": {
+          "$ref": "./business-types.schema.json#/$defs/StorageLocation"
+        },
+        "DELIVERY_DATE": {
+          "$ref": "#/$defs/SapDate"
+        },
+        "LINE_TEXT": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "DELETION_INDIC": {
+          "type": "string",
+          "maxLength": 1
+        },
+        "INSPECTION_TYPE": {
+          "type": "string",
+          "maxLength": 2
+        },
+        "MILSTRIP": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "LOT": {
+          "type": "string",
+          "maxLength": 10
+        },
+        "HANDLING_UNITS": {
+          "type": "array",
+          "items": {
+            "$ref": "./business-types.schema.json#/$defs/HandlingUnit"
+          },
+          "minItems": 1,
+          "maxItems": 100
+        },
+        "SERIAL_NUMBERS": {
+          "type": "array",
+          "items": {
+            "$ref": "./business-types.schema.json#/$defs/SerialNumber"
+          },
+          "uniqueItems": true,
+          "maxItems": 999
+        },
+        "BATCH_SPLITS": {
+          "type": "array",
+          "items": {
+            "$ref": "./business-types.schema.json#/$defs/BatchSplit"
+          },
+          "minItems": 2,
+          "maxItems": 50
+        },
+        "QUALITY_INSPECTION": {
+          "$ref": "./business-types.schema.json#/$defs/QualityInspection"
+        }
+      }
+    },
+    "InterfaceName": {
+      "$anchor": "InterfaceName",
+      "type": "string",
+      "pattern": "^Z[A-Z0-9_]{3,40}$",
+      "minLength": 4,
+      "maxLength": 41,
+      "description": "SAP WMS interface routing key. Always begins with 'Z' (custom namespace), uppercase alphanumeric + underscore. Strictly pattern-checked — unknown interfaces are hard-rejected. Analogous to message_type in the generic firewall.",
+      "examples": [
+        "ZWMS_WMS_PULL_PUSH_UNIT",
+        "ZWMS_WMS_RETURN_UNIT"
+      ]
+    },
+    "MessageId": {
+      "$anchor": "MessageId",
+      "type": "string",
+      "pattern": "^[0-9]{16}$",
+      "minLength": 16,
+      "maxLength": 16,
+      "description": "Unique 16-digit zero-padded message identifier assigned by the sending system.",
+      "examples": [
+        "0000002243643973",
+        "0000000000000001"
+      ]
+    },
+    "PlantCode": {
+      "$anchor": "PlantCode",
+      "type": "string",
+      "pattern": "^[0-9]{4}$",
+      "minLength": 4,
+      "maxLength": 4,
+      "description": "SAP 4-digit numeric plant code. Infrastructure primitive — owned by the infra/master-data team. Declared once here; $ref'd by any payload field that carries a plant code (SUPPLYING_PLANT, RECEIVING_PLANT, TRANSIT_DOCKING_PLANT).",
+      "examples": [
+        "6300",
+        "0010",
+        "1000"
+      ]
+    },
+    "ConsigneeCode": {
+      "$anchor": "ConsigneeCode",
+      "type": "string",
+      "pattern": "^[A-Z0-9]{2,10}$",
+      "minLength": 2,
+      "maxLength": 10,
+      "description": "Recipient/consignee short code. Uppercase alphanumeric, 2–10 chars. Infrastructure-level recipient identity — not a business-domain customer identifier.",
+      "examples": [
+        "ATAL",
+        "MAIN",
+        "WH01"
+      ]
+    },
+    "SapDate": {
+      "$anchor": "SapDate",
+      "type": "string",
+      "pattern": "^[0-9]{8}$",
+      "minLength": 8,
+      "maxLength": 8,
+      "description": "SAP compact date format YYYYMMDD. Used for all date fields across envelope and payload. Declared once here; $ref'd by payload date fields (DELIVERY_DATE etc.).",
+      "examples": [
+        "20240915",
+        "20241010"
+      ]
+    },
+    "SapTime": {
+      "$anchor": "SapTime",
+      "type": "string",
+      "pattern": "^[0-9]{6}$",
+      "minLength": 6,
+      "maxLength": 6,
+      "description": "SAP compact time format HHMMSS (24-hour). Used in envelope timestamp; payload systems may $ref for time fields.",
+      "examples": [
+        "160656",
+        "083000",
+        "235959"
+      ]
+    },
+    "OpaqueDocHeader": {
+      "$anchor": "OpaqueDocHeader",
+      "type": "object",
+      "description": "Business document payload. INTENTIONALLY OPAQUE to the firewall. Structure varies by WMS_ORD_TP order type. The recipient/WMS system is the sole owner of DOC_HEADER validation (Layer 2).",
+      "unevaluatedProperties": true
+    }
+  },
+  "properties": {
+    "Header": {
+      "type": "object",
+      "description": "Message envelope. All 6 fields are infrastructure invariants validated by the firewall.",
+      "properties": {
+        "INTERFACE_NAME": {
+          "const": "ZWMS_INBOUND_DELIVERY_CREATE"
+        }
+      },
+      "required": [
+        "INTERFACE_NAME"
+      ],
+      "unevaluatedProperties": false
+    },
+    "DOC_HEADER": {
+      "$ref": "#/$defs/Body"
+    }
+  },
+  "required": [
+    "Header"
+  ]
+}

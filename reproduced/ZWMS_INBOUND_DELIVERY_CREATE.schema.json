@@ -1,0 +1,1761 @@
+{
+  "$defs": {
+    "AIRORSEAIND": {
+      "maxLength": 1,
+      "title": "AIRORSEAIND",
+      "type": "string"
+    },
+    "ARMYMANAGED": {
+      "maxLength": 1,
+      "title": "ARMYMANAGED",
+      "type": "string"
+    },
+    "ASNALLOWPICK": {
+      "maxLength": 1,
+      "title": "ASNALLOWPICK",
+      "type": "string"
+    },
+    "ASNBLOCK": {
+      "maxLength": 10,
+      "title": "ASNBLOCK",
+      "type": "string"
+    },
+    "ASNCHARGEDATE": {
+      "maxLength": 8,
+      "title": "ASNCHARGEDATE",
+      "type": "string"
+    },
+    "ASNCOLDATE": {
+      "maxLength": 8,
+      "title": "ASNCOLDATE",
+      "type": "string"
+    },
+    "ASNEXPIRATIONDATE": {
+      "maxLength": 8,
+      "title": "ASNEXPIRATIONDATE",
+      "type": "string"
+    },
+    "ASNEXTRAACTIVITYDATE": {
+      "maxLength": 8,
+      "title": "ASNEXTRAACTIVITYDATE",
+      "type": "string"
+    },
+    "ASNHU": {
+      "maxLength": 20,
+      "title": "ASNHU",
+      "type": "string"
+    },
+    "ASNHUTYPE": {
+      "maxLength": 10,
+      "title": "ASNHUTYPE",
+      "type": "string"
+    },
+    "ASNINSPECTIONDATE": {
+      "maxLength": 8,
+      "title": "ASNINSPECTIONDATE",
+      "type": "string"
+    },
+    "ASNKITORDER": {
+      "maxLength": 7,
+      "title": "ASNKITORDER",
+      "type": "string"
+    },
+    "ASNLASTCNTDATE": {
+      "maxLength": 8,
+      "title": "ASNLASTCNTDATE",
+      "type": "string"
+    },
+    "ASNLOADID": {
+      "maxLength": 20,
+      "title": "ASNLOADID",
+      "type": "string"
+    },
+    "ASNLOADUM": {
+      "maxLength": 10,
+      "title": "ASNLOADUM",
+      "type": "string"
+    },
+    "ASNMAINTENANCEDATE": {
+      "maxLength": 8,
+      "title": "ASNMAINTENANCEDATE",
+      "type": "string"
+    },
+    "ASNSKUWMS": {
+      "maxLength": 100,
+      "title": "ASNSKUWMS",
+      "type": "string"
+    },
+    "ASNSUBKIT": {
+      "maxLength": 20,
+      "title": "ASNSUBKIT",
+      "type": "string"
+    },
+    "ASNUMUNITS": {
+      "maxLength": 17,
+      "title": "ASNUMUNITS",
+      "type": "string"
+    },
+    "ASNVERSION": {
+      "maxLength": 50,
+      "title": "ASNVERSION",
+      "type": "string"
+    },
+    "ASNVERSIONDATE": {
+      "maxLength": 8,
+      "title": "ASNVERSIONDATE",
+      "type": "string"
+    },
+    "ASNWMSSTAT": {
+      "maxLength": 10,
+      "title": "ASNWMSSTAT",
+      "type": "string"
+    },
+    "BATCH": {
+      "maxLength": 10,
+      "title": "BATCH",
+      "type": "string"
+    },
+    "BOL": {
+      "maxLength": 20,
+      "title": "BOL",
+      "type": "string"
+    },
+    "BatchSplit": {
+      "additionalProperties": false,
+      "description": "A portion of a line item fulfilled from one specific batch. Used when a single delivery line is split across multiple batches (e.g. partial FIFO fulfilment).",
+      "properties": {
+        "BATCH": {
+          "maxLength": 10,
+          "minLength": 1,
+          "title": "Batch",
+          "type": "string"
+        },
+        "QUANTITY": {
+          "$ref": "#/$defs/SapQuantity"
+        },
+        "STOCK_TYPE": {
+          "anyOf": [
+            {
+              "maxLength": 2,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stock Type"
+        },
+        "STORAGE_LOCATION": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StorageLocation"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "SHELF_LIFE_EXP_DATE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SHELFLIFEEXPDATE"
+            },
+            {
+              "$ref": "#/$defs/SapDate"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Shelf Life Exp Date"
+        }
+      },
+      "required": [
+        "BATCH",
+        "QUANTITY"
+      ],
+      "title": "BatchSplit",
+      "type": "object"
+    },
+    "Body": {
+      "additionalProperties": false,
+      "description": "Payload schema for sheet '5,6,7,8,24.1' – קבלה למלאי (אספקה נכנסת) רכש מקומי (Outbound)",
+      "properties": {
+        "REC_DOC": {
+          "$ref": "#/$defs/RECDOC"
+        },
+        "WMS_ORD_TP": {
+          "$ref": "#/$defs/WMSORDTP"
+        },
+        "SHIP_CON": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SHIPCON"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "SUP_PRTNR": {
+          "$ref": "#/$defs/SUPPRTNR"
+        },
+        "PARTNER_TYPE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PARTNERTYPE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "OPER_CODE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/OPERCODE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "HEADER_TEXT": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/HEADERTEXT"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "RELS_ORD": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RELSORD"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "BOL": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BOL"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "CONTAIN_ID": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CONTAINID"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "CONTAIN_SEAL_NUM": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CONTAINSEALNUM"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "CONTAIN_TYP": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CONTAINTYP"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "AIR_OR_SEA_IND": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AIRORSEAIND"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "REQU_COORD": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/REQUCOORD"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "REF_DELIV": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/REFDELIV"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "RECEIVING_PLANT": {
+          "$ref": "#/$defs/RECEIVINGPLANT"
+        },
+        "DELIV_NOTE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DELIVNOTE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "SPED": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SPED"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ARMY_MANAGED": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ARMYMANAGED"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "PICK_POINT": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PICKPOINT"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "DELIVERY_DATE": {
+          "$ref": "#/$defs/SapDate"
+        },
+        "REC_DOC_LINE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RECDOCLINE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "DELETION_INDIC": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DELETIONINDIC"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "MOD_ORDER": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MODORDER"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "MATERIAL": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MaterialNumber"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "SERIAL_PROF": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SERIALPROF"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "QUANTITY": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SapQuantity"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "STOCK_TYPE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/STOCKTYPE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "RECEIVING_STORAGE_LOCATION": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RECEIVINGSTORAGELOCATION"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "LINE_TEXT": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LINETEXT"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ORDER_TOLERANCE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ORDERTOLERANCE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "CROSS_DOC_ORDER": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CROSSDOCORDER"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "CROSS_DOC_ORDER_LINE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CROSSDOCORDERLINE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "BATCH": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BATCH"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "KIT_SIZE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/KITSIZE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "INSPECTION_TYPE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/INSPECTIONTYPE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "SAP_INTER_ORDER": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SAPINTERORDER"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "SAP_INTER_ORDER_LINE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SAPINTERORDERLINE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "MILSTRIP": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MILSTRIP"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "MLSTRP_SPLIT": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MLSTRPSPLIT"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "LOT": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/LOT"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "RESERVATION_ORDER": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RESERVATIONORDER"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "RECEIPT": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RECEIPT"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "RECEIPT_LINE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RECEIPTLINE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "CONTACT_PERSON_NAME": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CONTACTPERSONNAME"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "CONTACT_PERSON_PHONE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CONTACTPERSONPHONE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "COORDINATES_WIDTH": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/COORDINATESWIDTH"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "COORDINATES_LENGTH": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/COORDINATESLENGTH"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "SERIAL": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SERIAL"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_MAINTENANCE_DATE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNMAINTENANCEDATE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_LAST_CNT_DATE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNLASTCNTDATE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_INSPECTION_DATE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNINSPECTIONDATE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_LOADID": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNLOADID"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_EXPIRATION_DATE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNEXPIRATIONDATE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_HU": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNHU"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_SKU_WMS": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNSKUWMS"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_COL_DATE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNCOLDATE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_CHARGE_DATE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNCHARGEDATE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_EXTRA_ACTIVITY_DATE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNEXTRAACTIVITYDATE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_ALLOW_PICK": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNALLOWPICK"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_VERSION": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNVERSION"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_VERSION_DATE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNVERSIONDATE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_LOAD_UM": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNLOADUM"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_UM_UNITS": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNUMUNITS"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_WMS_STAT": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNWMSSTAT"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_BLOCK": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNBLOCK"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_HU_TYPE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNHUTYPE"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_KIT_ORDER": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNKITORDER"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ASN_SUB_KIT": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ASNSUBKIT"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "DOC_ITEM": {
+          "items": {
+            "$ref": "#/$defs/InboundDocItem"
+          },
+          "maxItems": 999,
+          "minItems": 1,
+          "title": "Doc Item",
+          "type": "array"
+        }
+      },
+      "required": [
+        "REC_DOC",
+        "WMS_ORD_TP",
+        "SUP_PRTNR",
+        "RECEIVING_PLANT",
+        "DELIVERY_DATE",
+        "DOC_ITEM"
+      ],
+      "title": "Body",
+      "type": "object"
+    },
+    "CONTACTPERSONNAME": {
+      "maxLength": 35,
+      "title": "CONTACTPERSONNAME",
+      "type": "string"
+    },
+    "CONTACTPERSONPHONE": {
+      "maxLength": 10,
+      "title": "CONTACTPERSONPHONE",
+      "type": "string"
+    },
+    "CONTAINID": {
+      "maxLength": 20,
+      "title": "CONTAINID",
+      "type": "string"
+    },
+    "CONTAINSEALNUM": {
+      "maxLength": 20,
+      "title": "CONTAINSEALNUM",
+      "type": "string"
+    },
+    "CONTAINTYP": {
+      "maxLength": 2,
+      "title": "CONTAINTYP",
+      "type": "string"
+    },
+    "COORDINATESLENGTH": {
+      "maxLength": 18,
+      "title": "COORDINATESLENGTH",
+      "type": "string"
+    },
+    "COORDINATESWIDTH": {
+      "maxLength": 18,
+      "title": "COORDINATESWIDTH",
+      "type": "string"
+    },
+    "CROSSDOCORDER": {
+      "maxLength": 10,
+      "title": "CROSSDOCORDER",
+      "type": "string"
+    },
+    "CROSSDOCORDERLINE": {
+      "maxLength": 6,
+      "title": "CROSSDOCORDERLINE",
+      "type": "string"
+    },
+    "DELETIONINDIC": {
+      "maxLength": 1,
+      "title": "DELETIONINDIC",
+      "type": "string"
+    },
+    "DELIVNOTE": {
+      "maxLength": 20,
+      "title": "DELIVNOTE",
+      "type": "string"
+    },
+    "DimensionUnit": {
+      "description": "Unit of measure for linear dimensions used in HU DIMENSIONS objects.",
+      "enum": [
+        "MM",
+        "CM",
+        "M",
+        "IN"
+      ],
+      "title": "DimensionUnit",
+      "type": "string"
+    },
+    "HEADERTEXT": {
+      "maxLength": 255,
+      "title": "HEADERTEXT",
+      "type": "string"
+    },
+    "HandlingUnit": {
+      "additionalProperties": false,
+      "description": "A physical handling unit (pallet, box, container) assigned to a document item. Demonstrates three levels of nesting: HandlingUnit → DIMENSIONS (nested object) + ITEMS (array of HuItem dicts).",
+      "properties": {
+        "HU_NUMBER": {
+          "pattern": "^[0-9]{18,20}$",
+          "title": "Hu Number",
+          "type": "string"
+        },
+        "HU_TYPE": {
+          "$ref": "#/$defs/HuType"
+        },
+        "GROSS_WEIGHT": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WeightDecimal"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "TARE_WEIGHT": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WeightDecimal"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "WEIGHT_UNIT": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WeightUnit"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "DIMENSIONS": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/HuDimensions"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ITEMS": {
+          "items": {
+            "$ref": "#/$defs/HuItem"
+          },
+          "maxItems": 200,
+          "minItems": 1,
+          "title": "Items",
+          "type": "array"
+        }
+      },
+      "required": [
+        "HU_NUMBER",
+        "HU_TYPE",
+        "ITEMS"
+      ],
+      "title": "HandlingUnit",
+      "type": "object"
+    },
+    "Header": {
+      "additionalProperties": false,
+      "description": "Message envelope. All 6 fields are infrastructure invariants validated by the firewall.",
+      "properties": {
+        "INTERFACE_NAME": {
+          "const": "ZWMS_INBOUND_DELIVERY_CREATE",
+          "title": "Interface Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "INTERFACE_NAME"
+      ],
+      "title": "Header",
+      "type": "object"
+    },
+    "HuDimensions": {
+      "additionalProperties": false,
+      "description": "Physical outer dimensions of a handling unit. All values in the unit specified by UNIT field.",
+      "properties": {
+        "LENGTH": {
+          "$ref": "#/$defs/LinearDimension"
+        },
+        "WIDTH": {
+          "$ref": "#/$defs/LinearDimension"
+        },
+        "HEIGHT": {
+          "$ref": "#/$defs/LinearDimension"
+        },
+        "UNIT": {
+          "$ref": "#/$defs/DimensionUnit"
+        }
+      },
+      "required": [
+        "LENGTH",
+        "WIDTH",
+        "HEIGHT",
+        "UNIT"
+      ],
+      "title": "HuDimensions",
+      "type": "object"
+    },
+    "HuItem": {
+      "additionalProperties": false,
+      "description": "A single material line packed inside a handling unit. Represents the physical packing detail — what material, which batch, how many, and optionally the serial number.",
+      "properties": {
+        "MATERIAL": {
+          "$ref": "#/$defs/MaterialNumber"
+        },
+        "BATCH": {
+          "anyOf": [
+            {
+              "maxLength": 10,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Batch"
+        },
+        "QUANTITY": {
+          "$ref": "#/$defs/SapQuantity"
+        },
+        "SERIAL_NUMBER": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SERIALNUMBER"
+            },
+            {
+              "$ref": "#/$defs/SerialNumber"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Serial Number"
+        }
+      },
+      "required": [
+        "MATERIAL",
+        "QUANTITY"
+      ],
+      "title": "HuItem",
+      "type": "object"
+    },
+    "HuType": {
+      "description": "Handling unit type. PAL=euro pallet, BOX=carton box, BAG=bulk bag, CTN=ISO container, PLT=flat pallet, TRL=trailer load.",
+      "enum": [
+        "PAL",
+        "BOX",
+        "BAG",
+        "CTN",
+        "PLT",
+        "TRL"
+      ],
+      "title": "HuType",
+      "type": "string"
+    },
+    "INSPECTIONTYPE": {
+      "maxLength": 1,
+      "title": "INSPECTIONTYPE",
+      "type": "string"
+    },
+    "InboundDocItem": {
+      "additionalProperties": false,
+      "properties": {
+        "MATERIAL": {
+          "$ref": "#/$defs/MaterialNumber"
+        },
+        "BATCH": {
+          "anyOf": [
+            {
+              "maxLength": 10,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Batch"
+        },
+        "QUANTITY": {
+          "$ref": "#/$defs/SapQuantity"
+        },
+        "STOCK_TYPE": {
+          "anyOf": [
+            {
+              "maxLength": 2,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stock Type"
+        },
+        "RECEIVING_STORAGE_LOCATION": {
+          "$ref": "#/$defs/StorageLocation"
+        },
+        "DELIVERY_DATE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SapDate"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "LINE_TEXT": {
+          "anyOf": [
+            {
+              "maxLength": 40,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Text"
+        },
+        "DELETION_INDIC": {
+          "anyOf": [
+            {
+              "maxLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Deletion Indic"
+        },
+        "INSPECTION_TYPE": {
+          "anyOf": [
+            {
+              "maxLength": 2,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Inspection Type"
+        },
+        "MILSTRIP": {
+          "anyOf": [
+            {
+              "maxLength": 20,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Milstrip"
+        },
+        "LOT": {
+          "anyOf": [
+            {
+              "maxLength": 10,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Lot"
+        },
+        "HANDLING_UNITS": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/HandlingUnit"
+              },
+              "maxItems": 100,
+              "minItems": 1,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Handling Units"
+        },
+        "SERIAL_NUMBERS": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/SerialNumber"
+              },
+              "maxItems": 999,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Serial Numbers"
+        },
+        "BATCH_SPLITS": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/BatchSplit"
+              },
+              "maxItems": 50,
+              "minItems": 2,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Batch Splits"
+        },
+        "QUALITY_INSPECTION": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/QualityInspection"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "MATERIAL",
+        "QUANTITY",
+        "RECEIVING_STORAGE_LOCATION"
+      ],
+      "title": "InboundDocItem",
+      "type": "object"
+    },
+    "InspectionCharResult": {
+      "description": "Result of evaluating a single quality inspection characteristic. NA=not applicable for this material, PENDING=awaiting lab result.",
+      "enum": [
+        "PASS",
+        "FAIL",
+        "NA",
+        "PENDING"
+      ],
+      "title": "InspectionCharResult",
+      "type": "string"
+    },
+    "InspectionCharacteristic": {
+      "additionalProperties": false,
+      "description": "A single quality characteristic evaluated during goods receipt inspection. Attribute checks (visual, label) use RESULT only; quantitative checks (weight, temperature) also carry NUMERIC_VALUE and LOWER/UPPER limits.",
+      "properties": {
+        "CHAR_NAME": {
+          "maxLength": 30,
+          "title": "Char Name",
+          "type": "string"
+        },
+        "RESULT": {
+          "$ref": "#/$defs/InspectionCharResult"
+        },
+        "NUMERIC_VALUE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NUMERICVALUE"
+            },
+            {
+              "$ref": "#/$defs/NUMERICVALUE1"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Numeric Value"
+        },
+        "UNIT": {
+          "anyOf": [
+            {
+              "maxLength": 10,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "LOWER_LIMIT": {
+          "anyOf": [
+            {
+              "maxLength": 20,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Lower Limit"
+        },
+        "UPPER_LIMIT": {
+          "anyOf": [
+            {
+              "maxLength": 20,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Upper Limit"
+        }
+      },
+      "required": [
+        "CHAR_NAME",
+        "RESULT"
+      ],
+      "title": "InspectionCharacteristic",
+      "type": "object"
+    },
+    "KITSIZE": {
+      "maxLength": 7,
+      "title": "KITSIZE",
+      "type": "string"
+    },
+    "LINETEXT": {
+      "maxLength": 255,
+      "title": "LINETEXT",
+      "type": "string"
+    },
+    "LOT": {
+      "maxLength": 8,
+      "title": "LOT",
+      "type": "string"
+    },
+    "LinearDimension": {
+      "maxLength": 10,
+      "minLength": 4,
+      "pattern": "^[0-9]+\\.[0-9]{2}$",
+      "title": "LinearDimension",
+      "type": "string"
+    },
+    "MILSTRIP": {
+      "maxLength": 14,
+      "title": "MILSTRIP",
+      "type": "string"
+    },
+    "MLSTRPSPLIT": {
+      "maxLength": 1,
+      "title": "MLSTRPSPLIT",
+      "type": "string"
+    },
+    "MODORDER": {
+      "maxLength": 10,
+      "title": "MODORDER",
+      "type": "string"
+    },
+    "MaterialNumber": {
+      "maxLength": 40,
+      "minLength": 1,
+      "pattern": "^[0-9A-Z\\-]{1,40}$",
+      "title": "MaterialNumber",
+      "type": "string"
+    },
+    "NUMERICVALUE": {
+      "maxLength": 0,
+      "title": "NUMERICVALUE",
+      "type": "string"
+    },
+    "NUMERICVALUE1": {
+      "pattern": "^-?[0-9]+\\.[0-9]{1,6}$",
+      "title": "NUMERICVALUE1",
+      "type": "string"
+    },
+    "OPERCODE": {
+      "maxLength": 1,
+      "title": "OPERCODE",
+      "type": "string"
+    },
+    "ORDERTOLERANCE": {
+      "maxLength": 4,
+      "title": "ORDERTOLERANCE",
+      "type": "string"
+    },
+    "PARTNERTYPE": {
+      "maxLength": 2,
+      "title": "PARTNERTYPE",
+      "type": "string"
+    },
+    "PICKPOINT": {
+      "maxLength": 4,
+      "title": "PICKPOINT",
+      "type": "string"
+    },
+    "QualityDecision": {
+      "description": "Quality usage decision code attached to an inspection lot. A=Accept (unrestricted stock), R=Reject (returns to vendor or scrap), P=Partial accept (split stock), N=Not yet decided (inspection still open).",
+      "enum": [
+        "A",
+        "R",
+        "P",
+        "N"
+      ],
+      "title": "QualityDecision",
+      "type": "string"
+    },
+    "QualityInspection": {
+      "additionalProperties": false,
+      "description": "Quality inspection block attached to a document item. Present only for Q-inspection managed materials. Contains the inspection lot reference, usage decision, and an array of evaluated characteristics (each an InspectionCharacteristic dict).",
+      "properties": {
+        "INSPECTION_LOT": {
+          "pattern": "^[0-9]{12}$",
+          "title": "Inspection Lot",
+          "type": "string"
+        },
+        "USAGE_DECISION": {
+          "$ref": "#/$defs/QualityDecision"
+        },
+        "INSPECTOR_ID": {
+          "anyOf": [
+            {
+              "maxLength": 12,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Inspector Id"
+        },
+        "INSPECTION_DATE": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SapDate"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "CHARACTERISTICS": {
+          "items": {
+            "$ref": "#/$defs/InspectionCharacteristic"
+          },
+          "maxItems": 50,
+          "minItems": 1,
+          "title": "Characteristics",
+          "type": "array"
+        }
+      },
+      "required": [
+        "INSPECTION_LOT",
+        "USAGE_DECISION",
+        "CHARACTERISTICS"
+      ],
+      "title": "QualityInspection",
+      "type": "object"
+    },
+    "RECDOC": {
+      "maxLength": 10,
+      "title": "RECDOC",
+      "type": "string"
+    },
+    "RECDOCLINE": {
+      "maxLength": 10,
+      "title": "RECDOCLINE",
+      "type": "string"
+    },
+    "RECEIPT": {
+      "maxLength": 20,
+      "title": "RECEIPT",
+      "type": "string"
+    },
+    "RECEIPTLINE": {
+      "maxLength": 7,
+      "title": "RECEIPTLINE",
+      "type": "string"
+    },
+    "RECEIVINGPLANT": {
+      "maxLength": 4,
+      "title": "RECEIVINGPLANT",
+      "type": "string"
+    },
+    "RECEIVINGSTORAGELOCATION": {
+      "maxLength": 4,
+      "title": "RECEIVINGSTORAGELOCATION",
+      "type": "string"
+    },
+    "REFDELIV": {
+      "maxLength": 10,
+      "title": "REFDELIV",
+      "type": "string"
+    },
+    "RELSORD": {
+      "maxLength": 20,
+      "title": "RELSORD",
+      "type": "string"
+    },
+    "REQUCOORD": {
+      "maxLength": 1,
+      "title": "REQUCOORD",
+      "type": "string"
+    },
+    "RESERVATIONORDER": {
+      "maxLength": 10,
+      "title": "RESERVATIONORDER",
+      "type": "string"
+    },
+    "SAPINTERORDER": {
+      "maxLength": 10,
+      "title": "SAPINTERORDER",
+      "type": "string"
+    },
+    "SAPINTERORDERLINE": {
+      "maxLength": 6,
+      "title": "SAPINTERORDERLINE",
+      "type": "string"
+    },
+    "SERIAL": {
+      "maxLength": 18,
+      "title": "SERIAL",
+      "type": "string"
+    },
+    "SERIALNUMBER": {
+      "maxLength": 0,
+      "title": "SERIALNUMBER",
+      "type": "string"
+    },
+    "SERIALPROF": {
+      "maxLength": 4,
+      "title": "SERIALPROF",
+      "type": "string"
+    },
+    "SHELFLIFEEXPDATE": {
+      "maxLength": 0,
+      "title": "SHELFLIFEEXPDATE",
+      "type": "string"
+    },
+    "SHIPCON": {
+      "maxLength": 2,
+      "title": "SHIPCON",
+      "type": "string"
+    },
+    "SPED": {
+      "maxLength": 20,
+      "title": "SPED",
+      "type": "string"
+    },
+    "STOCKTYPE": {
+      "maxLength": 1,
+      "title": "STOCKTYPE",
+      "type": "string"
+    },
+    "SUPPRTNR": {
+      "maxLength": 10,
+      "title": "SUPPRTNR",
+      "type": "string"
+    },
+    "SapDate": {
+      "maxLength": 8,
+      "minLength": 8,
+      "pattern": "^[0-9]{8}$",
+      "title": "SapDate",
+      "type": "string"
+    },
+    "SapQuantity": {
+      "maxLength": 20,
+      "minLength": 5,
+      "pattern": "^[0-9]+\\.[0-9]{3}$",
+      "title": "SapQuantity",
+      "type": "string"
+    },
+    "SerialNumber": {
+      "maxLength": 30,
+      "minLength": 1,
+      "pattern": "^[A-Z0-9\\-]{1,30}$",
+      "title": "SerialNumber",
+      "type": "string"
+    },
+    "StorageLocation": {
+      "maxLength": 4,
+      "minLength": 4,
+      "pattern": "^[A-Z0-9]{4}$",
+      "title": "StorageLocation",
+      "type": "string"
+    },
+    "WMSORDTP": {
+      "maxLength": 3,
+      "title": "WMSORDTP",
+      "type": "string"
+    },
+    "WeightDecimal": {
+      "maxLength": 20,
+      "minLength": 5,
+      "pattern": "^[0-9]+\\.[0-9]{3}$",
+      "title": "WeightDecimal",
+      "type": "string"
+    },
+    "WeightUnit": {
+      "description": "Unit of measure for weight fields (GROSS_WEIGHT, TARE_WEIGHT).",
+      "enum": [
+        "KG",
+        "G",
+        "LB",
+        "T"
+      ],
+      "title": "WeightUnit",
+      "type": "string"
+    }
+  },
+  "description": "Payload schema for sheet '5,6,7,8,24.1' – קבלה למלאי (אספקה נכנסת) רכש מקומי (Outbound)",
+  "properties": {
+    "Header": {
+      "$ref": "#/$defs/Header"
+    },
+    "DOC_HEADER": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Body"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "Header"
+  ],
+  "title": "WmsinterfaceZwmsInboundDeliveryCreate",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

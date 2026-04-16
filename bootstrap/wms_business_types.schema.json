@@ -1,0 +1,2187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/wms/business-types.schema.json",
+  "title": "WmsBusinessTypes",
+  "description": "Shared WMS business-domain vocabulary. Owned by the WMS/recipient team — NOT the firewall. Declares reusable primitives and composites used across multiple payload schemas. Changing a type here (e.g. extending MaterialNumber length) is a business/master-data decision and never touches the firewall schema.",
+  "$defs": {
+    "SapDocumentNumber": {
+      "$anchor": "SapDocumentNumber",
+      "type": "string",
+      "pattern": "^[0-9]{10}$",
+      "minLength": 10,
+      "maxLength": 10,
+      "description": "SAP 10-digit zero-padded document number (DOCUMENT_NUM_SAP).",
+      "examples": [
+        "0703891136",
+        "0000000001"
+      ]
+    },
+    "SapItemNumber": {
+      "$anchor": "SapItemNumber",
+      "type": "string",
+      "pattern": "^[0-9]{5}$",
+      "minLength": 5,
+      "maxLength": 5,
+      "description": "SAP 5-digit zero-padded document line-item number (DOCUMENT_ITEM_SAP). Increments by 10: 00010, 00020, 00030.",
+      "examples": [
+        "00010",
+        "00020",
+        "00030"
+      ]
+    },
+    "StorageLocation": {
+      "$anchor": "StorageLocation",
+      "type": "string",
+      "pattern": "^[A-Z0-9]{4}$",
+      "minLength": 4,
+      "maxLength": 4,
+      "description": "SAP 4-character storage location code. Uppercase alphanumeric.",
+      "examples": [
+        "3000",
+        "PA30",
+        "0001"
+      ]
+    },
+    "CustomerNumber": {
+      "$anchor": "CustomerNumber",
+      "type": "string",
+      "pattern": "^[0-9]{10}$",
+      "minLength": 10,
+      "maxLength": 10,
+      "description": "SAP 10-digit zero-padded customer/business partner number.",
+      "examples": [
+        "0000004003",
+        "0000000001"
+      ]
+    },
+    "MaterialNumber": {
+      "$anchor": "MaterialNumber",
+      "type": "string",
+      "pattern": "^[0-9A-Z\\-]{1,40}$",
+      "minLength": 1,
+      "maxLength": 40,
+      "description": "SAP material number. Numeric in standard systems; may contain uppercase and hyphens in extended configurations.",
+      "examples": [
+        "319657933",
+        "000000000319657933"
+      ]
+    },
+    "WmsOrderType": {
+      "$anchor": "WmsOrderType",
+      "type": "string",
+      "enum": [
+        "101",
+        "201",
+        "301",
+        "401",
+        "501"
+      ],
+      "description": "WMS order type code (WMS_ORD_TP). Determines which DOC_HEADER payload schema branch fires in Layer 2. 101=inbound transfer, 201=outbound transfer, 301=inventory adjustment, 401=vendor return, 501=cross-dock. Extend this enum when new order types are onboarded — requires only a business-types update, not a firewall change.",
+      "examples": [
+        "101",
+        "201"
+      ]
+    },
+    "DocumentCategory": {
+      "$anchor": "DocumentCategory",
+      "type": "string",
+      "pattern": "^[0-9]{2}$",
+      "minLength": 2,
+      "maxLength": 2,
+      "description": "2-digit zero-padded document category code.",
+      "examples": [
+        "01",
+        "02",
+        "10"
+      ]
+    },
+    "SapDocumentType": {
+      "$anchor": "SapDocumentType",
+      "type": "string",
+      "pattern": "^[A-Z0-9]{2,4}$",
+      "minLength": 2,
+      "maxLength": 4,
+      "description": "SAP document type code. Uppercase alphanumeric, 2–4 chars. Custom types begin with 'Z'.",
+      "examples": [
+        "Z21",
+        "WA",
+        "WE"
+      ]
+    },
+    "TwoDigitCode": {
+      "$anchor": "TwoDigitCode",
+      "type": "string",
+      "pattern": "^[0-9]{2}$",
+      "minLength": 2,
+      "maxLength": 2,
+      "description": "Generic 2-digit numeric code. Used for CUSTOMER_TYPE, DELIVERY_PRIORITY, SHIP_CON and similar SAP code fields.",
+      "examples": [
+        "00",
+        "01",
+        "10",
+        "99"
+      ]
+    },
+    "SapQuantity": {
+      "$anchor": "SapQuantity",
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]{3}$",
+      "minLength": 5,
+      "maxLength": 20,
+      "description": "SAP quantity as a decimal string with exactly 3 decimal places, as transmitted in IDocs and WMS interfaces.",
+      "examples": [
+        "1.000",
+        "10.500",
+        "999.999"
+      ]
+    },
+    "CoordinateDecimal": {
+      "$anchor": "CoordinateDecimal",
+      "type": "string",
+      "pattern": "^-?[0-9]+\\.[0-9]{12}$",
+      "minLength": 14,
+      "maxLength": 22,
+      "description": "Geographic coordinate as a decimal string with exactly 12 decimal places. Zero value is '0.000000000000'.",
+      "examples": [
+        "0.000000000000",
+        "32.085300000000",
+        "-118.243683000000"
+      ]
+    },
+    "SerialNumber": {
+      "$anchor": "SerialNumber",
+      "type": "string",
+      "pattern": "^[A-Z0-9\\-]{1,30}$",
+      "minLength": 1,
+      "maxLength": 30,
+      "description": "Equipment/serial number. Uppercase alphanumeric with hyphens. Used in SERIAL_NUMBERS arrays for serial-number managed materials.",
+      "examples": [
+        "SN-20240101-00001",
+        "ABC123456789"
+      ]
+    },
+    "WeightDecimal": {
+      "$anchor": "WeightDecimal",
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]{3}$",
+      "minLength": 5,
+      "maxLength": 20,
+      "description": "Weight value with exactly 3 decimal places (kg by default unless WEIGHT_UNIT is set).",
+      "examples": [
+        "12.500",
+        "1000.000"
+      ]
+    },
+    "LinearDimension": {
+      "$anchor": "LinearDimension",
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]{2}$",
+      "minLength": 4,
+      "maxLength": 10,
+      "description": "Linear dimension (length/width/height) with exactly 2 decimal places.",
+      "examples": [
+        "120.00",
+        "80.00",
+        "100.50"
+      ]
+    },
+    "HuType": {
+      "$anchor": "HuType",
+      "type": "string",
+      "enum": [
+        "PAL",
+        "BOX",
+        "BAG",
+        "CTN",
+        "PLT",
+        "TRL"
+      ],
+      "description": "Handling unit type. PAL=euro pallet, BOX=carton box, BAG=bulk bag, CTN=ISO container, PLT=flat pallet, TRL=trailer load."
+    },
+    "DimensionUnit": {
+      "$anchor": "DimensionUnit",
+      "type": "string",
+      "enum": [
+        "MM",
+        "CM",
+        "M",
+        "IN"
+      ],
+      "description": "Unit of measure for linear dimensions used in HU DIMENSIONS objects."
+    },
+    "WeightUnit": {
+      "$anchor": "WeightUnit",
+      "type": "string",
+      "enum": [
+        "KG",
+        "G",
+        "LB",
+        "T"
+      ],
+      "description": "Unit of measure for weight fields (GROSS_WEIGHT, TARE_WEIGHT)."
+    },
+    "QualityDecision": {
+      "$anchor": "QualityDecision",
+      "type": "string",
+      "enum": [
+        "A",
+        "R",
+        "P",
+        "N"
+      ],
+      "description": "Quality usage decision code attached to an inspection lot. A=Accept (unrestricted stock), R=Reject (returns to vendor or scrap), P=Partial accept (split stock), N=Not yet decided (inspection still open)."
+    },
+    "InspectionCharResult": {
+      "$anchor": "InspectionCharResult",
+      "type": "string",
+      "enum": [
+        "PASS",
+        "FAIL",
+        "NA",
+        "PENDING"
+      ],
+      "description": "Result of evaluating a single quality inspection characteristic. NA=not applicable for this material, PENDING=awaiting lab result."
+    },
+    "SapAdjustmentQuantity": {
+      "$anchor": "SapAdjustmentQuantity",
+      "type": "string",
+      "pattern": "^-?[0-9]+\\.[0-9]{3}$",
+      "minLength": 5,
+      "maxLength": 21,
+      "description": "Signed SAP quantity for inventory adjustments. Positive = stock increase, negative = stock decrease. Same 3-decimal-place format as SapQuantity but permits a leading minus sign.",
+      "examples": [
+        "-2.000",
+        "5.000",
+        "-100.000"
+      ]
+    },
+    "AdjustmentReason": {
+      "$anchor": "AdjustmentReason",
+      "type": "string",
+      "enum": [
+        "SHRINKAGE",
+        "DAMAGE",
+        "COUNT_CORRECTION",
+        "THEFT",
+        "EXPIRY",
+        "SYSTEM_ERROR"
+      ],
+      "description": "Reason code for an inventory adjustment line (WMS_ORD_TP=301). Required on every adjustment item."
+    },
+    "HuDimensions": {
+      "$anchor": "HuDimensions",
+      "type": "object",
+      "description": "Physical outer dimensions of a handling unit. All values in the unit specified by UNIT field.",
+      "properties": {
+        "LENGTH": {
+          "$ref": "#/$defs/LinearDimension"
+        },
+        "WIDTH": {
+          "$ref": "#/$defs/LinearDimension"
+        },
+        "HEIGHT": {
+          "$ref": "#/$defs/LinearDimension"
+        },
+        "UNIT": {
+          "$ref": "#/$defs/DimensionUnit"
+        }
+      },
+      "required": [
+        "LENGTH",
+        "WIDTH",
+        "HEIGHT",
+        "UNIT"
+      ],
+      "additionalProperties": false
+    },
+    "HuItem": {
+      "$anchor": "HuItem",
+      "type": "object",
+      "description": "A single material line packed inside a handling unit. Represents the physical packing detail — what material, which batch, how many, and optionally the serial number.",
+      "properties": {
+        "MATERIAL": {
+          "$ref": "#/$defs/MaterialNumber"
+        },
+        "BATCH": {
+          "type": "string",
+          "maxLength": 10
+        },
+        "QUANTITY": {
+          "$ref": "#/$defs/SapQuantity"
+        },
+        "SERIAL_NUMBER": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 0
+            },
+            {
+              "$ref": "#/$defs/SerialNumber"
+            }
+          ],
+          "$comment": "Optional. Non-empty only for serial-number managed materials."
+        }
+      },
+      "required": [
+        "MATERIAL",
+        "QUANTITY"
+      ],
+      "additionalProperties": false
+    },
+    "HandlingUnit": {
+      "$anchor": "HandlingUnit",
+      "type": "object",
+      "description": "A physical handling unit (pallet, box, container) assigned to a document item. Demonstrates three levels of nesting: HandlingUnit → DIMENSIONS (nested object) + ITEMS (array of HuItem dicts).",
+      "properties": {
+        "HU_NUMBER": {
+          "type": "string",
+          "pattern": "^[0-9]{18,20}$",
+          "description": "SAP HU number. 18–20 digit SSCC-format barcode printed on the label."
+        },
+        "HU_TYPE": {
+          "$ref": "#/$defs/HuType"
+        },
+        "GROSS_WEIGHT": {
+          "$ref": "#/$defs/WeightDecimal"
+        },
+        "TARE_WEIGHT": {
+          "$ref": "#/$defs/WeightDecimal"
+        },
+        "WEIGHT_UNIT": {
+          "$ref": "#/$defs/WeightUnit"
+        },
+        "DIMENSIONS": {
+          "$ref": "#/$defs/HuDimensions"
+        },
+        "ITEMS": {
+          "type": "array",
+          "description": "Materials packed inside this HU. Each entry is an HuItem dict (MATERIAL, BATCH, QUANTITY, SERIAL_NUMBER).",
+          "items": {
+            "$ref": "#/$defs/HuItem"
+          },
+          "minItems": 1,
+          "maxItems": 200
+        }
+      },
+      "required": [
+        "HU_NUMBER",
+        "HU_TYPE",
+        "ITEMS"
+      ],
+      "additionalProperties": false
+    },
+    "BatchSplit": {
+      "$anchor": "BatchSplit",
+      "type": "object",
+      "description": "A portion of a line item fulfilled from one specific batch. Used when a single delivery line is split across multiple batches (e.g. partial FIFO fulfilment).",
+      "properties": {
+        "BATCH": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 10,
+          "description": "Batch/lot number for this split."
+        },
+        "QUANTITY": {
+          "$ref": "#/$defs/SapQuantity"
+        },
+        "STOCK_TYPE": {
+          "type": "string",
+          "maxLength": 2
+        },
+        "STORAGE_LOCATION": {
+          "$ref": "#/$defs/StorageLocation"
+        },
+        "SHELF_LIFE_EXP_DATE": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 0
+            },
+            {
+              "$ref": "https://example.org/wms/envelope.schema.json#/$defs/SapDate"
+            }
+          ],
+          "$comment": "Best-before/expiry date. Optional — blank for non-perishables. Non-empty must be a valid SapDate (YYYYMMDD)."
+        }
+      },
+      "required": [
+        "BATCH",
+        "QUANTITY"
+      ],
+      "additionalProperties": false
+    },
+    "InspectionCharacteristic": {
+      "$anchor": "InspectionCharacteristic",
+      "type": "object",
+      "description": "A single quality characteristic evaluated during goods receipt inspection. Attribute checks (visual, label) use RESULT only; quantitative checks (weight, temperature) also carry NUMERIC_VALUE and LOWER/UPPER limits.",
+      "properties": {
+        "CHAR_NAME": {
+          "type": "string",
+          "maxLength": 30,
+          "description": "SAP inspection characteristic name (e.g. LABEL_CHECK, NET_WEIGHT, TEMP_STORAGE)."
+        },
+        "RESULT": {
+          "$ref": "#/$defs/InspectionCharResult"
+        },
+        "NUMERIC_VALUE": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 0
+            },
+            {
+              "type": "string",
+              "pattern": "^-?[0-9]+\\.[0-9]{1,6}$"
+            }
+          ],
+          "$comment": "Measured value for quantitative characteristics. Blank for attribute (pass/fail only) characteristics."
+        },
+        "UNIT": {
+          "type": "string",
+          "maxLength": 10,
+          "description": "Unit of measure for NUMERIC_VALUE (e.g. KG, C, MM). Blank for attribute characteristics."
+        },
+        "LOWER_LIMIT": {
+          "type": "string",
+          "maxLength": 20,
+          "description": "Minimum acceptable value for quantitative characteristics."
+        },
+        "UPPER_LIMIT": {
+          "type": "string",
+          "maxLength": 20,
+          "description": "Maximum acceptable value for quantitative characteristics."
+        }
+      },
+      "required": [
+        "CHAR_NAME",
+        "RESULT"
+      ],
+      "additionalProperties": false
+    },
+    "QualityInspection": {
+      "$anchor": "QualityInspection",
+      "type": "object",
+      "description": "Quality inspection block attached to a document item. Present only for Q-inspection managed materials. Contains the inspection lot reference, usage decision, and an array of evaluated characteristics (each an InspectionCharacteristic dict).",
+      "properties": {
+        "INSPECTION_LOT": {
+          "type": "string",
+          "pattern": "^[0-9]{12}$",
+          "description": "12-digit SAP inspection lot number assigned at goods receipt."
+        },
+        "USAGE_DECISION": {
+          "$ref": "#/$defs/QualityDecision"
+        },
+        "INSPECTOR_ID": {
+          "type": "string",
+          "maxLength": 12,
+          "description": "SAP user ID of the inspector who posted the usage decision."
+        },
+        "INSPECTION_DATE": {
+          "$ref": "https://example.org/wms/envelope.schema.json#/$defs/SapDate"
+        },
+        "CHARACTERISTICS": {
+          "type": "array",
+          "description": "Array of quality characteristics evaluated during inspection. Each entry is an InspectionCharacteristic dict.",
+          "items": {
+            "$ref": "#/$defs/InspectionCharacteristic"
+          },
+          "minItems": 1,
+          "maxItems": 50
+        }
+      },
+      "required": [
+        "INSPECTION_LOT",
+        "USAGE_DECISION",
+        "CHARACTERISTICS"
+      ],
+      "additionalProperties": false
+    },
+    "DocItem": {
+      "$anchor": "DocItem",
+      "type": "object",
+      "description": "A single WMS document line item. Open schema (no additionalProperties:false) — SAP custom Z-fields and extension fields are common and must not be rejected by schema drift. Nested fields: BATCH_SPLITS (array of dicts), HANDLING_UNITS (array of dicts with nested DIMENSIONS + ITEMS), QUALITY_INSPECTION (object with CHARACTERISTICS array), SERIAL_NUMBERS (array of strings), CUSTOM_FIELDS (dict).",
+      "properties": {
+        "DELIVERY_DATE": {
+          "$ref": "https://example.org/wms/envelope.schema.json#/$defs/SapDate"
+        },
+        "SUPPLYING_STORAGE_LOCATION": {
+          "$ref": "#/$defs/StorageLocation"
+        },
+        "CUSTOMER": {
+          "type": "string",
+          "maxLength": 10
+        },
+        "CUSTOMER_TYPE": {
+          "$ref": "#/$defs/TwoDigitCode"
+        },
+        "RECEIVING_PLANT": {
+          "$ref": "https://example.org/wms/envelope.schema.json#/$defs/PlantCode"
+        },
+        "RECEIVING_STORAGE_LOCATION": {
+          "$ref": "#/$defs/StorageLocation"
+        },
+        "DELIVERY_PRIORITY": {
+          "$ref": "#/$defs/TwoDigitCode"
+        },
+        "SHIP_CON": {
+          "$ref": "#/$defs/TwoDigitCode"
+        },
+        "ORDERING_CUSTOMER": {
+          "$ref": "#/$defs/CustomerNumber"
+        },
+        "CONTACT_PERSON_NAME": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "CONTACT_PERSON_PHONE": {
+          "type": "string",
+          "maxLength": 30
+        },
+        "TRANSIT_DOCKING_PLANT": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 0
+            },
+            {
+              "$ref": "https://example.org/wms/envelope.schema.json#/$defs/PlantCode"
+            }
+          ],
+          "$comment": "Optional. Empty string = no transit plant (direct shipment). Non-empty must satisfy PlantCode pattern."
+        },
+        "COORDINATES_WIDTH": {
+          "$ref": "#/$defs/CoordinateDecimal"
+        },
+        "COORDINATES_LENGTH": {
+          "$ref": "#/$defs/CoordinateDecimal"
+        },
+        "DOCUMENT_ITEM_SAP": {
+          "$ref": "#/$defs/SapItemNumber"
+        },
+        "DELETION_INDIC": {
+          "type": "string",
+          "maxLength": 1
+        },
+        "CROSS_DOCK": {
+          "type": "string",
+          "maxLength": 1
+        },
+        "MATERIAL": {
+          "$ref": "#/$defs/MaterialNumber"
+        },
+        "BATCH": {
+          "type": "string",
+          "maxLength": 10
+        },
+        "QUANTITY": {
+          "$ref": "#/$defs/SapQuantity"
+        },
+        "STOCK_TYPE": {
+          "type": "string",
+          "maxLength": 2
+        },
+        "RESERVE_NUM": {
+          "type": "string",
+          "maxLength": 16
+        },
+        "VERSION": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "FOOD_PACKING": {
+          "type": "string",
+          "maxLength": 1
+        },
+        "EMERGENCY_TIME_ISSUE": {
+          "type": "string",
+          "maxLength": 1
+        },
+        "MILITARY_ZACHYAN_MANAGMENT": {
+          "type": "string",
+          "maxLength": 1
+        },
+        "MESIMA_ASHBARATIT": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "MANPAR_NOTES": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "SERIAL_TYPE": {
+          "type": "string",
+          "maxLength": 4
+        },
+        "MOVMENT_TYPE": {
+          "type": "string",
+          "maxLength": 3
+        },
+        "REASON_FOR_MOVMENT": {
+          "type": "string",
+          "maxLength": 4
+        },
+        "WMS_STATUS": {
+          "type": "string",
+          "maxLength": 4
+        },
+        "SERIAL_NUMBERS": {
+          "type": "array",
+          "description": "Array of serial numbers for serial-number managed materials. Length must not exceed QUANTITY. Omit entirely for non-serialized materials.",
+          "items": {
+            "$ref": "#/$defs/SerialNumber"
+          },
+          "uniqueItems": true,
+          "maxItems": 999,
+          "$comment": "ARRAY OF STRINGS — one per physical unit. Uniqueness enforced: same serial cannot appear twice on the same line item."
+        },
+        "BATCH_SPLITS": {
+          "type": "array",
+          "description": "Array of batch split dicts. Present when a single line item is fulfilled from multiple batches. Sum of quantities across splits should equal item QUANTITY. Each split is a BatchSplit object: { BATCH, QUANTITY, STOCK_TYPE?, STORAGE_LOCATION?, SHELF_LIFE_EXP_DATE? }.",
+          "items": {
+            "$ref": "#/$defs/BatchSplit"
+          },
+          "minItems": 2,
+          "maxItems": 50,
+          "$comment": "ARRAY OF DICTS — minItems:2 because a single-batch item uses the flat BATCH field instead."
+        },
+        "HANDLING_UNITS": {
+          "type": "array",
+          "description": "Array of handling unit dicts describing the physical packaging of this line item. Each HandlingUnit has: HU_NUMBER, HU_TYPE, weights, DIMENSIONS (nested object: LENGTH/WIDTH/HEIGHT/UNIT), and ITEMS (nested array of HuItem dicts: MATERIAL/BATCH/QUANTITY/SERIAL_NUMBER).",
+          "items": {
+            "$ref": "#/$defs/HandlingUnit"
+          },
+          "minItems": 1,
+          "maxItems": 100,
+          "$comment": "ARRAY OF DICTS WITH NESTED OBJECT + ARRAY — three-level nesting: DocItem → HandlingUnit → HuDimensions (dict) + HuItem[] (array of dicts)."
+        },
+        "QUALITY_INSPECTION": {
+          "$ref": "#/$defs/QualityInspection",
+          "$comment": "NESTED OBJECT WITH ARRAY INSIDE — present only for Q-managed materials. Contains INSPECTION_LOT, USAGE_DECISION, INSPECTION_DATE, INSPECTOR_ID, and CHARACTERISTICS (array of InspectionCharacteristic dicts each with CHAR_NAME, RESULT, NUMERIC_VALUE, UNIT, LOWER/UPPER_LIMIT)."
+        },
+        "CUSTOM_FIELDS": {
+          "type": "object",
+          "description": "Arbitrary SAP Z-field extension bag. Keys are field names (convention: ZCUSTOM_*), values are raw SAP string values. Open dict — no fixed property list. Allows any implementation-specific Z-fields without a schema update.",
+          "additionalProperties": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "maxProperties": 20,
+          "$comment": "DICT (string → string) — models SAP's customer-namespace Z-field pattern. Example: { 'ZCUSTOM_PRIO': 'HIGH', 'ZCUSTOM_ZONE': 'COLD_CHAIN' }."
+        }
+      },
+      "required": [
+        "DELIVERY_DATE",
+        "SUPPLYING_STORAGE_LOCATION",
+        "RECEIVING_PLANT",
+        "RECEIVING_STORAGE_LOCATION",
+        "ORDERING_CUSTOMER",
+        "DOCUMENT_ITEM_SAP",
+        "MATERIAL",
+        "QUANTITY"
+      ],
+      "$comment": "Open schema (no additionalProperties:false) — SAP custom Z-fields added by the implementation team must not cause a firewall schema update. New nested structures (SERIAL_NUMBERS, BATCH_SPLITS, HANDLING_UNITS, QUALITY_INSPECTION, CUSTOM_FIELDS) are all optional extras."
+    },
+    "DESCRIPTION_HE": {
+      "type": "string",
+      "description": "תיאור הפריט בעברית",
+      "maxLength": 1
+    },
+    "DESCRIPTION_EN": {
+      "type": "string",
+      "description": "תיאור הפריט באנגלית"
+    },
+    "MESHEK": {
+      "type": "string",
+      "description": "משק פריטי"
+    },
+    "NSC_GROUP": {
+      "type": "string",
+      "description": "קבוצת חומר NSC"
+    },
+    "SERIAL_PROFILE": {
+      "type": "string",
+      "description": "פרופיל מס\"ד"
+    },
+    "BATCH_INDICATOR": {
+      "type": "string",
+      "description": "סמן סדרה"
+    },
+    "STATUS": {
+      "type": "string",
+      "description": "סטאטוס פריט",
+      "maxLength": 1
+    },
+    "STOCK_INDICATOR": {
+      "type": "string",
+      "description": "אינדיקציית פריט מנוהל מלאי כן/לא"
+    },
+    "UNIT_OF_MEASURE": {
+      "type": "string",
+      "description": "יחידת מידה של הפריט"
+    },
+    "STORAGE_METHOD": {
+      "type": "string",
+      "description": "תנאי אחסנה (טור 21)"
+    },
+    "MIN_TEMPERATURE": {
+      "type": "string",
+      "description": "טמפ' מינימלית לאופן אחסנת הפריט"
+    },
+    "MAX_TEMPERATURE": {
+      "type": "string",
+      "description": "טמפ' מיקסימלית לאופן אחסנת הפריט"
+    },
+    "HUMIDITY": {
+      "type": "string",
+      "description": "אחוז לחות מקסימלי לאופן אחסנת הפריט"
+    },
+    "SUPPLY_CENTER": {
+      "type": "string",
+      "description": "משק על - טור 02  מערך"
+    },
+    "SUPPLY_SECTION": {
+      "type": "string",
+      "description": "מדור משביר טור 03 קוד מדור"
+    },
+    "PRODUCT_MANAGER": {
+      "type": "string",
+      "description": "מנהל פריט טור 15"
+    },
+    "MANAGER_NAME": {
+      "type": "string",
+      "description": "שם מנהל פריט"
+    },
+    "MANAGER_TEL": {
+      "type": "string",
+      "description": "טלפון מנהל פריט"
+    },
+    "GENERALSKU": {
+      "type": "string",
+      "description": "אינדיקציית מק\"ט כללי"
+    },
+    "VERSION": {
+      "type": "string",
+      "description": "אינדיקציית פריט מנוהל גרסה"
+    },
+    "SHELF_LIFE_WMS": {
+      "type": "string",
+      "description": "חיי מדף WMS"
+    },
+    "EXPIRTAION_DATE_INDICATOR": {
+      "type": "string",
+      "description": "אינדיקציית פריט ניהול פג תוקף WMS"
+    },
+    "MIN_SHELF_LIFE": {
+      "type": "string",
+      "description": "מינימום חיי מדף לקליטה"
+    },
+    "TAKIN_ACHZAKA": {
+      "type": "string",
+      "description": "חייב בנתונים אחזקתיים."
+    },
+    "SIVUG_BITCHONI": {
+      "type": "string",
+      "description": "סיווג ביטחוני"
+    },
+    "ATTRACTIVE_ITEM": {
+      "type": "string",
+      "description": "אינדיקציית פריט חמיד (פריט אטרקטיבי)"
+    },
+    "STOCK_COUNT": {
+      "type": "string",
+      "description": "מס ימים לספירה מחזורית"
+    },
+    "MATERIAL_SUB_CATEGORY": {
+      "type": "string",
+      "description": "תת משפחה"
+    },
+    "ACCOMPANYING_ITEM": {
+      "type": "string",
+      "description": "אינדיקציית פריט עיקרי, מצביע האם לפריט יש נלווים"
+    },
+    "SPECIAL_TRACE": {
+      "type": "string",
+      "description": "מעקב מיוחד טור 11"
+    },
+    "WMS_MATERIAL_GROUP": {
+      "type": "string",
+      "description": "קבוצת פריטים"
+    },
+    "MATERIAL_TYPE": {
+      "type": "string",
+      "description": "סוג חומר מהקט\"מ"
+    },
+    "BREAKABLE": {
+      "type": "string",
+      "description": "אינדיקציית פריט שביר"
+    },
+    "TOTAL_SHELF_LIFE": {
+      "type": "string",
+      "description": "סך חיי מדף לפריט"
+    },
+    "MANAGED_PART_NUMBER": {
+      "type": "string",
+      "description": "אינדקצית מנוהל מקט  יצרן"
+    },
+    "UN_ID": {
+      "type": "string",
+      "description": "שדה המייצג את החומר המסוכן"
+    },
+    "UN_SEQUENCE": {
+      "type": "string",
+      "description": "שדה המייצג מספור פנימי לנתוני חומר מסוכן מכיוון שיכול לקרות מצב שבו מספר או\"ם מופיע יותר ממופע אחד. ומספר או\"ם אינו חובה."
+    },
+    "MAIN_UN": {
+      "type": "string",
+      "description": "שדה המצביע על האו\"ם המוביל במק\"ט מכיוון שיכול לקרות מצב שבו למק\"ט יהיה יותר מאו\"ם אחד ולכן יש לתת מענה לאו\"ם הראשי במק\"ט. סימון X עבור האו\"ם המוביל. או\"ם מוביל אחד למק\"ט"
+    },
+    "UN_HE_DESC": {
+      "type": "string",
+      "description": "שם העברי של החומר המסוכן"
+    },
+    "UN_EN_DESC": {
+      "type": "string"
+    },
+    "MAIN_GROUP": {
+      "type": "string",
+      "description": "קבוצות הסיכון אליה משויך החומר"
+    },
+    "SECONDARY_GROUP": {
+      "type": "string",
+      "description": "קבוצת הסיכון המשנית אליה משויך החומר"
+    },
+    "EMERGENCY_CODE": {
+      "type": "string",
+      "description": "מסמן את אופן הטיפול בחומר בעת אירוע בטיחות בחומ\"ס. לכל תו בקוד חרום יש משמעות"
+    },
+    "NFPA_RED": {
+      "type": "string",
+      "description": "מידת הדליקות"
+    },
+    "NFPA_BLUE": {
+      "type": "string",
+      "description": "סיכון הבריאותי"
+    },
+    "NFPA_YELLOW": {
+      "type": "string",
+      "description": "מידת הפעילות הכימית"
+    },
+    "NFPA_WHITE": {
+      "type": "string",
+      "description": "סיכונים מיוחדים"
+    },
+    "MATCH_GROUP": {
+      "type": "string",
+      "description": "איזה קבוצות חומרים קיים פוטנציאל לתגובה כימית ולכן אסור לאחסנם או להבילם יחדיו"
+    },
+    "MATTER_STATE": {
+      "type": "string",
+      "description": "מצב צבירה של החומר המסוכן"
+    },
+    "PACK_TYPE": {
+      "type": "string",
+      "description": "אריזה של החומר כגון: חבית, ג'ריקן, מארז וכו'."
+    },
+    "PACK_QUAN": {
+      "type": "string",
+      "description": "הכמות מהחומר המסוכן באריזה"
+    },
+    "UN_UNIT_OF_MEASURE": {
+      "type": "string",
+      "description": "יחידת המידה של החומר המסוכן לדוגמא : ק\"ג, ליטר וכו'."
+    },
+    "CHEM_COMP": {
+      "type": "string",
+      "description": "הרכב הכימי של התרכובות של החומר המסוכן"
+    },
+    "CHEM_SEQUENCE": {
+      "type": "string",
+      "description": "מספור פנימי לנתוני חומר מסוכן"
+    },
+    "CONCENTRATION": {
+      "type": "number",
+      "description": "מציין אחוזים את אחוז החומר שנמצא בסה\"כ מתוך סה\"כ החומר עצמו שדה ב % מ 0.00000001 עד 100%"
+    },
+    "CAS": {
+      "type": "string",
+      "description": "מייצג מספר זיהוי לכל חומר שתואר בספרות הכימית המקצועית"
+    },
+    "TEKEN_EXPOSURE": {
+      "type": "string",
+      "description": "תקן חשיפה"
+    },
+    "NIIN": {
+      "type": "string",
+      "description": "המקט הבינלאומי של ה הבינלאומי- מקט נטו\nNIIN==NSN"
+    },
+    "MANUFACTURER_PART_NUM": {
+      "type": "string",
+      "description": "מק\"ט יצרן"
+    },
+    "MANUFACTURER_PART_EXT": {
+      "type": "string",
+      "description": "תוספת מק\"ט  ארוך עד 500"
+    },
+    "MANUFACTURER_NUMBER": {
+      "type": "string",
+      "description": "קוד ספק"
+    },
+    "MAINTENANCE_TYPE": {
+      "type": "string",
+      "description": "סוג פעילות מחזורית (תחזוקה , כיול , טעינה , בחינה) ערכים אפשריים לשדה : \n INSPECTION \n CHARGING \n CALIBRATION \n MAINTENANCE\nEXRRAACTIVITY"
+    },
+    "CYCLE": {
+      "type": "string",
+      "description": "תדירות בדיקה בימים"
+    },
+    "WARNING": {
+      "type": "string",
+      "description": "התראת פעולה בימים"
+    },
+    "MAINTENANCENOTE": {
+      "type": "string",
+      "description": "הערות לפעילויות מחזוריות"
+    },
+    "LOCATION": {
+      "type": "string",
+      "description": "מיקום פעולה לפעילות מחזורית- נדרש ברמת פקע"
+    },
+    "INSPECTION_LOT": {
+      "type": "string",
+      "description": "מנת ביקורת טיב",
+      "maxLength": 12
+    },
+    "VENDOR_ID": {
+      "type": "string",
+      "description": "מספר ספק",
+      "maxLength": 10
+    },
+    "EVALUATION_CODE": {
+      "type": "string",
+      "description": "קוד הערכה",
+      "maxLength": 1
+    },
+    "CUSTOMER_ID": {
+      "type": "string",
+      "description": "קוד לקוח",
+      "maxLength": 10
+    },
+    "CUSTOMER_NAME": {
+      "type": "string",
+      "description": "שם לקוח",
+      "maxLength": 35
+    },
+    "CUSTOMER_TYPE": {
+      "type": "string",
+      "description": "סוג לקוח",
+      "maxLength": 4
+    },
+    "CUSTOMER_ACCOUNT_GROUP": {
+      "type": "string",
+      "description": "קבוצת לקוח",
+      "maxLength": 4
+    },
+    "COORDINATES_WIDTH": {
+      "type": "string",
+      "description": "קורדינטת רוחב",
+      "maxLength": 18
+    },
+    "COORDINATES_LENGTH": {
+      "type": "string",
+      "description": "קורדינת אורך",
+      "maxLength": 18
+    },
+    "TRANSPORTION_ZONE": {
+      "type": "string",
+      "description": "אזור הובלה",
+      "maxLength": 20
+    },
+    "STORAGE_LOCATION": {
+      "type": "string",
+      "description": "אתר אחסון תחת הלקוח",
+      "maxLength": 4
+    },
+    "STORAGE_LOCATION_TYPE": {
+      "type": "string",
+      "description": "סוג אתר אחסון תחת הלקוח",
+      "maxLength": 2
+    },
+    "STORAGE_LOCATION_TYPE_DESC": {
+      "type": "string",
+      "description": "תיאור סוג האתר אחסון",
+      "maxLength": 30
+    },
+    "VENDOR_NAME": {
+      "type": "string",
+      "description": "שם ספק",
+      "maxLength": 35
+    },
+    "VENDOR_TYPE": {
+      "type": "string",
+      "description": "סוג ספק",
+      "maxLength": 2
+    },
+    "VENDOR_ACCOUNT_GROUP": {
+      "type": "string",
+      "description": "קבוצת ספק",
+      "maxLength": 4
+    },
+    "LANGUAGE": {
+      "type": "string",
+      "description": "שפה",
+      "maxLength": 2
+    },
+    "COUNTRY": {
+      "type": "string",
+      "description": "ארץ",
+      "maxLength": 3
+    },
+    "CITY": {
+      "type": "string",
+      "description": "עיר",
+      "maxLength": 35
+    },
+    "ADDRESS": {
+      "type": "string",
+      "description": "כתובת",
+      "maxLength": 35
+    },
+    "TELEPHONE1": {
+      "type": "string",
+      "description": "טלפון 1",
+      "maxLength": 16
+    },
+    "TELEPHONE2": {
+      "type": "string",
+      "description": "טלפון 2",
+      "maxLength": 16
+    },
+    "EMAIL": {
+      "type": "string",
+      "description": "כתובת דואר אלקטרוני",
+      "maxLength": 60
+    },
+    "CANCELED_VENDOR": {
+      "type": "string",
+      "description": "ספק מבוטל",
+      "maxLength": 1
+    },
+    "BLOCKED_VENDOR": {
+      "type": "string",
+      "description": "ספק חסום",
+      "maxLength": 1
+    },
+    "VENDOR_ALL_BLOCK": {
+      "type": "string",
+      "description": "ספק חסום לכל הארגונים",
+      "maxLength": 1
+    },
+    "VENDOR_FAX": {
+      "type": "string",
+      "description": "פקס של ספק",
+      "maxLength": 31
+    },
+    "CP_FIRST_NAME": {
+      "type": "string",
+      "description": "שם פרטי של איש קשר",
+      "maxLength": 35
+    },
+    "CP_LAST_NAME": {
+      "type": "string",
+      "description": "שם משפחה של איש קשר",
+      "maxLength": 35
+    },
+    "CP_TELEPHONE": {
+      "type": "string",
+      "description": "טלפון של איש קשר",
+      "maxLength": 16
+    },
+    "REC_DOC": {
+      "type": "string",
+      "description": "מספר מסמך",
+      "maxLength": 10
+    },
+    "WMS_ORD_TP": {
+      "type": "string",
+      "description": "סוג מסמך מקור",
+      "maxLength": 3
+    },
+    "SHIP_CON": {
+      "type": "string",
+      "description": "סוג אספקה",
+      "maxLength": 2
+    },
+    "SUP_PRTNR": {
+      "type": "string",
+      "description": "קוד ספק",
+      "maxLength": 10
+    },
+    "PARTNER_TYPE": {
+      "type": "string",
+      "description": "סוג חברה",
+      "maxLength": 2
+    },
+    "OPER_CODE": {
+      "type": "string",
+      "description": "קוד פעולה (יצירה או ביטול)",
+      "maxLength": 1
+    },
+    "HEADER_TEXT": {
+      "type": "string",
+      "description": "הערות כותרת",
+      "maxLength": 255
+    },
+    "RELS_ORD": {
+      "type": "string",
+      "description": "מס' הוראות שחרור",
+      "maxLength": 20
+    },
+    "BOL": {
+      "type": "string",
+      "description": "AWB|BOL",
+      "maxLength": 20
+    },
+    "CONTAIN_ID": {
+      "type": "string",
+      "description": "מספר מכולה \\פאלט",
+      "maxLength": 20
+    },
+    "CONTAIN_SEAL_NUM": {
+      "type": "string",
+      "description": "מספר סוגר מכולה",
+      "maxLength": 20
+    },
+    "CONTAIN_TYP": {
+      "type": "string",
+      "description": "סוג מכולה",
+      "maxLength": 2
+    },
+    "AIR_OR_SEA_IND": {
+      "type": "string",
+      "description": "אינד' אווירי או ימי",
+      "maxLength": 1
+    },
+    "REQU_COORD": {
+      "type": "string",
+      "description": "אינד' נדרש תיאום",
+      "maxLength": 1
+    },
+    "REF_DELIV": {
+      "type": "string",
+      "description": "מספר הזמנה מקושר",
+      "maxLength": 10
+    },
+    "RECEIVING_PLANT": {
+      "type": "string",
+      "description": "אתר מקבל",
+      "maxLength": 4
+    },
+    "DELIV_NOTE": {
+      "type": "string",
+      "description": "תעודת משלוח",
+      "maxLength": 20
+    },
+    "SPED": {
+      "type": "string",
+      "description": "ספד",
+      "maxLength": 20
+    },
+    "ARMY_MANAGED": {
+      "type": "string",
+      "description": "קליטה למחסן המזמין (מנוהל צבאי)",
+      "maxLength": 1
+    },
+    "PICK_POINT": {
+      "type": "string",
+      "description": "אתר אחסון מנפק -לטובת אתר",
+      "maxLength": 4
+    },
+    "REC_DOC_LINE": {
+      "type": "string",
+      "description": "מספר שורת הזמנה (אספקה)",
+      "maxLength": 10
+    },
+    "DELETION_INDIC": {
+      "type": "string",
+      "description": "סמן מחיקה",
+      "maxLength": 1
+    },
+    "MOD_ORDER": {
+      "type": "string",
+      "description": "מספר הזמנת מקור (SAP)",
+      "maxLength": 10
+    },
+    "SERIAL_PROF": {
+      "type": "string",
+      "description": "מזהה סיריאלי",
+      "maxLength": 4
+    },
+    "STOCK_TYPE": {
+      "type": "string",
+      "description": "סטאטוס מלאי צפוי",
+      "maxLength": 1
+    },
+    "RECEIVING_STORAGE_LOCATION": {
+      "type": "string",
+      "description": "אתר אחסנה מקבל",
+      "maxLength": 4
+    },
+    "LINE_TEXT": {
+      "type": "string",
+      "description": "הערות שורה",
+      "maxLength": 255
+    },
+    "ORDER_TOLERANCE": {
+      "type": "string",
+      "description": "אחוז קליטה יתר",
+      "maxLength": 4
+    },
+    "CROSS_DOC_ORDER": {
+      "type": "string",
+      "description": "הזמנת קרוס-דוק",
+      "maxLength": 10
+    },
+    "CROSS_DOC_ORDER_LINE": {
+      "type": "string",
+      "description": "מספר שורת הזמנת הקרוס-דוק",
+      "maxLength": 6
+    },
+    "BATCH": {
+      "type": "string",
+      "description": "סדרה",
+      "maxLength": 10
+    },
+    "KIT_SIZE": {
+      "type": "string",
+      "description": "גודל ערכה",
+      "maxLength": 7
+    },
+    "INSPECTION_TYPE": {
+      "type": "string",
+      "description": "נדרש ביקורת טיב",
+      "maxLength": 1
+    },
+    "SAP_INTER_ORDER": {
+      "type": "string",
+      "description": "מספר הזמנת סאפ\\הסבה (SAP)",
+      "maxLength": 10
+    },
+    "SAP_INTER_ORDER_LINE": {
+      "type": "string",
+      "description": "(SAP) מספר שורת הזמנת סאפ\\הסבה",
+      "maxLength": 6
+    },
+    "MILSTRIP": {
+      "type": "string",
+      "description": "מספר מילסטריפ",
+      "maxLength": 14
+    },
+    "MLSTRP_SPLIT": {
+      "type": "string",
+      "description": "פיצול מילסטריפ",
+      "maxLength": 1
+    },
+    "LOT": {
+      "type": "string",
+      "description": "לוט",
+      "maxLength": 8
+    },
+    "RESERVATION_ORDER": {
+      "type": "string",
+      "description": "מספר הזמנת שריון",
+      "maxLength": 10
+    },
+    "RECEIPT": {
+      "type": "string",
+      "description": "מספר תעודת קליטה",
+      "maxLength": 20
+    },
+    "RECEIPT_LINE": {
+      "type": "string",
+      "description": "שורה תעודת קליטה",
+      "maxLength": 7
+    },
+    "CONTACT_PERSON_NAME": {
+      "type": "string",
+      "description": "שם איש קשר",
+      "maxLength": 35
+    },
+    "CONTACT_PERSON_PHONE": {
+      "type": "string",
+      "description": "מספר טלפון של איש הקשר",
+      "maxLength": 10
+    },
+    "SERIAL": {
+      "type": "string",
+      "description": "מספר סיריאלי",
+      "maxLength": 18
+    },
+    "ASN_MAINTENANCE_DATE": {
+      "type": "string",
+      "description": "תאריך תחזוקה",
+      "maxLength": 8
+    },
+    "ASN_LAST_CNT_DATE": {
+      "type": "string",
+      "description": "תאריך ספירה אחרון",
+      "maxLength": 8
+    },
+    "ASN_INSPECTION_DATE": {
+      "type": "string",
+      "description": "תאריך ביקורת איכות אחרון",
+      "maxLength": 8
+    },
+    "ASN_LOADID": {
+      "type": "string",
+      "description": "מטען",
+      "maxLength": 20
+    },
+    "ASN_EXPIRATION_DATE": {
+      "type": "string",
+      "description": "תאריך פג תוקף(ללא סידרה)",
+      "maxLength": 8
+    },
+    "ASN_HU": {
+      "type": "string",
+      "description": "יחידת ניטול",
+      "maxLength": 20
+    },
+    "ASN_SKU_WMS": {
+      "type": "string",
+      "description": "מק\"ט WMS פנימי",
+      "maxLength": 100
+    },
+    "ASN_COL_DATE": {
+      "type": "string",
+      "description": "תאריך כיול",
+      "maxLength": 8
+    },
+    "ASN_CHARGE_DATE": {
+      "type": "string",
+      "description": "תאריך טעינה",
+      "maxLength": 8
+    },
+    "ASN_EXTRA_ACTIVITY_DATE": {
+      "type": "string",
+      "description": "תאריך פעילות נוספת",
+      "maxLength": 8
+    },
+    "ASN_ALLOW_PICK": {
+      "type": "string",
+      "description": "כשיר אחזקתי לניפוק",
+      "maxLength": 1
+    },
+    "ASN_VERSION": {
+      "type": "string",
+      "description": "גירסה",
+      "maxLength": 50
+    },
+    "ASN_VERSION_DATE": {
+      "type": "string",
+      "description": "תאריך צריבת גירסה",
+      "maxLength": 8
+    },
+    "ASN_LOAD_UM": {
+      "type": "string",
+      "description": "יחידת המידה של המטען",
+      "maxLength": 10
+    },
+    "ASN_UM_UNITS": {
+      "type": "string",
+      "description": "כמות ביחידת המידה של המטען",
+      "maxLength": 17
+    },
+    "ASN_WMS_STAT": {
+      "type": "string",
+      "description": "סטאטוס מלאי WMS",
+      "maxLength": 10
+    },
+    "ASN_BLOCK": {
+      "type": "string",
+      "description": "קוד סיבה חסימה",
+      "maxLength": 10
+    },
+    "ASN_HU_TYPE": {
+      "type": "string",
+      "description": "סוג יחידת ניטול",
+      "maxLength": 10
+    },
+    "ASN_KIT_ORDER": {
+      "type": "string",
+      "description": "סדר בערכה",
+      "maxLength": 7
+    },
+    "ASN_SUB_KIT": {
+      "type": "string",
+      "description": "תת ערכה",
+      "maxLength": 20
+    },
+    "DOCUMENT_CATEGORY": {
+      "type": "string",
+      "description": "סוג מסמך מקור",
+      "maxLength": 2
+    },
+    "SAP_DOCUMENT_TYPE": {
+      "type": "string",
+      "description": "סוג מסמך הקוד ב SAP (לא חובה) (סוג אובייקט מקור מה SAP )",
+      "maxLength": 4
+    },
+    "REF_DOC_NUM": {
+      "type": "string",
+      "description": "מספר הזמנת מקור (SAP) (עבור החזרה לספק)",
+      "maxLength": 10
+    },
+    "SUPPLYING_PLANT": {
+      "type": "string",
+      "description": "אתר מנפק",
+      "maxLength": 4
+    },
+    "SUPPLYING_STORAGE_LOCATION": {
+      "type": "string",
+      "description": "אתר אחסון מנפק",
+      "maxLength": 4
+    },
+    "CUSTOMER": {
+      "type": "string",
+      "description": "לקוח מזמין",
+      "maxLength": 10
+    },
+    "DELIVERY_PRIORITY": {
+      "type": "string",
+      "description": "עדיפות אספקה",
+      "maxLength": 2
+    },
+    "ORDERING_CUSTOMER": {
+      "type": "string",
+      "description": "לקוח מזמין - מקבל",
+      "maxLength": 10
+    },
+    "TRANSIT_DOCKING_PLANT": {
+      "type": "string",
+      "description": "אתר ביניים (מרחב מפיץ)",
+      "maxLength": 4
+    },
+    "EMERGENCY_COORDINATES_WIDTH": {
+      "type": "string",
+      "description": "נקודת נ\"צ רוחב חירום",
+      "maxLength": 18
+    },
+    "EMERGENCY_COORDINATES_LENGTH": {
+      "type": "string",
+      "description": "נקודת נ\"צ אורך חירום",
+      "maxLength": 18
+    },
+    "CROSS_DOCK": {
+      "type": "string",
+      "description": "סמן קרוסדוק",
+      "maxLength": 1
+    },
+    "Material": {
+      "type": "string",
+      "description": "מקט-SKU",
+      "maxLength": 120
+    },
+    "Batch": {
+      "type": "string",
+      "description": "סדרה(שורה)",
+      "maxLength": 10
+    },
+    "Version": {
+      "type": "string",
+      "description": "גירסה"
+    },
+    "QUANTITIY": {
+      "type": "string",
+      "description": "כמות של חומר",
+      "maxLength": 18
+    },
+    "RESERVE_NUM": {
+      "type": "string",
+      "description": "מספר שריון",
+      "maxLength": 10
+    },
+    "FOOD_PACKING": {
+      "type": "string",
+      "description": "סמן מארזי מזון (הרכבת מנות מוצבים)",
+      "maxLength": 1
+    },
+    "MESIMA_ASHBARATIT": {
+      "type": "string",
+      "description": "משימה השברתית (קוד מבצע)",
+      "maxLength": 12
+    },
+    "MANPAR_NOTES": {
+      "type": "string",
+      "description": "הערות מנפ\"ר למחסנאי",
+      "maxLength": 50
+    },
+    "KOSHER": {
+      "type": "string",
+      "description": "כושר",
+      "maxLength": 2
+    },
+    "SERIAL_TYPE": {
+      "type": "string",
+      "description": "מזהה סיראלי(מסד\\צ')",
+      "maxLength": 4
+    },
+    "MOVEMENT_TYPE": {
+      "type": "string",
+      "description": "קוד סוג תנועה",
+      "maxLength": 3
+    },
+    "MOVEMENT_REASON": {
+      "type": "string",
+      "description": "קוד סיבה לתנועה",
+      "maxLength": 4
+    },
+    "WMS_STATUS": {
+      "type": "string",
+      "description": "סטטוס זכיין",
+      "maxLength": 3
+    },
+    "SERIAL_NUMBER": {
+      "type": "string",
+      "description": "סריאלי(שורה)",
+      "maxLength": 18
+    },
+    "CYCLE_ACTIVITY_TYPE": {
+      "type": "string",
+      "description": "סוג פעילות מחזורית",
+      "maxLength": 2
+    },
+    "CYCLE_ACTIVITY_DATE": {
+      "type": "string",
+      "description": "תאריך פעילות מחזורית",
+      "maxLength": 8
+    },
+    "MAINTENANCE_DATE": {
+      "type": "string",
+      "description": "תאריך פעילות מחזורית - תחזוקה",
+      "maxLength": 8
+    },
+    "CALIBRATION_DATE": {
+      "type": "string",
+      "description": "תאריך פעילות מחזורית - כיול",
+      "maxLength": 8
+    },
+    "CHARGE_DATE": {
+      "type": "string",
+      "description": "תאריך פעילות מחזורית - טעינה",
+      "maxLength": 8
+    },
+    "EXTRA_ACTIVITY_DATE": {
+      "type": "string",
+      "description": "תאריך פעילות מחזורית - פעילות נוספת",
+      "maxLength": 8
+    },
+    "ASN_SUB_SERIES": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "WMS_DOC_TYPE": {
+      "type": "string",
+      "description": "סוג המסמך ב WMS",
+      "maxLength": 20
+    },
+    "SAP_ORDER_TYPE": {
+      "type": "string",
+      "description": "סוג המסמך\\ ההזמנה בSAP",
+      "maxLength": 4
+    },
+    "CREATE_DATE": {
+      "type": "string",
+      "description": "תאריך יצירת המסמך ב-SAP",
+      "maxLength": 8
+    },
+    "SOLD_TO": {
+      "type": "string",
+      "description": "לקוח מזמין",
+      "maxLength": 10
+    },
+    "ZZWMS_RECEIVING_DOCUMENT": {
+      "type": "string",
+      "description": "תעודת קליטה",
+      "maxLength": 25
+    },
+    "ZZWMS_RECEIVING_DOC_ITEM": {
+      "type": "string",
+      "description": "שורה בתעודת קליטה",
+      "maxLength": 7
+    },
+    "ORDER_QTY": {
+      "type": "string",
+      "description": "כמות בשורה לביצוע",
+      "maxLength": 17
+    },
+    "FROM_BATCH": {
+      "type": "string",
+      "description": "הסדרה ממנה מתבצעת ההמרה",
+      "maxLength": 10
+    },
+    "FSTK_TYPE": {
+      "type": "string",
+      "description": "סוג מלאי ממנו מתבצעת ההמרה",
+      "maxLength": 1
+    },
+    "BATCH_STATUS": {
+      "type": "string",
+      "description": "סטטוס הסדרה",
+      "maxLength": 1
+    },
+    "TSTK_TYPE": {
+      "type": "string",
+      "description": "סוג מלאי",
+      "maxLength": 1
+    },
+    "ISSUE_PLANT": {
+      "type": "string",
+      "description": "אתר מנפק",
+      "maxLength": 4
+    },
+    "ISSUE_ST_LOC": {
+      "type": "string",
+      "description": "אתר אחסון מנפק-שורה",
+      "maxLength": 4
+    },
+    "RECEIVING_ST_LOC": {
+      "type": "string",
+      "description": "אתר אחסון מקבל-שורה",
+      "maxLength": 4
+    },
+    "TOLERANCE": {
+      "type": "string",
+      "description": "אחוז טולרנס",
+      "maxLength": 4
+    },
+    "DELETION_INDICATOR": {
+      "type": "string",
+      "description": "סמן מחיקה",
+      "maxLength": 1
+    },
+    "ORDER_REASON": {
+      "type": "string",
+      "description": "סיבה להזמנה",
+      "maxLength": 3
+    },
+    "EXPIRED_DATE": {
+      "type": "string",
+      "description": "תאריך פג תוקף",
+      "maxLength": 8
+    },
+    "TO_RESERVATION": {
+      "type": "string",
+      "description": "לשריון",
+      "maxLength": 10
+    },
+    "FROM_SERIAL_NUMBER": {
+      "type": "string",
+      "description": "מסד\\צ",
+      "maxLength": 18
+    },
+    "CREATE_TIME": {
+      "type": "string",
+      "description": "שעת מסמך - חותמת זמן (שעות ודקות)",
+      "maxLength": 6
+    },
+    "ORDER_NUMBER": {
+      "type": "string",
+      "description": "מספר פקע"
+    },
+    "END_DATE": {
+      "type": "string",
+      "description": "תאריך סיום פקע"
+    },
+    "WMS_WORK_CENTER": {
+      "type": "string",
+      "description": "גורם מטפל WMS"
+    },
+    "RECIVING_PLANT": {
+      "type": "string",
+      "description": "אתר"
+    },
+    "ORDER_INTOF": {
+      "type": "string",
+      "description": "שורה בפקע"
+    },
+    "FROM_MATERIAL": {
+      "type": "string",
+      "description": "מק\"ט ערכה",
+      "maxLength": 120
+    },
+    "FROM_ORDER_QTY": {
+      "type": "string",
+      "description": "כמות ערכה"
+    },
+    "ISSUE_STLOC": {
+      "type": "string",
+      "description": "אתר אחסון"
+    },
+    "KIT_LOCATION": {
+      "type": "string",
+      "description": "מיקום פריט בערכה"
+    },
+    "RECIVING_STLOC": {
+      "type": "string",
+      "description": "אתר אחסון"
+    },
+    "TO_MATERIAL": {
+      "type": "string",
+      "description": "מקט"
+    },
+    "TO_ORDER_QTY": {
+      "type": "string",
+      "description": "כמות"
+    },
+    "TO_BATCH": {
+      "type": "string",
+      "description": "סדרה"
+    },
+    "ORDER_INTOT": {
+      "type": "string",
+      "description": "שורה בפקע"
+    },
+    "TO_SERIAL_NUMBER": {
+      "type": "string",
+      "description": "מסד\\צ"
+    },
+    "MATERIALTYPE": {
+      "type": "string",
+      "description": "סוג הפריט צהלי או ייצרן"
+    },
+    "DESCRIPTION_SHORT": {
+      "type": "string",
+      "description": "תיאור קצר של הפריט"
+    },
+    "ITEM_CLASS": {
+      "type": "string",
+      "description": "פרופיל פריט"
+    },
+    "IMAGE": {
+      "type": "string",
+      "description": "תמונת פריט"
+    },
+    "NEW_ITEM": {
+      "type": "string",
+      "description": "מקט חדש"
+    },
+    "INITIALSTATUS": {
+      "type": "string",
+      "description": "סטאטוס לקליטה ברירת מחדל"
+    },
+    "HUTYPE": {
+      "type": "string",
+      "description": "סוג יחידת ניטול"
+    },
+    "DEFAULTUOM": {
+      "type": "string",
+      "description": "יחידת מידה ברירת מחדל"
+    },
+    "DEFAULTRECUOM": {
+      "type": "string",
+      "description": "יחידת מידה ברירת מחדל לקליטה"
+    },
+    "OVERRECEIVEPCT": {
+      "type": "string",
+      "description": "אחוז קליטת יתר"
+    },
+    "OVERPICKPCT": {
+      "type": "string",
+      "description": "אחוז ליקוט יתר"
+    },
+    "NOTES": {
+      "type": "string",
+      "description": "הערות כלליות לפריט"
+    },
+    "COUNTTOLERANCE": {
+      "type": "string",
+      "description": "פקטור בספירה להתראה"
+    },
+    "CYCLECOUNTINT": {
+      "type": "string",
+      "description": "מספר ימים לספירה מחזורית"
+    },
+    "LOWLIMITCOUNT": {
+      "type": "string",
+      "description": "סף מינימום לספירה"
+    },
+    "OPORTUNITYREPLFLAG": {
+      "type": "string",
+      "description": "רענון מזדמן"
+    },
+    "STORAGECLASS": {
+      "type": "string",
+      "description": "סוג אחסון"
+    },
+    "PICKSORTORDER": {
+      "type": "string",
+      "description": "סדר ליקוט (מעיכות)"
+    },
+    "BASEITEM": {
+      "type": "string",
+      "description": "פריט בסיס"
+    },
+    "PUTAWAYNOTES": {
+      "type": "string",
+      "description": "הערות לפיזור"
+    },
+    "PACKNOTES": {
+      "type": "string",
+      "description": "הערות לאריזה"
+    },
+    "WONOTES": {
+      "type": "string",
+      "description": "הערות לפק\"ע"
+    },
+    "RECADDITIONALWORK": {
+      "type": "string",
+      "description": "עבודות משלימות לקבלה"
+    },
+    "KITFACTOR": {
+      "type": "string",
+      "description": "פקטור תזמון לקיט"
+    },
+    "WEIGHTTYPE": {
+      "type": "string",
+      "description": "סוג פריט שקיל"
+    },
+    "LINGEROUTTIME": {
+      "type": "string",
+      "description": "זמן שהייה מחוץ לאיזור הטמפרטורה באחסון"
+    },
+    "CONFIRMSKUONPICK": {
+      "type": "string",
+      "description": "דורש אימות פריט בליקוט"
+    },
+    "PRINTSKULBLREC": {
+      "type": "string",
+      "description": "הפקת מדבקת פריט בקבלה"
+    },
+    "REQINSPECTIONREC": {
+      "type": "string",
+      "description": "דורש בקרת איכות בקליטה"
+    },
+    "REQSAMPLINGREC": {
+      "type": "string",
+      "description": "דורש לקיחת דוגמה בקבלה"
+    },
+    "SAMPLESIZE": {
+      "type": "string",
+      "description": "גודל דוגמה"
+    },
+    "LEADITEM": {
+      "type": "string",
+      "description": "מק\"ט מקבץ"
+    },
+    "LEADITEM_SIZE": {
+      "type": "string",
+      "description": "מידה של המקט המקבץ"
+    },
+    "VELOCITYGROUP": {
+      "type": "string",
+      "description": "קבוצת מהירות"
+    },
+    "PHARMACYINSPECTION": {
+      "type": "string",
+      "description": "בקרת רוקח"
+    },
+    "G29": {
+      "type": "string",
+      "description": "29 ג"
+    },
+    "WEIGHTTOLERANCEPCT": {
+      "type": "string",
+      "description": "אחוז סטייה בשקילה"
+    },
+    "UOM": {
+      "type": "string",
+      "description": "יחידת המידה"
+    },
+    "EANUPC": {
+      "type": "string",
+      "description": "ברקוד אריזה"
+    },
+    "BRGEW": {
+      "type": "string",
+      "description": "משקל ברוטו"
+    },
+    "NTGEW": {
+      "type": "string",
+      "description": "משקל נטו"
+    },
+    "LAENG": {
+      "type": "string",
+      "description": "אורך"
+    },
+    "BREIT": {
+      "type": "string",
+      "description": "רוחב"
+    },
+    "HOEHE": {
+      "type": "string",
+      "description": "גובה"
+    },
+    "VOLUME": {
+      "type": "string",
+      "description": "נפח"
+    },
+    "MEABM": {
+      "type": "string",
+      "description": "יחידת מידה לייחוס"
+    },
+    "SHIPPABLE": {
+      "type": "string",
+      "description": "ניתן לשילוח"
+    },
+    "SKU": {
+      "type": "string"
+    },
+    "UNITPERLOWESTUOM": {
+      "type": "string"
+    },
+    "PACKAGETYPE": {
+      "type": "string",
+      "description": "סוג חבילה"
+    },
+    "GRABTYPE": {
+      "type": "string",
+      "description": "סוג אריזה"
+    },
+    "CASEPREPARATIONTYPE": {
+      "type": "string",
+      "description": "סוג הכנת מארז"
+    },
+    "EACHHANDLINGTYPE": {
+      "type": "string",
+      "description": "כלי ניטול פריט"
+    },
+    "LABORPACKAGETYPE": {
+      "type": "string",
+      "description": "סוג אריזה לביצוע עבודה"
+    },
+    "LABORGRABTYPE": {
+      "type": "string",
+      "description": "סוג לקיחה לביצוע עבודה"
+    },
+    "LABORPREPARATIONTYPE": {
+      "type": "string",
+      "description": "סוג הכנה לביצוע עבודה"
+    },
+    "LABORHANDLINGTYPE": {
+      "type": "string",
+      "description": "סוג שינוע לביצוע עבודה"
+    },
+    "VERSIONDESC": {
+      "type": "string",
+      "description": "סוג שינוע לביצוע עבודה"
+    },
+    "KITTYPE": {
+      "type": "string",
+      "description": "סוג ערכה (אופן ניהול הערכה בסדרה חד-חד-ערכי/ כמותי/ חד-חד-ערכי יחידני/ חד-חד-ערכי מאוחד)."
+    },
+    "RECEIPT_TYPE": {
+      "type": "string",
+      "description": "סוג קליטה",
+      "maxLength": 2
+    },
+    "QTY": {
+      "type": "string",
+      "description": "כמות HU שהתקבלה",
+      "maxLength": 17
+    },
+    "INCPECTION_NUM": {
+      "type": "string",
+      "description": "תעודת בחינה",
+      "maxLength": 25
+    },
+    "WAREHOUSEID": {
+      "type": "string",
+      "description": "מספר מחסן יעד",
+      "maxLength": 10
+    },
+    "PROD_DATE": {
+      "type": "string",
+      "description": "תאריך ייצור",
+      "maxLength": 8
+    },
+    "VENDOR_EXP_DATE": {
+      "type": "string",
+      "description": "תפוגת ספק",
+      "maxLength": 8
+    },
+    "PURPOSE_KIT": {
+      "type": "string",
+      "description": "ייעוד הערכה",
+      "maxLength": 2
+    },
+    "PASS_KOSHER": {
+      "type": "string",
+      "description": "כשר/לא כשר לפסח",
+      "maxLength": 2
+    },
+    "AppointmentID": {
+      "type": "string",
+      "description": "מספר הזימון"
+    },
+    "Status": {
+      "type": "string",
+      "description": "סטאטוס הזימון (מאושר/מאושר)"
+    },
+    "ReasonCode": {
+      "type": "string",
+      "description": "קוד סיבת דחייה"
+    },
+    "Notes": {
+      "type": "string",
+      "description": "הערות"
+    },
+    "VehicleID": {
+      "type": "string",
+      "description": "מספר הרכב"
+    },
+    "Gate": {
+      "type": "string",
+      "description": "מספר שער"
+    },
+    "MovementType": {
+      "type": "string",
+      "description": "סוג תנועה"
+    },
+    "TimeOfMovement": {
+      "type": "string",
+      "description": "מועד התנועה בשער"
+    },
+    "APPOITMENTID": {
+      "type": "string",
+      "description": "מספר זימון"
+    },
+    "SCHEDULEDATE": {
+      "type": "string",
+      "description": "תאריך זימון"
+    },
+    "FROMTIME": {
+      "type": "string",
+      "description": "שעת תחילת זימון"
+    },
+    "TOTIME": {
+      "type": "string",
+      "description": "שעת סיום זימון"
+    },
+    "DOCUMENT_NUM": {
+      "type": "string",
+      "description": "מספר מסמך SAP"
+    },
+    "DOCUMENT_ITEM": {
+      "type": "string",
+      "description": "מספר שורה SAP",
+      "maxLength": 5
+    },
+    "WMS_CERTIFICATE": {
+      "type": "string",
+      "description": "מספר מסמך WMS"
+    },
+    "WMS_CERTIFICATE_ITEM": {
+      "type": "string",
+      "description": "מספר שורה מסמך WMS"
+    },
+    "DISTRIBUTION_ROUTE": {
+      "type": "string",
+      "description": "מספר מסלול",
+      "maxLength": 20
+    },
+    "DISTRIBUTION_DATE": {
+      "type": "string",
+      "description": "תאריך הפצה",
+      "maxLength": 8
+    },
+    "DOCUMENT_TYPE_SAP": {
+      "type": "string",
+      "description": "סוג מסמך",
+      "maxLength": 2
+    },
+    "ORDERID": {
+      "type": "string",
+      "description": "מספר תעודת יציאה",
+      "maxLength": 20
+    },
+    "CHANGE_DATE": {
+      "type": "string",
+      "description": "תאריך עדכון/יצירה",
+      "maxLength": 8
+    },
+    "RESTRICTED": {
+      "type": "string",
+      "description": "סטטוס הסדרה",
+      "maxLength": 1
+    },
+    "NEXT_INSPEC": {
+      "type": "string",
+      "description": "תאריך ביקורת איכות",
+      "maxLength": 8
+    },
+    "VENDOR_BATCH": {
+      "type": "string",
+      "description": "סדרת ספק",
+      "maxLength": 15
+    },
+    "DATE_1": {
+      "type": "string",
+      "description": "תאריך ביקורת דלק",
+      "maxLength": 8
+    },
+    "DATE_2": {
+      "type": "string",
+      "description": "תאריך ביקורת דלק",
+      "maxLength": 8
+    },
+    "DATE_3": {
+      "type": "string",
+      "description": "תאריך ביקורת דלק",
+      "maxLength": 8
+    },
+    "DATE_5": {
+      "type": "string",
+      "description": "תאריך 5",
+      "maxLength": 8
+    },
+    "DATE_6": {
+      "type": "string",
+      "description": "תאריך 6",
+      "maxLength": 8
+    },
+    "STATUS_ON": {
+      "type": "string",
+      "description": "סטטוס חסימה",
+      "maxLength": 1
+    },
+    "UsageDecisionBlock": {
+      "$anchor": "UsageDecisionBlock",
+      "type": "object",
+      "description": "Quality usage decision block. Encapsulates the final SAP usage decision for an inspection lot: decision code, inspector, date, and optional remarks. Promoted from per-interface inline definition to BT so all schemas share one canonical type.",
+      "properties": {
+        "DECISION": {
+          "$ref": "#/$defs/QualityDecision",
+          "description": "Decision code: A=Accept, R=Reject, P=Partial, N=Not yet decided."
+        },
+        "INSPECTOR_ID": {
+          "type": "string",
+          "maxLength": 12,
+          "description": "SAP user ID of the inspector who posted the usage decision."
+        },
+        "DECISION_DATE": {
+          "$ref": "https://example.org/wms/envelope.schema.json#/$defs/SapDate"
+        },
+        "REMARKS": {
+          "type": "string",
+          "maxLength": 255
+        }
+      },
+      "required": [
+        "DECISION",
+        "INSPECTOR_ID"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$comment": "PlantCode and SapDate are declared in wms_envelope.schema.json (L1) because they appear in the envelope itself. DocItem $ref's them cross-schema. WmsOrderType is declared here (not in L1) because new order types are a business decision. AdjustmentReason is declared here because it is a business-domain code used by L2 inventory-adjustment payloads."
+}

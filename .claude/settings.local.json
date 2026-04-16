@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/bin/python -m datamodel_code_generator --version 2>&1)",
+      "Bash(.venv/bin/python 03_compare_schemas.py)",
+      "Bash(python3:*)",
+      "Bash(.venv/bin/python 02_reproduce_schema.py)",
+      "Bash(.venv/bin/python3 -c \"\nimport sys, json\nsys.path.insert\\(0, '.'\\)\nfrom models.ZWMS_INBOUND_DELIVERY_CREATE_schema import WmsinterfaceZwmsInboundDeliveryCreate\nfrom pydantic import ValidationError\n\ngood = {\n  'Header': {\n    'INTERFACE_NAME': 'ZWMS_INBOUND_DELIVERY_CREATE',\n    'ID': '0000002243643980',\n    'PLANT': '6300',\n    'DATE': '20240918',\n    'TIME': '080000',\n    'CONSIGNEE': 'ATAL'\n  },\n  'DOC_HEADER': {\n    'REC_DOC': '4500012345',\n    'WMS_ORD_TP': '101',\n    'SUP_PRTNR': '0000001001',\n    'RECEIVING_PLANT': '6300',\n    'DELIVERY_DATE': '20240918',\n    'DOC_ITEM': [\n      {\n        'MATERIAL': '319657933',\n        'QUANTITY': '30.000',\n        'RECEIVING_STORAGE_LOCATION': '3000',\n        'BATCH': 'B24-A',\n        'DELIVERY_DATE': '20240918'\n      }\n    ]\n  }\n}\n\nbad = {\n  'Header': {\n    'INTERFACE_NAME': 'ZWMS_INBOUND_DELIVERY_CREATE',\n    'ID': '0000002243643980',\n    'PLANT': '6300',\n    'DATE': '20240918',\n    'TIME': '080000',\n    'CONSIGNEE': 'ATAL'\n  },\n  'DOC_HEADER': {\n    'WMS_ORD_TP': '101',\n    'SUP_PRTNR': '0000001001',\n    'RECEIVING_PLANT': '6300',\n    'DELIVERY_DATE': '20240918',\n    'DOC_ITEM': [\n      {\n        'MATERIAL': '319657933',\n        'QUANTITY': '30.000',\n        'RECEIVING_STORAGE_LOCATION': '3000',\n        'BATCH': 'B24-A',\n        'DELIVERY_DATE': '20240918'\n      }\n    ]\n  }\n}\n\nprint\\('=== GOOD MESSAGE ==='\\)\ntry:\n    m = WmsinterfaceZwmsInboundDeliveryCreate.model_validate\\(good\\)\n    print\\('PASSED'\\)\nexcept ValidationError as e:\n    print\\('FAILED:', e\\)\n\nprint\\(\\)\nprint\\('=== BAD MESSAGE ==='\\)\ntry:\n    m = WmsinterfaceZwmsInboundDeliveryCreate.model_validate\\(bad\\)\n    print\\('PASSED'\\)\nexcept ValidationError as e:\n    print\\('FAILED:'\\)\n    for err in e.errors\\(\\):\n        print\\(f'  loc={err[\\\\\"loc\\\\\"]}  type={err[\\\\\"type\\\\\"]}  msg={err[\\\\\"msg\\\\\"]}'\\)\n\")",
+      "Bash(.venv/bin/pip show:*)",
+      "Bash(.venv/bin/pip install:*)",
+      "Bash(.venv/bin/python validate_messages.py)"
+    ]
+  }
+}
