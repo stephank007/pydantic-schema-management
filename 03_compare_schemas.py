@@ -127,6 +127,17 @@ def _is_optional_expansion(orig: dict, new: dict) -> bool:
     Handles both:
       - {"$ref": "url"}         → {"anyOf": [{"$ref": "#/$defs/X"}, {"type": "null"}]}
       - {"type": "string", ...} → {"anyOf": [{"type": "string", ...}, {"type": "null"}]}
+
+    Constraints supplied via `json_schema_extra` (e.g. uniqueItems) are emitted
+    by Pydantic as SIBLINGS of anyOf rather than inside the non-null branch:
+
+      {"anyOf": [{type: array, items: …, maxItems: 999}, {type: null}],
+       "uniqueItems": true}
+
+    They are merged into the non-null branch before comparing, so the field
+    still matches its bootstrap definition. Merging (rather than ignoring the
+    key) keeps the check honest: a constraint that is genuinely absent from
+    both places still fails to match and is reported.
     """
     if "anyOf" not in new:
         return False
@@ -145,11 +156,17 @@ def _is_optional_expansion(orig: dict, new: dict) -> bool:
     # For inline types: non-null branch should match orig (ignoring title + enrichment keys).
     # Normalize $ref URLs to local fragments before comparing (bootstrap may use external URLs).
     ignore = PYDANTIC_ENRICHMENT_KEYS | {"default"}
-    orig_norm     = _normalize_refs_in(orig)
-    non_null_norm = _normalize_refs_in(non_null)
-    orig_stripped     = {k: v for k, v in orig_norm.items()     if k not in ignore}
-    non_null_stripped = {k: v for k, v in non_null_norm.items() if k not in ignore}
-    return orig_stripped == non_null_stripped
+
+    # Fold anyOf's siblings in with the non-null branch. The branch wins on
+    # conflict — it is the more specific statement of the constraint.
+    siblings = {k: v for k, v in new.items() if k not in ignore and k != "anyOf"}
+    merged   = {**siblings, **non_null}
+
+    orig_norm   = _normalize_refs_in(orig)
+    merged_norm = _normalize_refs_in(merged)
+    orig_stripped   = {k: v for k, v in orig_norm.items()   if k not in ignore}
+    merged_stripped = {k: v for k, v in merged_norm.items() if k not in ignore}
+    return orig_stripped == merged_stripped
 
 
 def compare_values(path: str, orig: Any, new: Any, diff: Diff):

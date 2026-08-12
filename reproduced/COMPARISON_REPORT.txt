@@ -58,16 +58,13 @@
 ────────────────────────────────────────────────────────────────
   Comparing: wms_business_types.schema.json
   ────────────────────────────────────────────────────────────
-  Missing: 15  |  Structural Δ: 2  |  Added: 38  |  Enrichments: 673
+  Missing: 12  |  Structural Δ: 2  |  Added: 37  |  Enrichments: 671
 
-  ── MISSING FROM REPRODUCED (15) ── [REVIEW REQUIRED]
-    ✗ $root.$defs.ISSUE_STLOC  (was: {"type": "string", "description": "\u05d0\u05ea\u05e8 \u05d0\u05d7\u05e1\u05d5\u)
+  ── MISSING FROM REPRODUCED (12) ── [REVIEW REQUIRED]
+    ✗ $root.$defs.ISSUE_ST_LOC  (was: {"type": "string", "description": "\u05d0\u05ea\u05e8 \u05d0\u05d7\u05e1\u05d5\u)
     ✗ $root.$defs.MATERIAL_TYPE  (was: {"type": "string", "description": "\u05e1\u05d5\u05d2 \u05d7\u05d5\u05de\u05e8 \)
     ✗ $root.$defs.BatchSplit.properties.SHELF_LIFE_EXP_DATE.anyOf[0].maxLength  (was: 0)
     ✗ $root.$defs.BatchSplit.properties.SHELF_LIFE_EXP_DATE.anyOf[0].type  (was: "string")
-    ✗ $root.$defs.DocItem.properties.SERIAL_NUMBERS.items  (was: {"$ref": "#/$defs/SerialNumber"})
-    ✗ $root.$defs.DocItem.properties.SERIAL_NUMBERS.maxItems  (was: 999)
-    ✗ $root.$defs.DocItem.properties.SERIAL_NUMBERS.type  (was: "array")
     ✗ $root.$defs.DocItem.properties.TRANSIT_DOCKING_PLANT.anyOf[0].maxLength  (was: 0)
     ✗ $root.$defs.DocItem.properties.TRANSIT_DOCKING_PLANT.anyOf[0].type  (was: "string")
     ✗ $root.$defs.HuItem.properties.SERIAL_NUMBER.anyOf[0].maxLength  (was: 0)
@@ -77,7 +74,7 @@
     ✗ $root.$defs.InspectionCharacteristic.properties.NUMERIC_VALUE.anyOf[1].pattern  (was: "^-?[0-9]+\\.[0-9]{1,6}$")
     ✗ $root.$defs.InspectionCharacteristic.properties.NUMERIC_VALUE.anyOf[1].type  (was: "string")
 
-  ── ADDED IN REPRODUCED (38) ── [EXPECTED — Pydantic enrichment]
+  ── ADDED IN REPRODUCED (37) ── [EXPECTED — Pydantic enrichment]
     + $root.$defs.ConsigneeCode  (value: {"maxLength": 10, "minLength": 2, "pattern": "^[A-Z0-9]{2,10}$", "type": "string)
     + $root.$defs.ISSUESTLOC1  (value: {"type": "string"})
     + $root.$defs.InterfaceName  (value: {"maxLength": 41, "minLength": 4, "pattern": "^Z[A-Z0-9_]{3,40}$", "type": "stri)
@@ -98,8 +95,6 @@
     + $root.$defs.BatchSplit.properties.SHELF_LIFE_EXP_DATE.anyOf[0].$ref  (value: "#/$defs/SHELFLIFEEXPDATE")
     + $root.$defs.BatchSplit.properties.SHELF_LIFE_EXP_DATE.anyOf[2]: item added
     + $root.$defs.DocItem.$defs  (value: {"BatchSplit": {"additionalProperties": false, "description": "A portion of a li)
-    + $root.$defs.DocItem.properties.SERIAL_NUMBERS.anyOf  (value: [{"items": {"$ref": "#/$defs/SerialNumber"}, "maxItems": 999, "type": "array"}, )
-    + $root.$defs.DocItem.properties.SERIAL_NUMBERS.default  (value: null)
     + $root.$defs.DocItem.properties.TRANSIT_DOCKING_PLANT.default  (value: null)
     + $root.$defs.DocItem.properties.TRANSIT_DOCKING_PLANT.anyOf[0].$ref  (value: "#/$defs/TRANSIT_DOCKING_PLANT")
     + $root.$defs.DocItem.properties.TRANSIT_DOCKING_PLANT.anyOf[2]: item added
@@ -109,6 +104,7 @@
     + $root.$defs.HuItem.properties.SERIAL_NUMBER.default  (value: null)
     + $root.$defs.HuItem.properties.SERIAL_NUMBER.anyOf[0].$ref  (value: "#/$defs/SERIAL_NUMBER")
     + $root.$defs.HuItem.properties.SERIAL_NUMBER.anyOf[2]: item added
+    + $root.$defs.ISSUE_STLOC.maxLength  (value: 4)
     + $root.$defs.InspectionCharacteristic.$defs  (value: {"InspectionCharResult": {"description": "Result of evaluating a single quality )
     + $root.$defs.InspectionCharacteristic.properties.NUMERIC_VALUE.default  (value: null)
     + $root.$defs.InspectionCharacteristic.properties.NUMERIC_VALUE.anyOf[0].$ref  (value: "#/$defs/NUMERICVALUE")
@@ -121,7 +117,7 @@
     Δ $root.$defs.SERIAL_NUMBER.maxLength: '18' → '0'
     Δ $root.$defs.TRANSIT_DOCKING_PLANT.maxLength: '4' → '0'
 
-  ── EXPECTED ENRICHMENTS (673) ── [Document for firewall team]
+  ── EXPECTED ENRICHMENTS (671) ── [Document for firewall team]
     ~ $root.$defs.ACCOMPANYINGITEM → ACCOMPANYING_ITEM  (codegen underscore normalisation — expected)
     ~ $root.$defs.AIRORSEAIND → AIR_OR_SEA_IND  (codegen underscore normalisation — expected)
     ~ $root.$defs.ARMYMANAGED → ARMY_MANAGED  (codegen underscore normalisation — expected)
@@ -214,7 +210,7 @@
     ~ $root.$defs.INSPECTIONLOT → INSPECTION_LOT  (codegen underscore normalisation — expected)
     ~ $root.$defs.INSPECTIONTYPE → INSPECTION_TYPE  (codegen underscore normalisation — expected)
     ~ $root.$defs.ISSUEPLANT → ISSUE_PLANT  (codegen underscore normalisation — expected)
-    ~ $root.$defs.ISSUESTLOC → ISSUE_ST_LOC  (codegen underscore normalisation — expected)
+    ~ $root.$defs.ISSUESTLOC → ISSUE_STLOC  (codegen underscore normalisation — expected)
     ~ $root.$defs.ITEMCLASS → ITEM_CLASS  (codegen underscore normalisation — expected)
     ~ $root.$defs.KITLOCATION → KIT_LOCATION  (codegen underscore normalisation — expected)
     ~ $root.$defs.KITSIZE → KIT_SIZE  (codegen underscore normalisation — expected)
@@ -479,9 +475,7 @@
     ~ $root.$defs.DocItem.properties.REASON_FOR_MOVMENT: $ref → Optional (Pydantic anyOf+null pattern)
     ~ $root.$defs.DocItem.properties.RECEIVING_PLANT.$ref: external → local ref
     ~ $root.$defs.DocItem.properties.RESERVE_NUM: $ref → Optional (Pydantic anyOf+null pattern)
-    ~ $root.$defs.DocItem.properties.SERIAL_NUMBERS.$comment: removed (was: 'ARRAY OF STRINGS — one per physical unit. Uniqueness enforced: same serial cannot appear twice on the same line item.')
-    ~ $root.$defs.DocItem.properties.SERIAL_NUMBERS.description: removed (was: 'Array of serial numbers for serial-number managed materials. Length must not exceed QUANTITY. Omit entirely for non-serialized materials.')
-    ~ $root.$defs.DocItem.properties.SERIAL_NUMBERS.title: added → 'Serial Numbers'
+    ~ $root.$defs.DocItem.properties.SERIAL_NUMBERS: $ref → Optional (Pydantic anyOf+null pattern)
     ~ $root.$defs.DocItem.properties.SERIAL_TYPE: $ref → Optional (Pydantic anyOf+null pattern)
     ~ $root.$defs.DocItem.properties.SHIP_CON: $ref → Optional (Pydantic anyOf+null pattern)
     ~ $root.$defs.DocItem.properties.STOCK_TYPE: $ref → Optional (Pydantic anyOf+null pattern)
@@ -540,7 +534,7 @@
     ~ $root.$defs.INSPECTION_LOT.description: removed (was: 'מנת ביקורת טיב')
     ~ $root.$defs.INSPECTION_TYPE.description: removed (was: 'נדרש ביקורת טיב')
     ~ $root.$defs.ISSUE_PLANT.description: removed (was: 'אתר מנפק')
-    ~ $root.$defs.ISSUE_ST_LOC.description: removed (was: 'אתר אחסון מנפק-שורה')
+    ~ $root.$defs.ISSUE_STLOC.description: removed (was: 'אתר אחסון')
     ~ $root.$defs.ITEM_CLASS.description: removed (was: 'פרופיל פריט')
     ~ $root.$defs.InspectionCharResult.$anchor: removed (was: 'InspectionCharResult')
     ~ $root.$defs.InspectionCharacteristic.$anchor: removed (was: 'InspectionCharacteristic')
@@ -805,14 +799,9 @@ NIIN==NSN')
 ────────────────────────────────────────────────────────────────
   Comparing: ZWMS_INBOUND_DELIVERY_CREATE.schema.json
   ────────────────────────────────────────────────────────────
-  Missing: 3  |  Structural Δ: 0  |  Added: 94  |  Enrichments: 90
+  Missing: 0  |  Structural Δ: 0  |  Added: 92  |  Enrichments: 90
 
-  ── MISSING FROM REPRODUCED (3) ── [REVIEW REQUIRED]
-    ✗ $root.$defs.InboundDocItem.properties.SERIAL_NUMBERS.items  (was: {"$ref": "https://example.org/wms/business-types.schema.json#/$defs/SerialNumber)
-    ✗ $root.$defs.InboundDocItem.properties.SERIAL_NUMBERS.maxItems  (was: 999)
-    ✗ $root.$defs.InboundDocItem.properties.SERIAL_NUMBERS.type  (was: "array")
-
-  ── ADDED IN REPRODUCED (94) ── [EXPECTED — Pydantic enrichment]
+  ── ADDED IN REPRODUCED (92) ── [EXPECTED — Pydantic enrichment]
     + $root.properties  (value: {"Header": {"$ref": "#/$defs/Header"}, "DOC_HEADER": {"anyOf": [{"$ref": "#/$def)
     + $root.required  (value: ["Header"])
     + $root.type  (value: "object")
@@ -905,8 +894,6 @@ NIIN==NSN')
     + $root.$defs.WMSORDTP  (value: {"maxLength": 3, "title": "WMSORDTP", "type": "string"})
     + $root.$defs.WeightDecimal  (value: {"maxLength": 20, "minLength": 5, "pattern": "^[0-9]+\\.[0-9]{3}$", "title": "We)
     + $root.$defs.WeightUnit  (value: {"description": "Unit of measure for weight fields (GROSS_WEIGHT, TARE_WEIGHT).")
-    + $root.$defs.InboundDocItem.properties.SERIAL_NUMBERS.anyOf  (value: [{"items": {"$ref": "#/$defs/SerialNumber"}, "maxItems": 999, "type": "array"}, )
-    + $root.$defs.InboundDocItem.properties.SERIAL_NUMBERS.default  (value: null)
 
   ── EXPECTED ENRICHMENTS (90) ── [Document for firewall team]
     ~ $root.$id: removed (was: 'https://example.org/wms/interfaces/ZWMS_INBOUND_DELIVERY_CREATE')
@@ -996,7 +983,7 @@ NIIN==NSN')
     ~ $root.$defs.InboundDocItem.properties.QUALITY_INSPECTION: $ref → Optional (Pydantic anyOf+null pattern)
     ~ $root.$defs.InboundDocItem.properties.QUANTITY.$ref: external → local ref
     ~ $root.$defs.InboundDocItem.properties.RECEIVING_STORAGE_LOCATION.$ref: external → local ref
-    ~ $root.$defs.InboundDocItem.properties.SERIAL_NUMBERS.title: added → 'Serial Numbers'
+    ~ $root.$defs.InboundDocItem.properties.SERIAL_NUMBERS: $ref → Optional (Pydantic anyOf+null pattern)
     ~ $root.$defs.InboundDocItem.properties.STOCK_TYPE: $ref → Optional (Pydantic anyOf+null pattern)
     ~ $root.title: 'WmsInterface — ZWMS_INBOUND_DELIVERY_CREATE' → 'WmsinterfaceZwmsInboundDeliveryCreate'
 

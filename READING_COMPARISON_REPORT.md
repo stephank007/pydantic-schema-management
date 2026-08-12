@@ -4,8 +4,8 @@ Guide to interpreting the output of `03_compare_schemas.py`
 (`reproduced/COMPARISON_REPORT.txt`). Read this before spending time on the
 report — most of its ~1000 lines are expected noise.
 
-**Current baseline (commit `4d0084b`): 24 `✗` and 2 `Δ`, and every one of them
-is accounted for below. No outstanding model defects.**
+**Current baseline: 18 `✗` and 2 `Δ`, and every one of them is accounted for
+below. No outstanding model defects.**
 
 ---
 
@@ -19,8 +19,8 @@ is accounted for below. No outstanding model defects.**
    | Schema | Missing | Structural Δ |
    |---|---|---|
    | `wms_envelope` | 6 | 0 |
-   | `wms_business_types` | 15 | 2 |
-   | `ZWMS_INBOUND_DELIVERY_CREATE` | 3 | 0 |
+   | `wms_business_types` | 12 | 2 |
+   | `ZWMS_INBOUND_DELIVERY_CREATE` | 0 | 0 |
 
 3. If the numbers match, **nothing needs action** — every finding is a known
    accepted diff or a comparator limitation, both catalogued below.
@@ -145,39 +145,38 @@ verified individually against bootstrap.** The same mispairing produces the two
 docstrings, not schema fields — so they are genuinely indistinguishable to any
 automated matcher.
 
-### D. Optional arrays — 6 `✗` — comparator limitation
+### D. Optional arrays — **fixed, no longer reported**
 
-```
-✗ $root.$defs.DocItem.properties.SERIAL_NUMBERS.items
-✗ $root.$defs.DocItem.properties.SERIAL_NUMBERS.maxItems      (was: 999)
-✗ $root.$defs.DocItem.properties.SERIAL_NUMBERS.type          (was: "array")
-✗ $root.$defs.InboundDocItem.properties.SERIAL_NUMBERS.items
-✗ $root.$defs.InboundDocItem.properties.SERIAL_NUMBERS.maxItems  (was: 999)
-✗ $root.$defs.InboundDocItem.properties.SERIAL_NUMBERS.type      (was: "array")
-```
+Previously 6 `✗` (three each on `DocItem.SERIAL_NUMBERS` and
+`InboundDocItem.SERIAL_NUMBERS`). Kept here because the shape recurs on every
+optional array, and knowing why it *used* to be reported is useful when
+onboarding a new schema.
 
-Every one of these keys **is present** — nested one level down, because the
-field is optional:
+An optional array nests its constraints one level down:
 
 ```jsonc
 "SERIAL_NUMBERS": {
   "anyOf": [
     { "items": {"$ref": "#/$defs/SerialNumber"},
       "maxItems": 999,
-      "type": "array" },          // ← all three "missing" keys are here
+      "type": "array" },          // ← constraints live here
     { "type": "null" }
   ],
   "default": null,
-  "uniqueItems": true
+  "uniqueItems": true             // ← sibling, via json_schema_extra
 }
 ```
 
-`_is_optional_expansion()` recognises the `anyOf + null` pattern only when
-`anyOf` is the sole meaningful key. `uniqueItems` sits beside it as a sibling
-(added via `json_schema_extra`), so the check falls through and the comparator
-reports the nested keys as missing.
+`_is_optional_expansion()` compared bootstrap against `anyOf[0]` only, so
+`uniqueItems` — emitted as a *sibling* of `anyOf` — had no counterpart and the
+match failed, causing the three nested keys to be reported as missing.
 
-Verify with:
+It now folds those siblings into the non-null branch before comparing. Merging
+rather than ignoring keeps the check honest: a constraint genuinely absent from
+both places still fails. Verified — a dropped `uniqueItems` and a changed
+`maxItems` are both still reported.
+
+Verify any optional array with:
 
 ```bash
 python3 -c "import json; d=json.load(open('reproduced/business-types.schema.json'));
@@ -265,11 +264,12 @@ present, and `02` emits no warnings.
 Send with them:
 
 - **Section A** — the 6 envelope diffs, already accepted; re-confirm only.
-- **Sections B, C, D** — 18 `✗` plus 2 `Δ` that are comparator artifacts or
-  by-design sentinels, not schema changes. Each is verifiable against
+- **Sections B and C** — 12 `✗` plus 2 `Δ` that are by-design sentinels or
+  comparator artifacts, not schema changes. Each is verifiable against
   `reproduced/` with the commands above.
 
-Breakdown of the 24 `✗`: A=6, B=10, C=2, D=6. Plus the 2 `Δ` in section C.
+Breakdown of the 18 `✗`: A=6, B=10, C=2. Plus the 2 `Δ` in section C.
+`ZWMS_INBOUND_DELIVERY_CREATE` is now completely clean (0 `✗`, 0 `Δ`).
 
 The report's trailing `✗ Structural differences found` line will still be
 present. Explain it up front, or it will be read as a failed check.
