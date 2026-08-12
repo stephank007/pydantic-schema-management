@@ -173,6 +173,35 @@ def prepare_schemas():
     print("  ✓ envelope.schema.json → schemas/  (reference copy)")
 
 
+def guard_existing_models():
+    """Refuse to re-bootstrap over a hand-enriched models/ directory.
+
+    This script regenerates models/ from scratch. That directory is generated
+    *then hand-enriched* and is the project's source of truth, so an accidental
+    rerun silently destroys every added Field() constraint and validator.
+    """
+    if not MODELS_OUT.exists() or "--force" in sys.argv:
+        return
+
+    print(
+        f"  ✗ Refusing to run: {MODELS_OUT.name}/ already exists.\n"
+        "\n"
+        "    This script is a ONE-TIME bootstrap step. It deletes and regenerates\n"
+        f"    {MODELS_OUT.name}/ from scratch, destroying every hand-added Field()\n"
+        "    constraint, validator and description — the enrichment layer that is\n"
+        "    the project's source of truth.\n"
+        "\n"
+        "    To reproduce schemas from the existing models, run:\n"
+        "        python 02_reproduce_schema.py\n"
+        "        python 03_compare_schemas.py\n"
+        "\n"
+        f"    If you really do intend to discard {MODELS_OUT.name}/ and re-bootstrap,\n"
+        "    re-run with --force.",
+        file=sys.stderr,
+    )
+    sys.exit(1)
+
+
 def run_codegen():
     if MODELS_OUT.exists():
         shutil.rmtree(MODELS_OUT)
@@ -189,7 +218,7 @@ def run_codegen():
         "--use-field-description",
         "--field-constraints",
         "--use-annotated",
-        "--target-python-version", "3.11",
+        "--target-python-version", "3.10",
     ]
 
     print("  Running datamodel-codegen …")
@@ -206,7 +235,7 @@ def run_codegen():
     generated = sorted(MODELS_OUT.glob("*.py"))
     print(f"  Generated {len(generated)} file(s):")
     for f in generated:
-        n_classes = f.read_text().count("\nclass ")
+        n_classes = f.read_text(encoding="utf-8").count("\nclass ")
         print(f"    {f.name}  ({n_classes} model classes)")
 
 
@@ -247,6 +276,8 @@ def main():
     print("  WMS Reverse Engineer — one-time project setup")
     print("  Using real envelope.schema.json")
     print(sep)
+
+    guard_existing_models()
 
     print("\n[0/4] Validating real envelope schema …")
     validate_envelope()

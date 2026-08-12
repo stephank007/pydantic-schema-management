@@ -4,7 +4,16 @@
 
 from __future__ import annotations
 
-from enum import StrEnum
+try:
+    from enum import StrEnum  # Python 3.11+
+except ImportError:  # Python 3.10 and earlier
+    from enum import Enum
+
+    class StrEnum(str, Enum):
+        """Backport of enum.StrEnum (added in 3.11) for the Python 3.10 target."""
+
+        __str__ = str.__str__
+
 from typing import Annotated, Any
 
 from pydantic import BaseModel, ConfigDict, Field, RootModel
