@@ -120,6 +120,17 @@ done
 
 [[ -d "${ROOT}/bootstrap" ]] || die "bootstrap/ not found."
 
+# models/ is the payload: generated once, then hand-enriched, and it is the
+# project's source of truth. Shipping a bundle whose models/ has been reset to
+# raw codegen output silently sends the target back to square one, so refuse.
+[[ -d "${ROOT}/models" ]] || die "models/ not found — nothing to ship."
+
+FIELD_COUNT=$(grep -c 'Field(' "${ROOT}/models/business_types_schema.py" || true)
+[[ "${FIELD_COUNT}" -ge 200 ]] || die \
+  "models/business_types_schema.py has only ${FIELD_COUNT} Field() constraints (expected 200+).
+      models/ looks like raw codegen output rather than the enriched source of truth.
+      Restore it (git checkout -- models/) before building the package."
+
 for f in install_windows.bat install_windows.ps1 \
          run_01_reverse_engineer.bat run_02_reproduce.bat \
          run_03_compare.bat run_validate.bat; do
@@ -303,10 +314,21 @@ step "4 / 4  Installer scripts and README"
 
 cp "${ROOT}/install_windows.bat"          "${WIN}/install.bat"
 cp "${ROOT}/install_windows.ps1"          "${WIN}/install.ps1"
-cp "${ROOT}/run_01_reverse_engineer.bat"  "${WIN}/run_01_reverse_engineer.bat"
 cp "${ROOT}/run_02_reproduce.bat"         "${WIN}/run_02_reproduce.bat"
 cp "${ROOT}/run_03_compare.bat"           "${WIN}/run_03_compare.bat"
 cp "${ROOT}/run_validate.bat"             "${WIN}/run_validate.bat"
+
+# run_01 is deliberately NOT shipped at the top level.
+#
+# This bundle ships an already-enriched project/models/ (see the rsync above).
+# 01_reverse_engineer.py rmtree's models/ and regenerates it from bootstrap/,
+# which destroys that enrichment — so running step 1 on the target is exactly
+# the wrong move, even though it is numbered first. Doing so is what produced
+# 29 structural diffs on the isolated box instead of the expected 6.
+#
+# It is parked in _rebootstrap/ for the rare case of a genuine re-bootstrap.
+mkdir -p "${WIN}/_rebootstrap"
+cp "${ROOT}/run_01_reverse_engineer.bat"  "${WIN}/_rebootstrap/run_01_reverse_engineer.bat"
 
 cat > "${WIN}/README.txt" <<'EOF'
 Pydantic Schema Management — Windows (offline)
@@ -322,16 +344,37 @@ Install
 
 Pipeline
 --------
-Run the steps in order:
+This package already contains the enriched Pydantic models in project\models\.
+Codegen has ALREADY been run. Do not run it again — start at step 2.
 
-  run_01_reverse_engineer.bat   ONE-TIME setup: preprocess schemas,
-                                generate Pydantic models
   run_02_reproduce.bat          Reproduce JSON schemas from Pydantic models
   run_03_compare.bat            Diff bootstrap vs reproduced schemas
-                                → project\COMPARISON_REPORT.txt
+                                → project\reproduced\COMPARISON_REPORT.txt
   run_validate.bat              Validate sample messages against all layers
 
-Recurring workflow after editing models\:  run_02 → run_03.
+Recurring workflow after editing project\models\:  run_02 → run_03.
+
+Reading the report
+------------------
+Look only at lines starting with the missing marker or the delta marker.
+Expected result: 6 missing-field lines, all in the wms_envelope block
+(unevaluatedProperties and Header), all previously accepted by the firewall
+team. Zero delta lines.
+
+The report still ends with "Structural differences found" even when correct —
+that line also fires on the 6 accepted envelope diffs. It is not a failure.
+
+If you see roughly 29 missing-field lines, project\models\ has been
+regenerated and its enrichment lost. Restore project\models\ from this
+package (or from git) and re-run step 2.
+
+_rebootstrap\
+-------------
+Contains run_01_reverse_engineer.bat. It DELETES project\models\ and
+regenerates it from bootstrap\, discarding every hand-added constraint and
+validator. It is not part of the normal workflow and must not be run to
+"start from the beginning". The script itself will refuse unless given
+--force.
 EOF
 
 ok "Scripts and README added"
