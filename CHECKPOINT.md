@@ -8,10 +8,22 @@ target and the Mac now agree, and the outstanding model defects are fixed.
 | | |
 |---|---|
 | Branch | `main`, clean, pushed to `origin` |
-| HEAD | `69cb96b` |
+| HEAD | `a31037a` |
 | Target | `C:\Users\o6365904\PycharmProjects\pydantic-schema\project` (PyCharm, py3.10, pydantic 2.13.4) |
 | Mac | py3.13, pydantic 2.12.5 |
-| Report | 24 `✗` + 2 `Δ`, all catalogued, **no model defects** |
+| Report | **18 `✗` + 2 `Δ`**, all catalogued, **no model defects** |
+
+Per-schema baseline — this is what a correct run looks like:
+
+| Schema | Missing | Structural Δ |
+|---|---|---|
+| `wms_envelope` | 6 | 0 |
+| `wms_business_types` | 12 | 2 |
+| `ZWMS_INBOUND_DELIVERY_CREATE` | **0** | **0** |
+
+`ZWMS_INBOUND_DELIVERY_CREATE` reproducing at 0/0 is the reference standard:
+**a newly onboarded interface schema should also land at 0/0.** Anything else
+deserves investigation.
 
 Commits this session:
 
@@ -22,6 +34,9 @@ Commits this session:
 - `2b64fd3` — `02`: skip memberless enum bases (3.10 `StrEnum` shim leak)
 - `4d0084b` — **models: fix `Field()` on union members + restore lost constraints**
 - `69cb96b` — rewrite `READING_COMPARISON_REPORT.md` against the verified baseline
+- `4691211` — checkpoint after transfer
+- `a31037a` — **`03`: fold `anyOf` siblings into the optional-expansion match**
+  (24→18; ZWMS to 0/0)
 
 ## Is `02`'s output trustworthy?
 
@@ -40,14 +55,14 @@ Practical rule: **`03`'s remaining findings are its own limitations; `03`
 producing a *new* finding is a real signal.** Compare against the catalogue in
 `READING_COMPARISON_REPORT.md`, not against zero.
 
-## The 24 remaining findings — none are defects
+## The 18 remaining findings — none are defects
 
 | Section | Count | Cause |
 |---|---|---|
 | A | 6 `✗` | Envelope: `unevaluatedProperties`→`additionalProperties`, Header inlined→`$ref`. Accepted permanent diffs. |
 | B | 10 `✗` | `maxLength: 0` empty-string sentinel — deliberate in bootstrap. **Never "fix" these.** |
 | C | 2 `✗` + 2 `Δ` | `_reconcile_def_names()` pairs colliding names wrongly (`ISSUE_ST_LOC`/`ISSUE_STLOC`, `MATERIAL_TYPE`/`MATERIALTYPE`). |
-| D | 6 `✗` | Optional arrays: `items`/`maxItems`/`type` are present inside `anyOf[0]`; the comparator only checks top level. |
+| D | — | **Fixed in `a31037a`.** Was 6 `✗` on optional arrays. |
 
 Full evidence and verification commands in `READING_COMPARISON_REPORT.md`.
 
@@ -56,41 +71,51 @@ shape made the count worse (15→16). `MATERIALTYPE` and `MATERIALTYPE1` are bot
 a bare `{"type": "string"}` in the reproduced schema, since descriptions become
 Python docstrings rather than schema fields.
 
-## Scaling to ~20 more interface schemas
+Section D was fixed by folding `anyOf`'s siblings into the non-null branch
+before matching. Merging rather than ignoring the key keeps the check honest —
+verified that a dropped `uniqueItems` and a changed `maxItems` are both still
+reported.
 
-This is the next piece of work. The pipeline handles it, but **three registries
-are hand-maintained and one script is hardcoded to a single interface**:
+## Onboarding the remaining ~20 interface schemas
 
-1. **`01_reverse_engineer.py:34`** — `INTERFACE_FILE` is a single hardcoded
-   path. Preprocessing (`prepare_schemas`) handles exactly one interface schema.
-   **This is the real blocker** — it needs to loop over
-   `bootstrap/*.schema.json` minus the envelope and business-types files.
-2. **`02_reproduce_schema.py:32`** — `EXPORT_TARGETS`, a list of
-   `(out_filename, module_stem, root_class_name)`. One entry per schema.
-3. **`03_compare_schemas.py:29`** — `COMPARE_PAIRS`, a list of
-   `(bootstrap_path, reproduced_path)`. One entry per schema.
+**Decided approach (2026-08-12): one schema at a time, manually, no batch
+automation.** The pace is deliberate — the team needs to be brought along, so
+each schema is converted to Pydantic and reproduced individually. A Python/JSX
+UI may come later; that is the right place for automation, not the scripts.
 
-Adding 20 schemas by hand means 20 entries in each of (2) and (3), plus
-rewriting (1). Recommended: derive all three from a single manifest, or by
-convention from `bootstrap/` filenames.
+`02` and `03` iterate their whole registry on every run — **there is no
+per-file invocation.** Onboarding a schema means adding a registry entry, then
+running the pair once and checking that only the new schema's block changed.
 
-**Per-schema cost after that:** each new interface needs its `$ref`s into
-`business-types` and `envelope` to resolve, and its root class named. The
-enrichment burden is small for interfaces — `business_types_schema.py` carries
-227 `Field()` constraints and is the shared vocabulary; interface schemas mostly
-`$ref` into it.
+Three places to register a new schema:
 
-**Expect the same class of findings to multiply.** Sections B and D are
-per-occurrence: every optional array costs ~3 `✗`, every empty-string sentinel
-~2. With 20 more schemas the raw count could reach the low hundreds while still
-containing zero defects. Two implications:
+1. **`01_reverse_engineer.py:34`** — `INTERFACE_FILE`, a single hardcoded path.
+   `prepare_schemas()` handles exactly one interface schema. Only relevant when
+   bootstrapping a schema's models for the first time; **`01` must not be run
+   against an existing `models/`** (it deletes it — guarded since `ecc5a53`).
+2. **`02_reproduce_schema.py:32`** — `EXPORT_TARGETS`:
+   `(out_filename, module_stem, root_class_name)`. Use `None` for the root
+   class to export all classes as `$defs` instead.
+3. **`03_compare_schemas.py:29`** — `COMPARE_PAIRS`:
+   `(bootstrap_path, reproduced_path)`.
 
-- Fixing `_is_optional_expansion()` to look inside `anyOf[0]` (section D) is
-  worth doing **before** scaling — it is a single-site fix that scales linearly
-  in savings.
-- The catalogue-based reading in `READING_COMPARISON_REPORT.md` does not scale
-  to hundreds of lines by eye. Consider a `--summary` flag on `03` that reports
-  counts per cause-category rather than per-line.
+**Target for each new schema: 0 `✗`, 0 `Δ`** — the standard
+`ZWMS_INBOUND_DELIVERY_CREATE` now meets. Findings in an *existing* schema's
+block after adding a new one mean the shared vocabulary was perturbed; that is
+the signal worth chasing.
+
+**Per-schema cost:** each interface needs its `$ref`s into `business-types` and
+`envelope` to resolve, and its root class named. Enrichment burden is low —
+`business_types_schema.py` carries 227 `Field()` constraints and is the shared
+vocabulary; interface schemas mostly `$ref` into it.
+
+**Watch for growth in section B.** The empty-string sentinel is per-occurrence
+(~2 `✗` each) and is not fixable — it is correct behaviour. If the count climbs
+into the hundreds, add a `--summary` flag to `03` reporting counts per
+cause-category rather than per line, rather than trying to eliminate them.
+
+Section D was the other per-occurrence category (~3 `✗` per optional array) and
+was fixed in `a31037a` before onboarding began, so it will not accumulate.
 
 ## Traps (all have actually bitten this project)
 
