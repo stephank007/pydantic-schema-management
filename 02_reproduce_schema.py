@@ -70,6 +70,12 @@ def module_classes(module) -> dict[str, type]:
             continue
         if obj is BaseModel:
             continue
+        # Skip memberless enum base classes. On Python 3.10 the StrEnum
+        # backport shim at the top of business_types_schema.py defines a real
+        # module-level StrEnum, which otherwise lands in $defs as a bogus type
+        # (369 defs on 3.10 vs 368 on 3.11+).
+        if issubclass(obj, enum.Enum) and not list(obj):
+            continue
         if issubclass(obj, BaseModel) or issubclass(obj, enum.Enum):
             result[name] = obj
     return result
