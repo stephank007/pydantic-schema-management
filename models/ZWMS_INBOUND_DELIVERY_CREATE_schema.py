@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, RootModel
+from pydantic import AfterValidator, BaseModel, ConfigDict, Field, RootModel
 
 from . import business_types_schema
 
@@ -155,9 +155,10 @@ class InboundDocItem(BaseModel):
         Field(max_length=100, min_length=1),
     ] | None = None
     SERIAL_NUMBERS: Annotated[
-        list[business_types_schema.SerialNumber],
-        Field(max_length=999),
-    ] | None = None
+        list[business_types_schema.SerialNumber] | None,
+        Field(max_length=999, json_schema_extra={"uniqueItems": True}),
+        AfterValidator(business_types_schema._unique_items),
+    ] = None
     BATCH_SPLITS: Annotated[
         list[business_types_schema.BatchSplit],
         Field(max_length=50, min_length=2),
@@ -187,7 +188,7 @@ class Body(BaseModel):
     OPER_CODE                 : business_types_schema.OPERCODE                             | None = None
     HEADER_TEXT               : business_types_schema.HEADERTEXT                           | None = None
     RELS_ORD                  : business_types_schema.RELSORD                              | None = None
-    BOL_1                     : Annotated[business_types_schema.BOL, Field(alias='BOL')]   | None = None
+    BOL_1                     : Annotated[business_types_schema.BOL | None, Field(alias='BOL')] = None
     CONTAIN_ID                : business_types_schema.CONTAINID                            | None = None
     CONTAIN_SEAL_NUM          : business_types_schema.CONTAINSEALNUM                       | None = None
     CONTAIN_TYP               : business_types_schema.CONTAINTYP                           | None = None
@@ -195,7 +196,7 @@ class Body(BaseModel):
     REQU_COORD                : business_types_schema.REQUCOORD                            | None = None
     REF_DELIV                 : business_types_schema.REFDELIV                             | None = None
     DELIV_NOTE                : business_types_schema.DELIVNOTE                            | None = None
-    SPED_1                    : Annotated[business_types_schema.SPED, Field(alias='SPED')] | None = None
+    SPED_1                    : Annotated[business_types_schema.SPED | None, Field(alias='SPED')] = None
     ARMY_MANAGED              : business_types_schema.ARMYMANAGED                          | None = None
     PICK_POINT                : business_types_schema.PICKPOINT                            | None = None
     REC_DOC_LINE              : business_types_schema.RECDOCLINE                           | None = None
@@ -210,22 +211,22 @@ class Body(BaseModel):
     ORDER_TOLERANCE           : business_types_schema.ORDERTOLERANCE                       | None = None
     CROSS_DOC_ORDER           : business_types_schema.CROSSDOCORDER                        | None = None
     CROSS_DOC_ORDER_LINE      : business_types_schema.CROSSDOCORDERLINE                    | None = None
-    BATCH_1                   : Annotated[business_types_schema.BATCH, Field(alias='BATCH')] | None = None
+    BATCH_1                   : Annotated[business_types_schema.BATCH | None, Field(alias='BATCH')] = None
     KIT_SIZE                  : business_types_schema.KITSIZE | None = None
     INSPECTION_TYPE           : business_types_schema.INSPECTIONTYPE | None = None
     SAP_INTER_ORDER           : business_types_schema.SAPINTERORDER | None = None
     SAP_INTER_ORDER_LINE      : business_types_schema.SAPINTERORDERLINE | None = None
-    MILSTRIP_1                : Annotated[business_types_schema.MILSTRIP, Field(alias='MILSTRIP')] | None = None
+    MILSTRIP_1                : Annotated[business_types_schema.MILSTRIP | None, Field(alias='MILSTRIP')] = None
     MLSTRP_SPLIT              : business_types_schema.MLSTRPSPLIT | None = None
-    LOT_1                     : Annotated[business_types_schema.LOT, Field(alias='LOT')] | None = None
+    LOT_1                     : Annotated[business_types_schema.LOT | None, Field(alias='LOT')] = None
     RESERVATION_ORDER         : business_types_schema.RESERVATIONORDER | None = None
-    RECEIPT_1                 : Annotated[business_types_schema.RECEIPT, Field(alias='RECEIPT')] | None = None
+    RECEIPT_1                 : Annotated[business_types_schema.RECEIPT | None, Field(alias='RECEIPT')] = None
     RECEIPT_LINE              : business_types_schema.RECEIPTLINE | None = None
     CONTACT_PERSON_NAME       : business_types_schema.CONTACTPERSONNAME | None = None
     CONTACT_PERSON_PHONE      : business_types_schema.CONTACTPERSONPHONE | None = None
     COORDINATES_WIDTH         : business_types_schema.COORDINATESWIDTH | None = None
     COORDINATES_LENGTH        : business_types_schema.COORDINATESLENGTH | None = None
-    SERIAL_1                  : Annotated[business_types_schema.SERIAL, Field(alias='SERIAL')] | None = None
+    SERIAL_1                  : Annotated[business_types_schema.SERIAL | None, Field(alias='SERIAL')] = None
     ASN_MAINTENANCE_DATE      : business_types_schema.ASNMAINTENANCEDATE | None = None
     ASN_LAST_CNT_DATE         : business_types_schema.ASNLASTCNTDATE | None = None
     ASN_INSPECTION_DATE       : business_types_schema.ASNINSPECTIONDATE | None = None

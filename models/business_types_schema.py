@@ -16,7 +16,16 @@ except ImportError:  # Python 3.10 and earlier
 
 from typing import Annotated, Any
 
-from pydantic import BaseModel, ConfigDict, Field, RootModel
+from pydantic import AfterValidator, BaseModel, ConfigDict, Field, RootModel
+
+
+def _unique_items(v: list | None) -> list | None:
+    """Enforce JSON Schema `uniqueItems: true`, which Pydantic has no native
+    equivalent for. Applied via Annotated so the constraint is enforced at the
+    model layer, alongside json_schema_extra which emits the keyword itself."""
+    if v is not None and len(v) != len(set(v)):
+        raise ValueError("items must be unique")
+    return v
 
 
 class WmsBusinessTypes(RootModel[Any]):
@@ -2847,7 +2856,11 @@ class DocItem(BaseModel):
     MOVMENT_TYPE: Annotated[str | None, Field(max_length=3)] = None
     REASON_FOR_MOVMENT: Annotated[str | None, Field(max_length=4)] = None
     WMS_STATUS: Annotated[str | None, Field(max_length=4)] = None
-    SERIAL_NUMBERS: Annotated[list[SerialNumber] | None, Field(max_length=999)] = None
+    SERIAL_NUMBERS: Annotated[
+        list[SerialNumber] | None,
+        Field(max_length=999, json_schema_extra={"uniqueItems": True}),
+        AfterValidator(_unique_items),
+    ] = None
     """
     Array of serial numbers for serial-number managed materials. Length must not exceed QUANTITY. Omit entirely for non-serialized materials.
     """
@@ -2864,7 +2877,10 @@ class DocItem(BaseModel):
     Array of handling unit dicts describing the physical packaging of this line item. Each HandlingUnit has: HU_NUMBER, HU_TYPE, weights, DIMENSIONS (nested object: LENGTH/WIDTH/HEIGHT/UNIT), and ITEMS (nested array of HuItem dicts: MATERIAL/BATCH/QUANTITY/SERIAL_NUMBER).
     """
     QUALITY_INSPECTION: QualityInspection | None = None
-    CUSTOM_FIELDS: dict[str, str] | None = None
+    CUSTOM_FIELDS: Annotated[
+        dict[str, Annotated[str, Field(max_length=255)]] | None,
+        Field(max_length=20),
+    ] = None
     """
     Arbitrary SAP Z-field extension bag. Keys are field names (convention: ZCUSTOM_*), values are raw SAP string values. Open dict — no fixed property list. Allows any implementation-specific Z-fields without a schema update.
     """

@@ -58,20 +58,16 @@
 ────────────────────────────────────────────────────────────────
   Comparing: wms_business_types.schema.json
   ────────────────────────────────────────────────────────────
-  Missing: 19  |  Structural Δ: 2  |  Added: 40  |  Enrichments: 675
+  Missing: 15  |  Structural Δ: 2  |  Added: 38  |  Enrichments: 673
 
-  ── MISSING FROM REPRODUCED (19) ── [REVIEW REQUIRED]
+  ── MISSING FROM REPRODUCED (15) ── [REVIEW REQUIRED]
     ✗ $root.$defs.ISSUE_STLOC  (was: {"type": "string", "description": "\u05d0\u05ea\u05e8 \u05d0\u05d7\u05e1\u05d5\u)
     ✗ $root.$defs.MATERIAL_TYPE  (was: {"type": "string", "description": "\u05e1\u05d5\u05d2 \u05d7\u05d5\u05de\u05e8 \)
     ✗ $root.$defs.BatchSplit.properties.SHELF_LIFE_EXP_DATE.anyOf[0].maxLength  (was: 0)
     ✗ $root.$defs.BatchSplit.properties.SHELF_LIFE_EXP_DATE.anyOf[0].type  (was: "string")
-    ✗ $root.$defs.DocItem.properties.CUSTOM_FIELDS.additionalProperties  (was: {"type": "string", "maxLength": 255})
-    ✗ $root.$defs.DocItem.properties.CUSTOM_FIELDS.maxProperties  (was: 20)
-    ✗ $root.$defs.DocItem.properties.CUSTOM_FIELDS.type  (was: "object")
     ✗ $root.$defs.DocItem.properties.SERIAL_NUMBERS.items  (was: {"$ref": "#/$defs/SerialNumber"})
     ✗ $root.$defs.DocItem.properties.SERIAL_NUMBERS.maxItems  (was: 999)
     ✗ $root.$defs.DocItem.properties.SERIAL_NUMBERS.type  (was: "array")
-    ✗ $root.$defs.DocItem.properties.SERIAL_NUMBERS.uniqueItems  (was: true)
     ✗ $root.$defs.DocItem.properties.TRANSIT_DOCKING_PLANT.anyOf[0].maxLength  (was: 0)
     ✗ $root.$defs.DocItem.properties.TRANSIT_DOCKING_PLANT.anyOf[0].type  (was: "string")
     ✗ $root.$defs.HuItem.properties.SERIAL_NUMBER.anyOf[0].maxLength  (was: 0)
@@ -81,7 +77,7 @@
     ✗ $root.$defs.InspectionCharacteristic.properties.NUMERIC_VALUE.anyOf[1].pattern  (was: "^-?[0-9]+\\.[0-9]{1,6}$")
     ✗ $root.$defs.InspectionCharacteristic.properties.NUMERIC_VALUE.anyOf[1].type  (was: "string")
 
-  ── ADDED IN REPRODUCED (40) ── [EXPECTED — Pydantic enrichment]
+  ── ADDED IN REPRODUCED (38) ── [EXPECTED — Pydantic enrichment]
     + $root.$defs.ConsigneeCode  (value: {"maxLength": 10, "minLength": 2, "pattern": "^[A-Z0-9]{2,10}$", "type": "string)
     + $root.$defs.ISSUESTLOC1  (value: {"type": "string"})
     + $root.$defs.InterfaceName  (value: {"maxLength": 41, "minLength": 4, "pattern": "^Z[A-Z0-9_]{3,40}$", "type": "stri)
@@ -102,8 +98,6 @@
     + $root.$defs.BatchSplit.properties.SHELF_LIFE_EXP_DATE.anyOf[0].$ref  (value: "#/$defs/SHELFLIFEEXPDATE")
     + $root.$defs.BatchSplit.properties.SHELF_LIFE_EXP_DATE.anyOf[2]: item added
     + $root.$defs.DocItem.$defs  (value: {"BatchSplit": {"additionalProperties": false, "description": "A portion of a li)
-    + $root.$defs.DocItem.properties.CUSTOM_FIELDS.anyOf  (value: [{"additionalProperties": {"type": "string"}, "type": "object"}, {"type": "null")
-    + $root.$defs.DocItem.properties.CUSTOM_FIELDS.default  (value: null)
     + $root.$defs.DocItem.properties.SERIAL_NUMBERS.anyOf  (value: [{"items": {"$ref": "#/$defs/SerialNumber"}, "maxItems": 999, "type": "array"}, )
     + $root.$defs.DocItem.properties.SERIAL_NUMBERS.default  (value: null)
     + $root.$defs.DocItem.properties.TRANSIT_DOCKING_PLANT.default  (value: null)
@@ -127,7 +121,7 @@
     Δ $root.$defs.SERIAL_NUMBER.maxLength: '18' → '0'
     Δ $root.$defs.TRANSIT_DOCKING_PLANT.maxLength: '4' → '0'
 
-  ── EXPECTED ENRICHMENTS (675) ── [Document for firewall team]
+  ── EXPECTED ENRICHMENTS (673) ── [Document for firewall team]
     ~ $root.$defs.ACCOMPANYINGITEM → ACCOMPANYING_ITEM  (codegen underscore normalisation — expected)
     ~ $root.$defs.AIRORSEAIND → AIR_OR_SEA_IND  (codegen underscore normalisation — expected)
     ~ $root.$defs.ARMYMANAGED → ARMY_MANAGED  (codegen underscore normalisation — expected)
@@ -470,9 +464,7 @@
     ~ $root.$defs.DocItem.properties.CROSS_DOCK: $ref → Optional (Pydantic anyOf+null pattern)
     ~ $root.$defs.DocItem.properties.CUSTOMER: $ref → Optional (Pydantic anyOf+null pattern)
     ~ $root.$defs.DocItem.properties.CUSTOMER_TYPE: $ref → Optional (Pydantic anyOf+null pattern)
-    ~ $root.$defs.DocItem.properties.CUSTOM_FIELDS.$comment: removed (was: 'DICT (string → string) — models SAP's customer-namespace Z-field pattern. Example: { 'ZCUSTOM_PRIO': 'HIGH', 'ZCUSTOM_ZONE': 'COLD_CHAIN' }.')
-    ~ $root.$defs.DocItem.properties.CUSTOM_FIELDS.description: removed (was: 'Arbitrary SAP Z-field extension bag. Keys are field names (convention: ZCUSTOM_*), values are raw SAP string values. Open dict — no fixed property list. Allows any implementation-specific Z-fields without a schema update.')
-    ~ $root.$defs.DocItem.properties.CUSTOM_FIELDS.title: added → 'Custom Fields'
+    ~ $root.$defs.DocItem.properties.CUSTOM_FIELDS: $ref → Optional (Pydantic anyOf+null pattern)
     ~ $root.$defs.DocItem.properties.DELETION_INDIC: $ref → Optional (Pydantic anyOf+null pattern)
     ~ $root.$defs.DocItem.properties.DELIVERY_DATE.$ref: external → local ref
     ~ $root.$defs.DocItem.properties.DELIVERY_PRIORITY: $ref → Optional (Pydantic anyOf+null pattern)
@@ -813,13 +805,12 @@ NIIN==NSN')
 ────────────────────────────────────────────────────────────────
   Comparing: ZWMS_INBOUND_DELIVERY_CREATE.schema.json
   ────────────────────────────────────────────────────────────
-  Missing: 4  |  Structural Δ: 0  |  Added: 94  |  Enrichments: 90
+  Missing: 3  |  Structural Δ: 0  |  Added: 94  |  Enrichments: 90
 
-  ── MISSING FROM REPRODUCED (4) ── [REVIEW REQUIRED]
+  ── MISSING FROM REPRODUCED (3) ── [REVIEW REQUIRED]
     ✗ $root.$defs.InboundDocItem.properties.SERIAL_NUMBERS.items  (was: {"$ref": "https://example.org/wms/business-types.schema.json#/$defs/SerialNumber)
     ✗ $root.$defs.InboundDocItem.properties.SERIAL_NUMBERS.maxItems  (was: 999)
     ✗ $root.$defs.InboundDocItem.properties.SERIAL_NUMBERS.type  (was: "array")
-    ✗ $root.$defs.InboundDocItem.properties.SERIAL_NUMBERS.uniqueItems  (was: true)
 
   ── ADDED IN REPRODUCED (94) ── [EXPECTED — Pydantic enrichment]
     + $root.properties  (value: {"Header": {"$ref": "#/$defs/Header"}, "DOC_HEADER": {"anyOf": [{"$ref": "#/$def)

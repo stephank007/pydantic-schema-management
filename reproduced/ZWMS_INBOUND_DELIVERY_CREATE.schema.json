@@ -190,6 +190,24 @@
         "WMS_ORD_TP": {
           "$ref": "#/$defs/WMSORDTP"
         },
+        "SUP_PRTNR": {
+          "$ref": "#/$defs/SUPPRTNR"
+        },
+        "RECEIVING_PLANT": {
+          "$ref": "#/$defs/RECEIVINGPLANT"
+        },
+        "DELIVERY_DATE": {
+          "$ref": "#/$defs/SapDate"
+        },
+        "DOC_ITEM": {
+          "items": {
+            "$ref": "#/$defs/InboundDocItem"
+          },
+          "maxItems": 999,
+          "minItems": 1,
+          "title": "Doc Item",
+          "type": "array"
+        },
         "SHIP_CON": {
           "anyOf": [
             {
@@ -200,9 +218,6 @@
             }
           ],
           "default": null
-        },
-        "SUP_PRTNR": {
-          "$ref": "#/$defs/SUPPRTNR"
         },
         "PARTNER_TYPE": {
           "anyOf": [
@@ -325,9 +340,6 @@
           ],
           "default": null
         },
-        "RECEIVING_PLANT": {
-          "$ref": "#/$defs/RECEIVINGPLANT"
-        },
         "DELIV_NOTE": {
           "anyOf": [
             {
@@ -371,9 +383,6 @@
             }
           ],
           "default": null
-        },
-        "DELIVERY_DATE": {
-          "$ref": "#/$defs/SapDate"
         },
         "REC_DOC_LINE": {
           "anyOf": [
@@ -902,15 +911,6 @@
             }
           ],
           "default": null
-        },
-        "DOC_ITEM": {
-          "items": {
-            "$ref": "#/$defs/InboundDocItem"
-          },
-          "maxItems": 999,
-          "minItems": 1,
-          "title": "Doc Item",
-          "type": "array"
         }
       },
       "required": [
@@ -1181,6 +1181,12 @@
         "MATERIAL": {
           "$ref": "#/$defs/MaterialNumber"
         },
+        "QUANTITY": {
+          "$ref": "#/$defs/SapQuantity"
+        },
+        "RECEIVING_STORAGE_LOCATION": {
+          "$ref": "#/$defs/StorageLocation"
+        },
         "BATCH": {
           "anyOf": [
             {
@@ -1194,9 +1200,6 @@
           "default": null,
           "title": "Batch"
         },
-        "QUANTITY": {
-          "$ref": "#/$defs/SapQuantity"
-        },
         "STOCK_TYPE": {
           "anyOf": [
             {
@@ -1209,9 +1212,6 @@
           ],
           "default": null,
           "title": "Stock Type"
-        },
-        "RECEIVING_STORAGE_LOCATION": {
-          "$ref": "#/$defs/StorageLocation"
         },
         "DELIVERY_DATE": {
           "anyOf": [
@@ -1289,6 +1289,17 @@
           "default": null,
           "title": "Lot"
         },
+        "QUALITY_INSPECTION": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/QualityInspection"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "HANDLING_UNITS": {
           "anyOf": [
             {
@@ -1320,7 +1331,8 @@
             }
           ],
           "default": null,
-          "title": "Serial Numbers"
+          "title": "Serial Numbers",
+          "uniqueItems": true
         },
         "BATCH_SPLITS": {
           "anyOf": [
@@ -1338,17 +1350,6 @@
           ],
           "default": null,
           "title": "Batch Splits"
-        },
-        "QUALITY_INSPECTION": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/QualityInspection"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null
         }
       },
       "required": [
