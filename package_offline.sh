@@ -291,6 +291,11 @@ EXCLUDES=(
   --exclude='.DS_Store'
   --exclude='schemas/'
   --exclude='reproduced/'
+  # Shipped at the bundle ROOT, where install.bat expects them. Without this
+  # they are duplicated into project/ as well (5.8M of win_amd64 wheels),
+  # since rsync does not honour .gitignore.
+  --exclude='python_wheels/'
+  --exclude='CHECKPOINT.md'
   --exclude='COMPARISON_REPORT.txt'
   --exclude='package_offline.sh'
   --exclude='install_windows.bat'
